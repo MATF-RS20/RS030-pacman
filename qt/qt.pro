@@ -16,11 +16,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Character.cpp \
     MyRect.cpp \
-    main.cpp
+    main.cpp \
+    pacmangame.cpp \
+    wall.cpp
 
 HEADERS += \
-    MyRect.h
+    Character.h \
+    MyRect.h \
+    pacmangame.h \
+    wall.h
 
 FORMS +=
 
