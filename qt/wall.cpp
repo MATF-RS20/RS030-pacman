@@ -9,12 +9,14 @@ Wall::Wall(int x, int y, int width, int height){
 }
 
 Wall::Wall(Wall &wall)
-{
+    :Wall(wall.pos.x, wall.pos.y, wall.getWidth(), wall.getHeight())
+{  /*
     this->height = wall.getHeight();
     this->width = wall.getWidth();
     this->pos.x = wall.pos.x;
     this->pos.y = wall.pos.y;
     setRect(this->pos.x, this->pos.y, this->width, this->height);
+    */
 }
 
 int Wall::getWidth(){

@@ -6,7 +6,7 @@ Ime projekta:
 Pacman
 
 Članovi:
-Marina Vasović      
+Marina Vasović      marinavasovic12@gmail.com
 Blagoje Mirković    blagoje.mirkovic@gmail.com
 Vasja Brkić         vasjabrkic@yahoo.com
 
