@@ -10,8 +10,8 @@ Character::Character(int x, int y, int width, int height, int sizeX, int sizeY)
     this->width = width;
     this->height = height;
 
-    this->horizontal_step = 1;
-    this->vertical_step = 1;
+    this->horizontal_step = 5;
+    this->vertical_step = 5;
 
     this->currentDirection = 0;
     this->nextDirection = 0;

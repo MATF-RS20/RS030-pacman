@@ -5,30 +5,41 @@
 
 PacmanGame::PacmanGame()
 {
-    this->pacman = new Character(0, 0, 10, 10, 1366, 768);
+    this->pacman = new Pacman();
     this->current_score = 0;
 
     Wall *w1 = new Wall(50, 400, 10, 200);
     this->walls[0] = w1;
-    Wall *w2 = new Wall(150, 470, 10, 200);
+    Wall *w2 = new Wall(100, 450, 10, 200);
     this->walls[1] = w2;
-    Wall *w3 = new Wall(200, 400, 10, 200);
+    Wall *w3 = new Wall(150, 400, 10, 200);
     this->walls[2] = w3;
-    Wall *w4 = new Wall(50, 390, 300, 10);
+    Wall *w4 = new Wall(200, 450, 10, 200);
     this->walls[3] = w4;
-
+    Wall *w5 = new Wall(250, 400, 10, 200);
+    this->walls[4] = w5;
+    Wall *w6 = new Wall(300, 450, 10, 200);
+    this->walls[5] = w6;
+    Wall *w7 = new Wall(350, 400, 10, 200);
+    this->walls[6] = w7;
+    Wall *w8 = new Wall(400, 450, 10, 200);
+    this->walls[7] = w8;
+    Wall *w9 = new Wall(50, 390, 400, 10);
+    this->walls[8] = w9;
+/*
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(checkAvailableDirections()));
     connect(timer, SIGNAL(timeout()), this, SLOT(setCurrentDirection()));
     connect(timer, SIGNAL(timeout()), this->getPacman(), SLOT(move()));
     timer->start(25);
+*/
 }
 
 PacmanGame::~PacmanGame()
 {
 
 }
-
+/*
 void PacmanGame::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A){
@@ -103,8 +114,8 @@ void PacmanGame::setCurrentDirection(){
             pacman->setCurrentDirection(0);
 
 }
-
-Character* PacmanGame::getPacman(){
+*/
+Pacman* PacmanGame::getPacman(){
     return this->pacman;
 }
 
@@ -117,4 +128,9 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
     scene.addItem(this->walls[1]);
     scene.addItem(this->walls[2]);
     scene.addItem(this->walls[3]);
+    scene.addItem(this->walls[4]);
+    scene.addItem(this->walls[5]);
+    scene.addItem(this->walls[6]);
+    scene.addItem(this->walls[7]);
+    scene.addItem(this->walls[8]);
 }

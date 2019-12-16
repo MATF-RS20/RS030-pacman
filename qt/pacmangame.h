@@ -9,12 +9,13 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include "wall.h"
+#include "pacman.h"
 
 
 class PacmanGame:  public QObject, public QGraphicsRectItem{
     Q_OBJECT
 private:
-    Character *pacman;
+    Pacman *pacman;
     Character *ghosts[4];
     int current_score;
     Wall *walls[50];
@@ -23,13 +24,13 @@ private:
 public:
     PacmanGame();
     virtual ~PacmanGame();
-    Character* getPacman();
+    Pacman* getPacman();
     Wall* getWall();
-    void keyPressEvent(QKeyEvent *event);
+    //void keyPressEvent(QKeyEvent *event);
     void populateScene(QGraphicsScene &scene);
 public slots:
-    void checkAvailableDirections();
-    void setCurrentDirection();
+    //void checkAvailableDirections();
+    //void setCurrentDirection();
 };
 
 #endif // PACMANGAME_H

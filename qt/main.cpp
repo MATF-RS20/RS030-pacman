@@ -27,22 +27,15 @@ int main(int argc, char *argv[])
 
     PacmanGame *game1 = new PacmanGame();
 
-
-
-
-
-
-
-
     //Character *box = new Character(0, 0, 20, 35, 1000, 1000);
-    Wall *w1 = new Wall(50, 400, 10, 200);
-    Wall *w2 = new Wall(50, 410, 100, 10);
-    Wall *w3 = new Wall(360, 470, 40, 10);
-    Wall *w4 = new Wall(50, 520, 10,300);
+    // Wall *w1 = new Wall(50, 400, 10, 200);
+    // Wall *w2 = new Wall(50, 410, 100, 10);
+    // Wall *w3 = new Wall(360, 470, 40, 10);
+    // Wall *w4 = new Wall(50, 520, 10,300);
 
 
-    game1->setFlag(QGraphicsItem::ItemIsFocusable);
-    game1->setFocus();
+    game1->getPacman()->setFlag(QGraphicsItem::ItemIsFocusable);
+    game1->getPacman()->setFocus();
     //box->setFlag(QGraphicsItem::ItemIsFocusable);
     //box->setFocus();
 

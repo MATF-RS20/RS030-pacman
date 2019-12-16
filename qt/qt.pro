@@ -19,12 +19,14 @@ SOURCES += \
     Character.cpp \
     MyRect.cpp \
     main.cpp \
+    pacman.cpp \
     pacmangame.cpp \
     wall.cpp
 
 HEADERS += \
     Character.h \
     MyRect.h \
+    pacman.h \
     pacmangame.h \
     wall.h
 
