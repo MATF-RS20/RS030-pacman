@@ -11,6 +11,10 @@
 #include "wall.h"
 #include "pacman.h"
 
+#include <list>
+
+//#include <QGraphicsItemGroup>
+
 
 class PacmanGame:  public QObject, public QGraphicsRectItem{
     Q_OBJECT
@@ -18,7 +22,8 @@ private:
     Pacman *pacman;
     Character *ghosts[4];
     int current_score;
-    Wall *walls[50];
+    Wall *walls[200];
+    std::list<Wall*> walls_and_borders{};
     //  tabela skorova
 
 public:
@@ -26,6 +31,8 @@ public:
     virtual ~PacmanGame();
     Pacman* getPacman();
     Wall* getWall();
+    int getWidth();
+    int getHeight();
     //void keyPressEvent(QKeyEvent *event);
     void populateScene(QGraphicsScene &scene);
 public slots:

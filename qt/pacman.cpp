@@ -3,7 +3,8 @@
 Pacman::Pacman()
 {
     // ideja da li da imamo unique_ptr koji pokazuje na Pacman???
-    setRect(0, 0, 30, 30);
+    //setRect(0, 0, 30, 30);
+    setRect(37, 37, 30, 30);
 
     QTimer *timer = new QTimer(this);
 

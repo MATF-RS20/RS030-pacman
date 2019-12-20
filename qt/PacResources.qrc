@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/PacFiles">
+        <file>mapa.txt</file>
+        <file>../izlaz.txt</file>
+    </qresource>
+</RCC>
