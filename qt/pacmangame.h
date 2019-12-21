@@ -8,6 +8,8 @@
 #include <QSize>
 #include <QGraphicsScene>
 #include <QTimer>
+#include <QPainter>
+
 #include "wall.h"
 #include "pacman.h"
 

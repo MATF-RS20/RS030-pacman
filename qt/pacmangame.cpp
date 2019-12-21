@@ -16,6 +16,10 @@
 PacmanGame::PacmanGame()
 {
     this->pacman = new Pacman();
+    this->pacman->setBrush(Qt::yellow);
+
+
+
     this->current_score = 0;
 
     /*
@@ -189,8 +193,10 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
     getWall();
     //QGraphicsItemGroup *group = new QGraphicsItemGroup{};
 
-    for(auto x : this->walls_and_borders)
+    for(auto x : this->walls_and_borders){
         scene.addItem(x);
+        x->setBrush(Qt::darkGray);
+    }
 
     /*
     scene = std::accumulate(std::begin(this->walls_and_borders), std::end(this->walls_and_borders),

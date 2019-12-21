@@ -57,7 +57,8 @@ SOURCES       = ../qt/Character.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
-		../qt/wall.cpp moc_Character.cpp \
+		../qt/wall.cpp qrc_PacResources.cpp \
+		moc_Character.cpp \
 		moc_MyRect.cpp \
 		moc_pacman.cpp \
 		moc_pacmangame.cpp
@@ -67,6 +68,7 @@ OBJECTS       = Character.o \
 		pacman.o \
 		pacmangame.o \
 		wall.o \
+		qrc_PacResources.o \
 		moc_Character.o \
 		moc_MyRect.o \
 		moc_pacman.o \
@@ -442,7 +444,8 @@ Makefile: ../qt/qt.pro ../../../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.conf
 		../../../../Qt/5.12.5/gcc_64/mkspecs/features/exceptions.prf \
 		../../../../Qt/5.12.5/gcc_64/mkspecs/features/yacc.prf \
 		../../../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf \
-		../qt/qt.pro
+		../qt/qt.pro \
+		../qt/PacResources.qrc
 	$(QMAKE) -o Makefile ../qt/qt.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 ../../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf:
 ../../../../Qt/5.12.5/gcc_64/mkspecs/common/unix.conf:
@@ -620,6 +623,7 @@ Makefile: ../qt/qt.pro ../../../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.conf
 ../../../../Qt/5.12.5/gcc_64/mkspecs/features/yacc.prf:
 ../../../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf:
 ../qt/qt.pro:
+../qt/PacResources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../qt/qt.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -634,6 +638,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/PacResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt/Character.h ../qt/MyRect.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/MyRect.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp $(DISTDIR)/
@@ -660,8 +665,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_PacResources.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_PacResources.cpp
+qrc_PacResources.cpp: ../qt/PacResources.qrc \
+		../../../../Qt/5.12.5/gcc_64/bin/rcc \
+		../qt/mapa.txt
+	/home/blagoje/Qt/5.12.5/gcc_64/bin/rcc -name PacResources ../qt/PacResources.qrc -o qrc_PacResources.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -1123,6 +1134,11 @@ moc_pacmangame.cpp: ../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qbrush.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qfont.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/QPainter \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qpainter.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qfontmetrics.h \
 		../qt/pacman.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList \
@@ -1142,7 +1158,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -1499,6 +1515,7 @@ main.o: ../qt/main.cpp ../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplicati
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QCoreApplication \
 		../qt/wall.h \
 		../qt/pacmangame.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/QPainter \
 		../qt/pacman.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList
@@ -1734,9 +1751,28 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qbrush.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qfont.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/QPainter \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qpainter.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qfontmetrics.h \
 		../qt/pacman.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QDebug \
-		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QDesktopWidget \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qpalette.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qcursor.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsItemGroup \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QFile \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QTextStream \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QChar
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pacmangame.o ../qt/pacmangame.cpp
 
 wall.o: ../qt/wall.cpp ../qt/wall.h \
@@ -1847,6 +1883,9 @@ wall.o: ../qt/wall.cpp ../qt/wall.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QSize
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wall.o ../qt/wall.cpp
+
+qrc_PacResources.o: qrc_PacResources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_PacResources.o qrc_PacResources.cpp
 
 moc_Character.o: moc_Character.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Character.o moc_Character.cpp

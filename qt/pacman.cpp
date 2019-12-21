@@ -4,8 +4,8 @@ Pacman::Pacman()
 {
     // ideja da li da imamo unique_ptr koji pokazuje na Pacman???
     //setRect(0, 0, 30, 30);
-    setRect(37, 37, 30, 30);
-
+    setRect(0, 0, 30, 30);
+    setPos(37, 37);
     QTimer *timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
@@ -149,12 +149,12 @@ void Pacman::move()
         }
     }
 
-    if (x() < 0)
-        setPos(0, y());
-    if (y() < 0)
-        setPos(x(), 0);
-    if (x() > this->scene()->width() - this->boundingRect().size().rwidth())
-        setPos(this->scene()->width() - this->boundingRect().size().rwidth(), y());
-    if (y() > this->scene()->height() - this->boundingRect().size().rheight())
-        setPos(x(), this->scene()->height() - this->boundingRect().size().rheight());
+    if (x() < -this->boundingRect().size().rwidth())
+        setPos(this->scene()->width(), y());
+    if (y() < 3)
+        setPos(x(), 3);
+    if (x() > this->scene()->width())
+        setPos(- this->boundingRect().size().rwidth(), y());
+    if (y() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
+        setPos(x(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
 }
