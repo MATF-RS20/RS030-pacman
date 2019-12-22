@@ -48,12 +48,12 @@ Ghost::Ghost(int x1, int y1, int id)
         this->setBrush(Qt::darkYellow);
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(move1()));
     }
-    timer->start(300);
+    timer->start(4800);
 
 
     QTimer *timerM = new QTimer(this);
     QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move()));
-    timerM->start(30);
+    timerM->start(25);
 
 }
 
@@ -268,6 +268,8 @@ void Ghost::move()
                     setPos(getX(), getY() + 5);
                 else if (this->currentDirection == 4)
                     setPos(getX(), getY() - 5);
+
+                this->currentDirection = 0;
             }
         }
         else
@@ -300,6 +302,8 @@ void Ghost::move()
                 setPos(getX(), getY() + 5);
             else if (this->currentDirection == 4)
                 setPos(getX(), getY() - 5);
+
+            this->currentDirection = 0;
         }
     }
 
@@ -311,6 +315,10 @@ void Ghost::move()
         setPos(- this->boundingRect().size().rwidth(), getY());
     if (getY() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
         setPos(getX(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
+
+
+
+    if (this->currentDirection == 0) move1();
 }
 int Ghost::getX()  {return this->x();}
 int Ghost::getY()  {return this->y();}
