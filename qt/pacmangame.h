@@ -1,8 +1,7 @@
 #ifndef PACMANGAME_H
 #define PACMANGAME_H
 
-#include "Character.h"
-#include "wall.h"
+//#include "Character.h"
 #include <vector>
 
 #include <QSize>
@@ -12,6 +11,7 @@
 
 #include "wall.h"
 #include "pacman.h"
+#include "ghost.h"
 
 #include <list>
 
@@ -22,7 +22,9 @@ class PacmanGame:  public QObject, public QGraphicsRectItem{
     Q_OBJECT
 private:
     Pacman *pacman;
-    Character *ghosts[4];
+    Ghost *ghost;
+    std::list<Ghost*> ghosts{};
+    // for now only one ghost
     int current_score;
     Wall *walls[200];
     std::list<Wall*> walls_and_borders{};

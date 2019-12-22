@@ -2,7 +2,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QScreen>
-#include "Character.h"
+//#include "Character.h"
 #include "wall.h"
 #include "pacmangame.h"
 

@@ -21,14 +21,16 @@ SOURCES += \
     main.cpp \
     pacman.cpp \
     pacmangame.cpp \
-    wall.cpp
+    wall.cpp \
+    ghost.cpp
 
 HEADERS += \
     Character.h \
     MyRect.h \
     pacman.h \
     pacmangame.h \
-    wall.h
+    wall.h \
+    ghost.h
 
 FORMS +=
 
