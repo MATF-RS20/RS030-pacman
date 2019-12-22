@@ -1,7 +1,6 @@
 #ifndef PACMANGAME_H
 #define PACMANGAME_H
 
-//#include "Character.h"
 #include <vector>
 
 #include <QSize>
@@ -24,7 +23,6 @@ private:
     Pacman *pacman;
     Ghost *ghost;
     std::list<Ghost*> ghosts{};
-    // for now only one ghost
     int current_score;
     Wall *walls[200];
     std::list<Wall*> walls_and_borders{};
@@ -37,11 +35,7 @@ public:
     Wall* getWall();
     int getWidth();
     int getHeight();
-    //void keyPressEvent(QKeyEvent *event);
     void populateScene(QGraphicsScene &scene);
-public slots:
-    //void checkAvailableDirections();
-    //void setCurrentDirection();
 };
 
 #endif // PACMANGAME_H
