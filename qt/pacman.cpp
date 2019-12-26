@@ -1,12 +1,15 @@
 #include "pacman.h"
 #include <QUrl>
 
-Pacman::Pacman()
+Pacman::Pacman(int x1, int y1)
+    :x1(x1),y1(y1)
 {
-    // ideja da li da imamo unique_ptr koji pokazuje na Pacman???
-    //setRect(0, 0, 30, 30);
     setRect(0, 0, 30, 30);
-    setPos(37, 37);
+    setPos(this->x1,this->y1);
+
+    this->setBrush(Qt::yellow);
+
+    this->current_score = 0;
 
     /*
     // ingame sounds
@@ -35,6 +38,10 @@ Pacman::Pacman()
 }
 
 
+int Pacman::getX() {return this->x(); }
+int Pacman::getY(){ return this->y(); }
+
+
 void Pacman::keyPressEvent(QKeyEvent *event)
 {
     //treba u meni-ju korisnik da izabere da li ce da se krece na strelicu ili na jkli.. za sada ovako
@@ -46,18 +53,22 @@ void Pacman::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left)
     {
         this->nextDirection = 1;
+        qDebug() << "PACMAAAN IDE LEVO";
     }
     else if (event->key() == Qt::Key_Right)
     {
         this->nextDirection = 2;
+        qDebug() << "PACMAAAN IDE DESNO";
     }
     else if (event->key() == Qt::Key_Up)
     {
         this->nextDirection = 3;
+        qDebug() << "PACMAAAN IDE GORE";
     }
     else if (event->key() == Qt::Key_Down)
     {
         this->nextDirection = 4;
+        qDebug() << "PACMAAAN IDE DOLE";
     }
     else if (event->key() == Qt::Key_H)
     { // left
@@ -84,16 +95,17 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 
 void Pacman::move()
 {
+
     if (this->nextDirection != 0)
     {
         if (this->nextDirection == 1)
-            setPos(x() - 5, y());
+            setPos(getX() - 5, getY());
         else if (this->nextDirection == 2)
-            setPos(x() + 5, y());
+            setPos(getX() + 5, getY());
         else if (this->nextDirection == 3)
-            setPos(x(), y() - 5);
+            setPos(getX(), getY() - 5);
         else if (this->nextDirection == 4)
-            setPos(x(), y() + 5);
+            setPos(getX(), getY() + 5);
 
         // pokusas sa next
         // ako ima kolizije korak unazad
@@ -105,37 +117,37 @@ void Pacman::move()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         if (n != 0)
-        {
+        {   qDebug() << "*************PACMAAAN ***************";
             if (this->nextDirection == 1)
-                setPos(x() + 5, y());
+                setPos(getX() + 5, getY());
             else if (this->nextDirection == 2)
-                setPos(x() - 5, y());
+                setPos(getX() - 5, getY());
             else if (this->nextDirection == 3)
-                setPos(x(), y() + 5);
+                setPos(getX(), getY() + 5);
             else if (this->nextDirection == 4)
-                setPos(x(), y() - 5);
+                setPos(getX(), getY() - 5);
 
             if (this->currentDirection == 1)
-                setPos(x() - 5, y());
+                setPos(getX() - 5, getY());
             else if (this->currentDirection == 2)
-                setPos(x() + 5, y());
+                setPos(getX() + 5, getY());
             else if (this->currentDirection == 3)
-                setPos(x(), y() - 5);
+                setPos(getX(), getY() - 5);
             else if (this->currentDirection == 4)
-                setPos(x(), y() + 5);
+                setPos(getX(), getY() + 5);
             colliding_items = collidingItems();
             int n = colliding_items.size();
             if (n != 0)
             {
                 // ako ima kolizije unazad
                 if (this->currentDirection == 1)
-                    setPos(x() + 5, y());
+                    setPos(getX() + 5, getY());
                 else if (this->currentDirection == 2)
-                    setPos(x() - 5, y());
+                    setPos(getX() - 5, getY());
                 else if (this->currentDirection == 3)
-                    setPos(x(), y() + 5);
+                    setPos(getX(), getY() + 5);
                 else if (this->currentDirection == 4)
-                    setPos(x(), y() - 5);
+                    setPos(getX(), getY() - 5);
             }
         }
         else
@@ -148,37 +160,37 @@ void Pacman::move()
     else
     { // ako next ne postoji samo radi normalno
         if (this->currentDirection == 1)
-            setPos(x() - 5, y());
+            setPos(getX() - 5, getY());
         else if (this->currentDirection == 2)
-            setPos(x() + 5, y());
+            setPos(getX() + 5, getY());
         else if (this->currentDirection == 3)
-            setPos(x(), y() - 5);
+            setPos(getX(), getY() - 5);
         else if (this->currentDirection == 4)
-            setPos(x(), y() + 5);
+            setPos(getX(), getY() + 5);
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         if (n != 0)
         {
             // ako ima kolizije unazad
             if (this->currentDirection == 1)
-                setPos(x() + 5, y());
+                setPos(getX() + 5, getY());
             else if (this->currentDirection == 2)
-                setPos(x() - 5, y());
+                setPos(getX() - 5, getY());
             else if (this->currentDirection == 3)
-                setPos(x(), y() + 5);
+                setPos(getX(), getY() + 5);
             else if (this->currentDirection == 4)
-                setPos(x(), y() - 5);
+                setPos(getX(), getY() - 5);
         }
     }
 
-    if (x() < -this->boundingRect().size().rwidth())
-        setPos(this->scene()->width(), y());
-    if (y() < 3)
-        setPos(x(), 3);
-    if (x() > this->scene()->width())
-        setPos(- this->boundingRect().size().rwidth(), y());
-    if (y() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
-        setPos(x(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
+    if (getX() < -this->boundingRect().size().rwidth())
+        setPos(this->scene()->width(), getY());
+    if (getY() < 3)
+        setPos(getX(), 3);
+    if (getX() > this->scene()->width())
+        setPos(- this->boundingRect().size().rwidth(), getY());
+    if (getY() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
+        setPos(getX(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
 }
 
 

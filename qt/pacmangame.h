@@ -23,7 +23,7 @@ private:
     Pacman *pacman;
     Ghost *ghost;
     std::list<Ghost*> ghosts{};
-    int current_score;
+//obrisala current_score, nalazi se u pacman klasi
     Wall *walls[200];
     std::list<Wall*> walls_and_borders{};
     //  tabela skorova

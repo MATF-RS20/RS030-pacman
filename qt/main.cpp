@@ -2,6 +2,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QScreen>
+#include <QDebug>
 //#include "Character.h"
 #include "wall.h"
 #include "pacmangame.h"
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
 
     //  Adding a view so that we can see something
     scene->addItem(game1);
-    scene->addItem(game1->getPacman());
+    //scene->addItem(game1->getPacman());
 
 
 

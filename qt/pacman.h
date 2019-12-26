@@ -11,19 +11,19 @@
 #include <QList>
 #include <QTimer>
 #include "wall.h"
-#include <QMediaPlayer>
+#include "ghost.h"
+//#include <QMediaPlayer>
 
 
 
 class Pacman: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    Pacman();
-    /*
-    Pacman(int x1, int y1, int width1, int height1);
-    int getHeight();
-    int getWidth();
-*/
+    Pacman(int x1, int y1);
+
+    int getX();
+    int getY();
+
     void keyPressEvent(QKeyEvent *event);
     void setCurrentDirection(int x);
 
@@ -51,10 +51,9 @@ private:
     QMediaPlayer * eatghost;
     QMediaPlayer * death;
     */
-//    int x;
-//    int y;
-//    int width;
-//    int height;
+    int x1;
+    int y1;
+    int current_score;
 }; //end of class Pacman
 
 #endif // PACMAN_H

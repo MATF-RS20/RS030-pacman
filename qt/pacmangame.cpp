@@ -16,41 +16,8 @@
 
 PacmanGame::PacmanGame()
 {
-    this->pacman = new Pacman();
-    this->pacman->setBrush(Qt::yellow);
-
-    this->current_score = 0;
-}
-
-PacmanGame::~PacmanGame()
-{
-
-}
-
-Pacman* PacmanGame::getPacman(){
-    return this->pacman;
-}
-
-
-int PacmanGame::getWidth(){
-    QRect rec = QApplication::desktop()->screenGeometry();
-    return rec.width();
-}
-
-
-int PacmanGame::getHeight(){
-    QRect rec = QApplication::desktop()->screenGeometry();
-    return rec.height();
-}
-
-
-
-Wall* PacmanGame::getWall(){
-    int height = getHeight();
-    int width = getWidth();
-
     std::string mapCe = ":/new/PacFiles/mapa";
-    int mapSelector = 0;                // napravicemo vec neko biranje
+    int mapSelector = 3;                // napravicemo vec neko biranje
     mapCe += std::to_string(mapSelector) + ".txt";
     QString gameMap = QString::fromStdString(mapCe);
     QFile mapa{gameMap};
@@ -97,15 +64,39 @@ Wall* PacmanGame::getWall(){
             x+=spacing;
         }
         else if(c == pacPosition){
-            this->pacman->setPos(x+2,y+2);
-            this->pacman->setCurrentDirection(direction);
+            //this->pacman->setCurrentDirection(direction);
+            this->pacman = new Pacman(x+2,y+2);
             x+=spacing;
         }
     }
 
-    return *this->walls;
+}
+
+PacmanGame::~PacmanGame()
+{
 
 }
+
+Pacman* PacmanGame::getPacman(){
+    return this->pacman;
+}
+
+
+int PacmanGame::getWidth(){
+    QRect rec = QApplication::desktop()->screenGeometry();
+    return rec.width();
+}
+
+
+int PacmanGame::getHeight(){
+    QRect rec = QApplication::desktop()->screenGeometry();
+    return rec.height();
+}
+
+
+//Wall* PacmanGame::getWall(){
+
+//}
 
 bool add_to_scene(QGraphicsScene &scene, Wall* zid){
     scene.addItem(zid);
@@ -113,7 +104,7 @@ bool add_to_scene(QGraphicsScene &scene, Wall* zid){
 }
 
 void PacmanGame::populateScene(QGraphicsScene &scene){
-    getWall();
+   // getWall();
     //QGraphicsItemGroup *group = new QGraphicsItemGroup{};
 
     for(auto x : this->walls_and_borders){
@@ -124,6 +115,8 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
     for(auto x : this->ghosts){
         scene.addItem(x);
     }
+
+    scene.addItem(this->pacman);
     /*
     scene = std::accumulate(std::begin(this->walls_and_borders), std::end(this->walls_and_borders),
                     QGraphicsScene, add_to_scene);

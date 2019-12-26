@@ -31,7 +31,7 @@ public slots:
     void move2();
     void move3();
     void move4();
-    void move();
+    void chooseRandom();
 private:
     // 1 - left; 2 - right; 3 - up; 4 - down; 0 - none
     int currentDirection = 0;
