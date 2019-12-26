@@ -12,6 +12,7 @@
 #include <QChar>
 #include <list>
 #include <numeric>
+#include <QString>
 
 PacmanGame::PacmanGame()
 {
@@ -48,22 +49,32 @@ Wall* PacmanGame::getWall(){
     int height = getHeight();
     int width = getWidth();
 
-
-    QFile mapa{":/new/PacFiles/mapa.txt"};
+    std::string mapCe = ":/new/PacFiles/mapa";
+    int mapSelector = 4;                // napravicemo vec neko biranje
+    mapCe += std::to_string(mapSelector) + ".txt";
+    QString gameMap = QString::fromStdString(mapCe);
+    QFile mapa{gameMap};
     mapa.open(QFile::ReadOnly | QFile::Text);
     QTextStream inMap{&mapa};
 
     char c;
 
 
-    int i = 0, x = 0, y = 0, broj_duha = 0;
+    int x = 0, y = 0, broj_duha = 0;
+
+    int direction;                      // ideja da u fajlu mapa imamo vec odredjen smer pekmena da bismo mogli
+                                        // da usmerimo animaciju, taj broj da stoji pre svega ostalog
+    inMap >> direction;
     QChar nula('0');
     QChar kec('1');
     QChar taraba('#');
-    //QChar noviRed('\n');
+    QChar pacPosition('P');             // u fajlu mapa stavimo P gde zelimo da bude pocetna pozicija
+    QChar noviRed('\n');
 
     int spacing = 35;
     Wall *w1;
+
+    inMap >> c;                         // kupi novi red posle ucitanog smera
 
     while(!inMap.atEnd()){
         inMap >> c;
@@ -73,9 +84,9 @@ Wall* PacmanGame::getWall(){
             w1 = new Wall(x,y,spacing,spacing);
             this->walls_and_borders.push_back(w1);
             x+=spacing;
-            i++; // counts walls
+            //i++; // counts walls
         }
-        else if(c == '\n'){
+        else if(c == noviRed){
             x = 0;
             y+=spacing;
         }
@@ -83,6 +94,11 @@ Wall* PacmanGame::getWall(){
             ++broj_duha;
             this->ghost = new Ghost(x+2,y+2, broj_duha);
             this->ghosts.push_back(ghost);
+            x+=spacing;
+        }
+        else if(c == pacPosition){
+            this->pacman->setPos(x+2,y+2);
+            this->pacman->setCurrentDirection(direction);
             x+=spacing;
         }
     }

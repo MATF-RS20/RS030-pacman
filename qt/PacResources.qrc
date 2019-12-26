@@ -1,5 +1,19 @@
 <RCC>
     <qresource prefix="/new/PacFiles">
-        <file>mapa.txt</file>
+        <file>mapa0.txt</file>
+        <file>mapa1.txt</file>
+        <file>mapa2.txt</file>
+        <file>mapa3.txt</file>
+        <file>mapa4.txt</file>
+    </qresource>
+    <qresource prefix="/Sounds">
+        <file>pacman_beginning.wav</file>
+        <file>pacman_chomp.wav</file>
+        <file>pacman_death.wav</file>
+        <file>pacman_eatfruit.wav</file>
+        <file>pacman_eatghost.wav</file>
+    </qresource>
+    <qresource prefix="/Puck">
+        <file>puckk.gif</file>
     </qresource>
 </RCC>

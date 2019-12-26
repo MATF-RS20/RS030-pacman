@@ -1,4 +1,5 @@
 #include "pacman.h"
+#include <QUrl>
 
 Pacman::Pacman()
 {
@@ -6,12 +7,33 @@ Pacman::Pacman()
     //setRect(0, 0, 30, 30);
     setRect(0, 0, 30, 30);
     setPos(37, 37);
+
+    /*
+    // ingame sounds
+    beginning = new QMediaPlayer{};
+    beginning->setMedia(QUrl("qrc:/Sounds/pacman_beginning.wav"));
+
+    chomp = new QMediaPlayer{};
+    chomp->setMedia(QUrl(":/Sounds/pacman_chomp.wav"));
+
+    eatfruit = new QMediaPlayer{};
+    eatfruit->setMedia(QUrl(":/Sounds/pacman_eatfruit.wav"));
+
+    eatghost = new QMediaPlayer{};
+    eatghost->setMedia(QUrl(":/Sounds/pacman_eatghost.wav"));
+
+    death = new QMediaPlayer{};
+    death->setMedia(QUrl(":/Sounds/pacman_death.wav"));
+    //
+    */
+
     QTimer *timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(25);
 }
+
 
 void Pacman::keyPressEvent(QKeyEvent *event)
 {
@@ -157,4 +179,10 @@ void Pacman::move()
         setPos(- this->boundingRect().size().rwidth(), y());
     if (y() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
         setPos(x(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
+}
+
+
+void Pacman::setCurrentDirection(int x)
+{
+    this->currentDirection = x%5;
 }
