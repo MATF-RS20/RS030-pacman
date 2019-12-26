@@ -50,7 +50,7 @@ Wall* PacmanGame::getWall(){
     int width = getWidth();
 
     std::string mapCe = ":/new/PacFiles/mapa";
-    int mapSelector = 4;                // napravicemo vec neko biranje
+    int mapSelector = 0;                // napravicemo vec neko biranje
     mapCe += std::to_string(mapSelector) + ".txt";
     QString gameMap = QString::fromStdString(mapCe);
     QFile mapa{gameMap};
