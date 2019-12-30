@@ -53,22 +53,18 @@ void Pacman::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left)
     {
         this->nextDirection = 1;
-        qDebug() << "PACMAAAN IDE LEVO";
     }
     else if (event->key() == Qt::Key_Right)
     {
         this->nextDirection = 2;
-        qDebug() << "PACMAAAN IDE DESNO";
     }
     else if (event->key() == Qt::Key_Up)
     {
         this->nextDirection = 3;
-        qDebug() << "PACMAAAN IDE GORE";
     }
     else if (event->key() == Qt::Key_Down)
     {
         this->nextDirection = 4;
-        qDebug() << "PACMAAAN IDE DOLE";
     }
     else if (event->key() == Qt::Key_H)
     { // left
@@ -96,6 +92,8 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 void Pacman::move()
 {
 
+    if(current_score == 160*20 )
+        QCoreApplication::quit();
     if (this->nextDirection != 0)
     {
         if (this->nextDirection == 1)
@@ -116,8 +114,26 @@ void Pacman::move()
         // ako lista nije prazna onda korak unazad
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
+        for(auto x: colliding_items){
+            if(x->boundingRect().size().rwidth() == 5){
+                scene()->removeItem(x);
+                delete x;
+                scene()->update();
+                this->current_score +=20;
+
+            }else if(x->boundingRect().size().rwidth() == 11){
+                scene()->removeItem(x);
+                delete x;
+                scene()->update();
+            }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
+                QCoreApplication::quit();
+
+        }
+
+            qDebug() << n <<"\n";
+
         if (n != 0)
-        {   qDebug() << "*************PACMAAAN ***************";
+        {
             if (this->nextDirection == 1)
                 setPos(getX() + 5, getY());
             else if (this->nextDirection == 2)
@@ -137,6 +153,23 @@ void Pacman::move()
                 setPos(getX(), getY() + 5);
             colliding_items = collidingItems();
             int n = colliding_items.size();
+            for(auto x: colliding_items){
+                if(x->boundingRect().size().rwidth() == 5){
+                    scene()->removeItem(x);
+                    delete x;
+                    scene()->update();
+                    n--;
+                    this->current_score +=20;
+
+                }else if(x->boundingRect().size().rwidth() == 11){
+                    scene()->removeItem(x);
+                    delete x;
+                    scene()->update();
+                    n--;
+                }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
+                    QCoreApplication::quit();
+
+            }
             if (n != 0)
             {
                 // ako ima kolizije unazad
@@ -156,6 +189,7 @@ void Pacman::move()
             this->currentDirection = this->nextDirection;
             this->nextDirection = 0;
         }
+        qDebug() << n <<"\n";
     }
     else
     { // ako next ne postoji samo radi normalno
@@ -169,6 +203,22 @@ void Pacman::move()
             setPos(getX(), getY() + 5);
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
+
+        for(auto x: colliding_items){
+            if(x->boundingRect().size().rwidth() == 5){
+                scene()->removeItem(x);
+                delete x;
+                scene()->update();
+                this->current_score +=20;
+            }else if(x->boundingRect().size().rwidth() == 11){
+                scene()->removeItem(x);
+                delete x;
+                scene()->update();
+            }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
+                QCoreApplication::quit();
+
+        }
+
         if (n != 0)
         {
             // ako ima kolizije unazad
@@ -191,6 +241,7 @@ void Pacman::move()
         setPos(- this->boundingRect().size().rwidth(), getY());
     if (getY() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
         setPos(getX(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
+
 }
 
 

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Ghost_t {
     QByteArrayData data[7];
-    char stringdata0[36];
+    char stringdata0[44];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,10 +37,11 @@ QT_MOC_LITERAL(2, 12, 0), // ""
 QT_MOC_LITERAL(3, 13, 5), // "move2"
 QT_MOC_LITERAL(4, 19, 5), // "move3"
 QT_MOC_LITERAL(5, 25, 5), // "move4"
-QT_MOC_LITERAL(6, 31, 4) // "move"
+QT_MOC_LITERAL(6, 31, 12) // "chooseRandom"
 
     },
-    "Ghost\0move1\0\0move2\0move3\0move4\0move"
+    "Ghost\0move1\0\0move2\0move3\0move4\0"
+    "chooseRandom"
 };
 #undef QT_MOC_LITERAL
 
@@ -84,7 +85,7 @@ void Ghost::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 1: _t->move2(); break;
         case 2: _t->move3(); break;
         case 3: _t->move4(); break;
-        case 4: _t->move(); break;
+        case 4: _t->chooseRandom(); break;
         default: ;
         }
     }

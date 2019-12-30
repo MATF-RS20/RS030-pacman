@@ -84,10 +84,10 @@ void Ghost::chooseRandom() {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0,4);
     this->nextDirection = dis(gen);
-
+/*
     qDebug() << "id " << this->ghost_id << "\n";
     qDebug() << "next " << this->nextDirection << "\n";
-    qDebug() << "current" << this->currentDirection << "\n\n";
+    qDebug() << "current" << this->currentDirection << "\n\n";*/
 }
 
 
@@ -116,6 +116,12 @@ void Ghost::move1()
         // ako lista nije prazna onda korak unazad
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
+        for(auto x: colliding_items){
+            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
+                n--;
+            }
+
+        }
         if (n != 0)
         {
             if (this->nextDirection == 1)
@@ -137,6 +143,12 @@ void Ghost::move1()
                 setPos(getX(), getY() + 5);
             colliding_items = collidingItems();
             int n = colliding_items.size();
+            for(auto x: colliding_items){
+                if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
+                    n--;
+                }
+
+            }
             if (n != 0)
             {
                 // ako ima kolizije unazad
@@ -171,6 +183,12 @@ void Ghost::move1()
             setPos(getX(), getY() + 5);
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
+        for(auto x: colliding_items){
+            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
+                n--;
+            }
+
+        }
         if (n != 0)
         {
             // ako ima kolizije unazad
