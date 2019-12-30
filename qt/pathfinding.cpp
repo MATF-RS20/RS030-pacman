@@ -76,14 +76,15 @@ Point PathFinding::nextPathPos(){
 
     int indeks = 1;
 
-    Vektor nextPos;
-    nextPos.x = m_pathToGoal[m_pathToGoal.size() - indeks].x;
-    nextPos.y = m_pathToGoal[m_pathToGoal.size() - indeks].y;
+    Point nextPos;
+    nextPos.setX(m_pathToGoal[m_pathToGoal.size() - indeks]->getX() );
+    nextPos.setY(m_pathToGoal[m_pathToGoal.size() - indeks]->getY());
 
+    Point pos;
     Point distance =  nextPos - pos;
 
     if ( indeks < m_pathToGoal.size()){
-
+        int radius = 1;
         if ( distance.length() < radius){
 
             m_pathToGoal.erase(m_pathToGoal.end() - indeks);
@@ -217,7 +218,7 @@ void PathFinding::continuePath(){
 
         for (getPath = m_goalCell; getPath != NULL; getPath = getPath->parent){
 
-            m_pathToGoal.push_back(new Vektor(getPath->m_xcoord, getPath->m_ycoord));
+            m_pathToGoal.push_back(new Point(getPath->m_xcoord, getPath->m_ycoord));
         }
 
 
