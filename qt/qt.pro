@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Character.cpp \
     MyRect.cpp \
+    dot.cpp \
     main.cpp \
     pacman.cpp \
     pacmangame.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     Character.h \
     MyRect.h \
+    dot.h \
     pacman.h \
     pacmangame.h \
     wall.h \

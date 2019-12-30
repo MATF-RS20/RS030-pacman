@@ -1,6 +1,9 @@
 #ifndef PACMAN_H
 #define PACMAN_H
 
+
+#include <iostream>
+#include "dot.h"
 #include <QGraphicsRectItem>
 //#include "character.h"
 #include <QKeyEvent>
@@ -53,7 +56,7 @@ private:
     */
     int x1;
     int y1;
-    int current_score;
+    int current_score = 0;
 }; //end of class Pacman
 
 #endif // PACMAN_H

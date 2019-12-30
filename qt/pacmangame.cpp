@@ -4,7 +4,7 @@
 #include <QDesktopWidget>
 #include <QApplication>
 
-#include<QGraphicsItemGroup>
+#include <QGraphicsItem>
 #include <fstream>
 #include <QFile>
 #include <stdio.h>
@@ -13,11 +13,32 @@
 #include <list>
 #include <numeric>
 #include <QString>
+#include "dot.h"
+#include <QStyleOption>
 
 PacmanGame::PacmanGame()
 {
+
+/*
+    // ingame sounds
+    beginning = new QMediaPlayer{};
+    beginning->setMedia(QUrl("qrc:/Sounds/pacman_beginning.wav"));
+
+    chomp = new QMediaPlayer{};
+    chomp->setMedia(QUrl("qrc:/Sounds/pacman_chomp.wav"));
+
+    eatfruit = new QMediaPlayer{};
+    eatfruit->setMedia(QUrl("qrc:/Sounds/pacman_eatfruit.wav"));
+
+    eatghost = new QMediaPlayer{};
+    eatghost->setMedia(QUrl("qrc:/Sounds/pacman_eatghost.wav"));
+
+    death = new QMediaPlayer{};
+    death->setMedia(QUrl("qrc:/Sounds/pacman_death.wav"));
+*/
+
     std::string mapCe = ":/new/PacFiles/mapa";
-    int mapSelector = 3;                // napravicemo vec neko biranje
+    int mapSelector = 1;                // napravicemo vec neko biranje
     mapCe += std::to_string(mapSelector) + ".txt";
     QString gameMap = QString::fromStdString(mapCe);
     QFile mapa{gameMap};
@@ -32,21 +53,30 @@ PacmanGame::PacmanGame()
     int direction;                      // ideja da u fajlu mapa imamo vec odredjen smer pekmena da bismo mogli
                                         // da usmerimo animaciju, taj broj da stoji pre svega ostalog
     inMap >> direction;
-    QChar nula('0');
-    QChar kec('1');
-    QChar taraba('#');
-    QChar pacPosition('P');             // u fajlu mapa stavimo P gde zelimo da bude pocetna pozicija
+    QChar nula('0');                // 0 => bobica
+    QChar kec('1');                 // 1 => zid
+    QChar taraba('#');              // # => duh
+    QChar pacPosition('P');         // P => pocetna pozicija
+    QChar bigDot('B');              // B => velika bobica
+    QChar emptySpace('=');          // '=' => prazan prostor
     QChar noviRed('\n');
 
     int spacing = 35;
     Wall *w1;
+    Dot *tuf{};
 
     inMap >> c;                         // kupi novi red posle ucitanog smera
 
     while(!inMap.atEnd()){
         inMap >> c;
-        if(c == nula)
+        if(c == nula || c == bigDot){
+            // stavi bobicu, stavimo koliziju pekmena sa
+            // bobicom da unisti bobicu i podesi skor
+            tuf = new Dot(x,y, c);
+            std::pair<int, int> par = {x,y};
+            dots[par] = tuf;
             x+=spacing;
+        }
         else if(c == kec){
             w1 = new Wall(x,y,spacing,spacing);
             this->walls_and_borders.push_back(w1);
@@ -66,6 +96,9 @@ PacmanGame::PacmanGame()
         else if(c == pacPosition){
             //this->pacman->setCurrentDirection(direction);
             this->pacman = new Pacman(x+2,y+2);
+            x+=spacing;
+        }
+        else if(c == emptySpace){
             x+=spacing;
         }
     }
@@ -117,6 +150,11 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
     }
 
     scene.addItem(this->pacman);
+
+
+    for(auto x: this->dots){
+        scene.addEllipse(x.second->getDot());
+    }
     /*
     scene = std::accumulate(std::begin(this->walls_and_borders), std::end(this->walls_and_borders),
                     QGraphicsScene, add_to_scene);

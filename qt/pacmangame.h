@@ -13,6 +13,9 @@
 #include "ghost.h"
 
 #include <list>
+#include <map>
+//#include <QMediaPlayer>
+#include "dot.h"
 
 //#include <QGraphicsItemGroup>
 
@@ -26,7 +29,17 @@ private:
 //obrisala current_score, nalazi se u pacman klasi
     Wall *walls[200];
     std::list<Wall*> walls_and_borders{};
-    //  tabela skorova
+    std::map<std::pair<int,int>,Dot*> dots{};
+/*
+    QMediaPlayer * beginning;
+    QMediaPlayer * chomp;
+    QMediaPlayer * eatfruit;
+    QMediaPlayer * eatghost;
+    QMediaPlayer * death;
+*/
+    //  tabela skorova !!!
+    //  bolje tipa vektor sa 10 mesta, da otmemo odmah 10 slotova
+    //  za skorove, da ne alociramo memoriju ako je slucajno nema
 
 public:
     PacmanGame();
