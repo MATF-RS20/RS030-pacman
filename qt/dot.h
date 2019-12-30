@@ -7,8 +7,9 @@ class Dot{
 public:
     Dot();
     Dot(int x, int y , char r = '0');
-    void destroy();
+    ~Dot();
     QRectF getDot();
+    int getPoints();
 private:
     int posX;
     int posY;

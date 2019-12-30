@@ -19,10 +19,10 @@ Dot::Dot(){
     bobby = nullptr;
 }
 
-void Dot::destroy(){
-    delete bobby;
-}
-
 QRectF Dot::getDot(){
     return *bobby;
+}
+
+int Dot::getPoints(){
+    return points;
 }
