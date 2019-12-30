@@ -23,7 +23,9 @@ SOURCES += \
     pacman.cpp \
     pacmangame.cpp \
     wall.cpp \
-    ghost.cpp
+    ghost.cpp \
+    searchcell.cpp \
+    pathfinding.cpp
 
 HEADERS += \
     Character.h \
@@ -32,7 +34,9 @@ HEADERS += \
     pacman.h \
     pacmangame.h \
     wall.h \
-    ghost.h
+    ghost.h \
+    searchcell.h \
+    pathfinding.h
 
 FORMS +=
 

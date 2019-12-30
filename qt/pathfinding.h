@@ -1,6 +1,7 @@
 #ifndef PATHFINDING_H
 #define PATHFINDING_H
 
+
 //#include "Vector.h"
 #include "searchcell.h"
 #include <vector>
@@ -33,6 +34,7 @@ private:
 
 
 };
+
 
 
 

@@ -1,6 +1,7 @@
 #ifndef SEARCHCELL_H
 #define SEARCHCELL_H
 
+
 #include <math.h>
 // #define  WORLD_SIZE 64
 
@@ -18,6 +19,8 @@ public:
     float getF();
     float ManHattanDistance (SearchCell *nodeEnd);
 };
+
+
 
 
 #endif // SEARCHCELL_H
