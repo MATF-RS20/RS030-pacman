@@ -2,7 +2,7 @@
 #define PATHFINDING_H
 
 
-//#include "Vector.h"
+#include "point.h"
 #include "searchcell.h"
 #include <vector>
 
@@ -11,8 +11,8 @@ public:
     PathFinding(void);
     ~PathFinding(void);
 
-    void findPath (Vector currentPos, Vector targetPos );
-    Vector nextPathPos();
+    void findPath (Point currentPos, Point targetPos );
+    Point nextPathPos();
 
     void clearOpenList();
     void clearVisitedList();
@@ -26,11 +26,13 @@ private:
     void pathOpen (int x, int y, float newCost, SearchCell *parent);
     SearchCell *getNextCell();
     void continuePath();
+
+
     SearchCell *m_startCell;
     SearchCell *m_goalCell;
     std::vector <SearchCell*> m_openList;
     std::vector <SearchCell*> m_visitedList;
-    std::vector <Vector*> m_pathToGoal;
+    std::vector <Point*> m_pathToGoal;
 
 
 };

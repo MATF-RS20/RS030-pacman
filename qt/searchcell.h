@@ -3,11 +3,12 @@
 
 
 #include <math.h>
-// #define  WORLD_SIZE 64
+#define  WORLD_SIZE 64
 
 class SearchCell {
 public:
-    int m_xcoord, m_ycoord;
+    int m_xcoord;
+    int m_ycoord;
     int m_id;
     SearchCell* parent;
     float G;

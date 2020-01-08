@@ -24,7 +24,8 @@ SOURCES += \
     wall.cpp \
     ghost.cpp \
     searchcell.cpp \
-    pathfinding.cpp
+    pathfinding.cpp \
+    point.cpp
 
 HEADERS += \
     Character.h \
@@ -34,7 +35,8 @@ HEADERS += \
     wall.h \
     ghost.h \
     searchcell.h \
-    pathfinding.h
+    pathfinding.h \
+    point.h
 
 FORMS +=
 
