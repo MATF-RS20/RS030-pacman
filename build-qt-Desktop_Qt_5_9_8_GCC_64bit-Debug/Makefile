@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = qt1.0.0
-DISTDIR = /home/vasja/Desktop/Git/tt/po\ treci\ put/RS030-pacman/build-qt-Desktop_Qt_5_9_8_GCC_64bit-Debug/.tmp/qt1.0.0
+DISTDIR = /home/vasja/Desktop/Git/E/RS030-pacman/build-qt-Desktop_Qt_5_9_8_GCC_64bit-Debug/.tmp/qt1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/vasja/Qt/5.9.8/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/home/vasja/Qt/5.9.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -51,29 +51,31 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../qt/Character.cpp \
-		../qt/MyRect.cpp \
 		../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
 		../qt/wall.cpp \
-		../qt/ghost.cpp qrc_PacResources.cpp \
+		../qt/ghost.cpp \
+		../qt/searchcell.cpp \
+		../qt/pathfinding.cpp \
+		../qt/point.cpp qrc_PacResources.cpp \
 		moc_Character.cpp \
-		moc_MyRect.cpp \
 		moc_pacman.cpp \
 		moc_pacmangame.cpp \
 		moc_ghost.cpp
 OBJECTS       = Character.o \
-		MyRect.o \
 		dot.o \
 		main.o \
 		pacman.o \
 		pacmangame.o \
 		wall.o \
 		ghost.o \
+		searchcell.o \
+		pathfinding.o \
+		point.o \
 		qrc_PacResources.o \
 		moc_Character.o \
-		moc_MyRect.o \
 		moc_pacman.o \
 		moc_pacmangame.o \
 		moc_ghost.o
@@ -259,19 +261,24 @@ DIST          = /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/yacc.prf \
 		/home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/lex.prf \
 		../qt/qt.pro ../qt/Character.h \
-		../qt/MyRect.h \
 		../qt/dot.h \
+		../qt/globalVariables.h \
 		../qt/pacman.h \
 		../qt/pacmangame.h \
 		../qt/wall.h \
-		../qt/ghost.h ../qt/Character.cpp \
-		../qt/MyRect.cpp \
+		../qt/ghost.h \
+		../qt/searchcell.h \
+		../qt/pathfinding.h \
+		../qt/point.h ../qt/Character.cpp \
 		../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
 		../qt/wall.cpp \
-		../qt/ghost.cpp
+		../qt/ghost.cpp \
+		../qt/searchcell.cpp \
+		../qt/pathfinding.cpp \
+		../qt/point.cpp
 QMAKE_TARGET  = qt
 DESTDIR       = 
 TARGET        = qt
@@ -672,8 +679,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt/PacResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.h ../qt/MyRect.h ../qt/dot.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/MyRect.cpp ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/Character.h ../qt/dot.h ../qt/globalVariables.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h ../qt/searchcell.h ../qt/pathfinding.h ../qt/point.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp ../qt/searchcell.cpp ../qt/pathfinding.cpp ../qt/point.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -721,9 +728,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Character.cpp moc_MyRect.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
+compiler_moc_header_make_all: moc_Character.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Character.cpp moc_MyRect.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
+	-$(DEL_FILE) moc_Character.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
 moc_Character.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -829,9 +836,10 @@ moc_Character.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectIt
 		../qt/Character.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I'/home/vasja/Desktop/Git/tt/po treci put/RS030-pacman/qt' -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/Character.h -o moc_Character.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/E/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/Character.h -o moc_Character.cpp
 
-moc_MyRect.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
+moc_pacman.cpp: ../qt/dot.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtguiglobal.h \
@@ -916,113 +924,8 @@ moc_MyRect.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem 
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qimage.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpixelformat.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtransform.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QKeyEvent \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qevent.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qkeysequence.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qurl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qurlquery.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qvector2d.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QTimer \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtimer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbasictimer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QObject \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QCoreApplication \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize \
-		../qt/MyRect.h \
-		moc_predefs.h \
-		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I'/home/vasja/Desktop/Git/tt/po treci put/RS030-pacman/qt' -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/MyRect.h -o moc_MyRect.cpp
-
-moc_pacman.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsitem.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtguiglobal.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qglobal.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qconfig.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtcore-config.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsystemdetection.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qprocessordetection.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcompilerdetection.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtypeinfo.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsysinfo.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qlogging.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qflags.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbasicatomic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qgenericatomic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic_msvc.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qglobalstatic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmutex.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qnumeric.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qversiontagging.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtgui-config.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobject.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qnamespace.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstring.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qchar.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbytearray.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qrefcount.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qarraydata.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qlist.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qalgorithms.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qiterator.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qhashfunctions.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qpair.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbytearraylist.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstringlist.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qregexp.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcoreevent.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qscopedpointer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmetatype.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qvariant.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmap.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qhash.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qshareddata.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qpoint.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qset.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qrect.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmargins.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsize.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpainterpath.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qmatrix.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpolygon.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qregion.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qline.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpixmap.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qcolor.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qrgb.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qrgba64.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qimage.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpixelformat.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtransform.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QRectF \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QKeyEvent \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qevent.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qkeysequence.h \
@@ -1053,7 +956,7 @@ moc_pacman.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem 
 		../qt/pacman.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I'/home/vasja/Desktop/Git/tt/po treci put/RS030-pacman/qt' -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacman.h -o moc_pacman.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/E/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacman.h -o moc_pacman.cpp
 
 moc_pacmangame.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsize.h \
@@ -1170,13 +1073,16 @@ moc_pacmangame.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
 		../qt/pacman.h \
+		../qt/dot.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QRectF \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QDebug \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QList \
 		../qt/ghost.h \
 		../qt/pacmangame.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I'/home/vasja/Desktop/Git/tt/po treci put/RS030-pacman/qt' -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacmangame.h -o moc_pacmangame.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/E/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacmangame.h -o moc_pacmangame.cpp
 
 moc_ghost.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QObject \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobject.h \
@@ -1292,7 +1198,7 @@ moc_ghost.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QObject \
 		../qt/ghost.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I'/home/vasja/Desktop/Git/tt/po treci put/RS030-pacman/qt' -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/ghost.h -o moc_ghost.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/E/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/ghost.h -o moc_ghost.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1412,111 +1318,6 @@ Character.o: ../qt/Character.cpp ../qt/Character.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Character.o ../qt/Character.cpp
-
-MyRect.o: ../qt/MyRect.cpp ../qt/MyRect.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsitem.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtguiglobal.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qglobal.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qconfig.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtcore-config.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsystemdetection.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qprocessordetection.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcompilerdetection.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtypeinfo.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsysinfo.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qlogging.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qflags.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbasicatomic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qgenericatomic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qatomic_msvc.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qglobalstatic.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmutex.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qnumeric.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qversiontagging.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtgui-config.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobject.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qnamespace.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstring.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qchar.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbytearray.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qrefcount.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qarraydata.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qlist.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qalgorithms.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qiterator.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qhashfunctions.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qpair.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbytearraylist.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstringlist.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qregexp.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcoreevent.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qscopedpointer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmetatype.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qvariant.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmap.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qhash.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qshareddata.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qpoint.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qset.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qrect.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qmargins.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsize.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpainterpath.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qmatrix.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpolygon.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qregion.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qline.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpixmap.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qcolor.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qrgb.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qrgba64.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qimage.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpixelformat.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtransform.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QKeyEvent \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qevent.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qkeysequence.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qurl.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qurlquery.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qvector2d.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QTimer \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qtimer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qbasictimer.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QObject \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QCoreApplication \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MyRect.o ../qt/MyRect.cpp
 
 dot.o: ../qt/dot.cpp ../qt/dot.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
@@ -1744,12 +1545,16 @@ main.o: ../qt/main.cpp /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QApplicatio
 		../qt/pacmangame.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QPainter \
 		../qt/pacman.h \
+		../qt/dot.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QRectF \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QList \
 		../qt/ghost.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../qt/main.cpp
 
 pacman.o: ../qt/pacman.cpp ../qt/pacman.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
+		../qt/dot.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtguiglobal.h \
@@ -1834,6 +1639,8 @@ pacman.o: ../qt/pacman.cpp ../qt/pacman.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qimage.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qpixelformat.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qtransform.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QRectF \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QKeyEvent \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qevent.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/qkeysequence.h \
@@ -1980,6 +1787,9 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
 		../qt/pacman.h \
+		../qt/dot.h \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
+		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QRectF \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QDebug \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtGui/QList \
 		../qt/ghost.h \
@@ -1998,9 +1808,6 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QTextStream \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QChar \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QString \
-		../qt/dot.h \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
-		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QRectF \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QStyleOption \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qstyleoption.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
@@ -2237,14 +2044,22 @@ ghost.o: ../qt/ghost.cpp ../qt/ghost.h \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ghost.o ../qt/ghost.cpp
 
+searchcell.o: ../qt/searchcell.cpp ../qt/searchcell.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o searchcell.o ../qt/searchcell.cpp
+
+pathfinding.o: ../qt/pathfinding.cpp ../qt/pathfinding.h \
+		../qt/point.h \
+		../qt/searchcell.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pathfinding.o ../qt/pathfinding.cpp
+
+point.o: ../qt/point.cpp ../qt/point.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o point.o ../qt/point.cpp
+
 qrc_PacResources.o: qrc_PacResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_PacResources.o qrc_PacResources.cpp
 
 moc_Character.o: moc_Character.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Character.o moc_Character.cpp
-
-moc_MyRect.o: moc_MyRect.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MyRect.o moc_MyRect.cpp
 
 moc_pacman.o: moc_pacman.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pacman.o moc_pacman.cpp

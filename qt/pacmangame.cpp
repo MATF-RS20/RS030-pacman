@@ -1,4 +1,5 @@
 #include "pacmangame.h"
+//#include "globalVariables.h"
 
 #include <iostream>
 #include <QDesktopWidget>
@@ -58,6 +59,7 @@ PacmanGame::PacmanGame()
     QChar taraba('#');              // # => duh
     QChar pacPosition('P');         // P => pocetna pozicija
     QChar bigDot('B');              // B => velika bobica
+    QChar fruit('V');              // V => vockica
     QChar emptySpace('=');          // '=' => prazan prostor
     QChar noviRed('\n');
 
@@ -69,7 +71,7 @@ PacmanGame::PacmanGame()
 
     while(!inMap.atEnd()){
         inMap >> c;
-        if(c == nula || c == bigDot){
+        if( (c == nula || c == bigDot) || c==fruit){
             // stavi bobicu, stavimo koliziju pekmena sa
             // bobicom da unisti bobicu i podesi skor
             tuf = new Dot(x,y, c);
@@ -140,6 +142,7 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
    // getWall();
     //QGraphicsItemGroup *group = new QGraphicsItemGroup{};
 
+
     for(auto x : this->walls_and_borders){
         scene.addItem(x);
         x->setBrush(Qt::darkGray);
@@ -149,12 +152,15 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
         scene.addItem(x);
     }
 
-    scene.addItem(this->pacman);
-
-
+    //Global prom{};
     for(auto x: this->dots){
+        //global::allDots.insert(scene.addEllipse(x.second->getDot()));
+        //prom.addDot(scene.addEllipse(x.second->getDot()));
         scene.addEllipse(x.second->getDot());
     }
+
+
+    scene.addItem(this->pacman);
     /*
     scene = std::accumulate(std::begin(this->walls_and_borders), std::end(this->walls_and_borders),
                     QGraphicsScene, add_to_scene);

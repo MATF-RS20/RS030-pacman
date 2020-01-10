@@ -8,10 +8,15 @@ Dot::Dot(int x, int y , char r){
         turnsGhostsBlue = false;
         bobby = new QRectF(x+15, y+15, 4, 4);
     }
-    else{
+    else if(r == 'B'){
         points = 0;
         turnsGhostsBlue = true;
         bobby = new QRectF(x+12, y+12, 10, 10);
+    }
+    else if(r == 'V'){
+        points = 200;
+        turnsGhostsBlue = true;
+        bobby = new QRectF(x+9, y+9, 19, 19);
     }
 }
 
