@@ -120,6 +120,7 @@ void Ghost::move1()
             if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
                 n--;
             }
+            //else if(x->boundingRect().size().rwidth() == this->boundingRect().rwidth())
 
         }
         if (n != 0)

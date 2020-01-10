@@ -30,6 +30,8 @@ private:
     Wall *walls[200];
     std::list<Wall*> walls_and_borders{};
     std::map<std::pair<int,int>,Dot*> dots{};
+    //std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
+    //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 /*
     QMediaPlayer * beginning;
     QMediaPlayer * chomp;

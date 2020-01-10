@@ -1,4 +1,5 @@
 #include "pacman.h"
+//#include "globalVariables.h"
 #include <QUrl>
 
 Pacman::Pacman(int x1, int y1)
@@ -92,7 +93,7 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 void Pacman::move()
 {
 
-    if(current_score == 160*20 )
+    if(current_score == 160*20  /*|| global::allDots.empty() == true*/ )
         QCoreApplication::quit();
     if (this->nextDirection != 0)
     {
@@ -117,12 +118,14 @@ void Pacman::move()
         for(auto x: colliding_items){
             if(x->boundingRect().size().rwidth() == 5){
                 scene()->removeItem(x);
+                //global::allDots.erase(x);
                 delete x;
                 scene()->update();
                 this->current_score +=20;
 
             }else if(x->boundingRect().size().rwidth() == 11){
                 scene()->removeItem(x);
+                //global::allDots.erase(x);
                 delete x;
                 scene()->update();
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
@@ -214,6 +217,11 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
+            }else if(x->boundingRect().size().rwidth() == 20){
+                scene()->removeItem(x);
+                delete x;
+                scene()->update();
+                this->current_score += 200;
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
                 QCoreApplication::quit();
 

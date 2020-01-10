@@ -30,6 +30,7 @@ SOURCES += \
 HEADERS += \
     Character.h \
     dot.h \
+    globalVariables.h \
     pacman.h \
     pacmangame.h \
     wall.h \
