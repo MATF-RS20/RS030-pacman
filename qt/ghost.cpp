@@ -117,7 +117,7 @@ void Ghost::move1()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
+            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20){
                 n--;
             }
             //else if(x->boundingRect().size().rwidth() == this->boundingRect().rwidth())
@@ -125,6 +125,11 @@ void Ghost::move1()
         }
         if (n != 0)
         {
+            if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                std::cout << "VISE SRECE DRUGI PUT!!!\n";
+                QCoreApplication::quit();
+            }
+
             if (this->nextDirection == 1)
                 setPos(getX() + 5, getY());
             else if (this->nextDirection == 2)
@@ -145,13 +150,17 @@ void Ghost::move1()
             colliding_items = collidingItems();
             int n = colliding_items.size();
             for(auto x: colliding_items){
-                if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
+                if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20){
                     n--;
                 }
 
             }
             if (n != 0)
             {
+                if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                    std::cout << "VISE SRECE DRUGI PUT!!!\n";
+                    QCoreApplication::quit();
+                }
                 // ako ima kolizije unazad
                 if (this->currentDirection == 1)
                     setPos(getX() + 5, getY());
@@ -185,13 +194,17 @@ void Ghost::move1()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11){
+            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20){
                 n--;
             }
 
         }
         if (n != 0)
         {
+            if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                std::cout << "VISE SRECE DRUGI PUT!!!\n";
+                QCoreApplication::quit();
+            }
             // ako ima kolizije unazad
             if (this->currentDirection == 1)
                 setPos(getX() + 5, getY());
@@ -211,7 +224,7 @@ void Ghost::move1()
     if (getY() < 3)
         setPos(getX(), 3);
     if (getX() > this->scene()->width())
-        setPos(- this->boundingRect().size().rwidth(), getY());
+        setPos(- this->boundingRect().size().rwidth() - 1, getY());
     if (getY() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
         setPos(getX(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
 

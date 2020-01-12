@@ -90,7 +90,7 @@ PacmanGame::PacmanGame()
         }
         else if(c == noviRed){
             width--;
-            std::cout << width << "\n";
+            //std::cout << width << "\n";
             x = 0;
             y+=spacing;
         }

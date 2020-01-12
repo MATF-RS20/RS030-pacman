@@ -5,7 +5,7 @@
 Pacman::Pacman(int x1, int y1)
     :x1(x1),y1(y1)
 {
-    setRect(0, 0, 30, 30);
+    setRect(0, 0, 29, 29);
     setPos(this->x1,this->y1);
 
     this->setBrush(Qt::yellow);
@@ -93,8 +93,10 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 void Pacman::move()
 {
 
-    if(current_score == 156*20  /*|| global::allDots.empty() == true*/ )
+    if(current_score == 156*20  /*|| global::allDots.empty() == true*/ ){
+        std::cout <<"SVAKA CAST POBEDILI STE!!" << "\n";
         QCoreApplication::quit();
+    }
     if (this->nextDirection != 0)
     {
         if (this->nextDirection == 1)
@@ -134,12 +136,13 @@ void Pacman::move()
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
-            }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
+            }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                std::cout << "VISE SRECE DRUGIT PT!!!\n";
                 QCoreApplication::quit();
-
+            }
         }
 
-            qDebug() << n <<"\n";
+            //qDebug() << n <<"\n";
 
         if (n != 0)
         {
@@ -175,8 +178,10 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
-                }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
+                }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                    std::cout << "VISE SRECE DRUGI PUT!!!\n";
                     QCoreApplication::quit();
+                }
 
             }
             if (n != 0)
@@ -198,7 +203,7 @@ void Pacman::move()
             this->currentDirection = this->nextDirection;
             this->nextDirection = 0;
         }
-        qDebug() << n <<"\n";
+        //qDebug() << n <<"\n";
     }
     else
     { // ako next ne postoji samo radi normalno
@@ -227,9 +232,11 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
-                this->current_score += 200;
-            }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth())
+                this->current_score += 20;
+            }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
+                std::cout<<"VISE SRECE DRUGI PUT!!!\n";
                 QCoreApplication::quit();
+            }
 
         }
 
@@ -252,7 +259,7 @@ void Pacman::move()
     if (getY() < 3)
         setPos(getX(), 3);
     if (getX() > this->scene()->width())
-        setPos(- this->boundingRect().size().rwidth(), getY());
+        setPos(- this->boundingRect().size().rwidth()-1, getY());
     if (getY() > this->scene()->height() - this->boundingRect().size().rheight() - 3)
         setPos(getX(), this->scene()->height() - this->boundingRect().size().rheight() - 3);
 

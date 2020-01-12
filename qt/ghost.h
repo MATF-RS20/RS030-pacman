@@ -2,6 +2,7 @@
 #define GHOST_H
 
 //#include "character.h"
+#include <iostream>
 #include <QObject>
 #include <QGraphicsRectItem>
 #include <QCoreApplication>
