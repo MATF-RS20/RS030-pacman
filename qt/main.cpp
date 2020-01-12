@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     //QSize size = qApp->screens()[0]->size();
 
-    int mapNumber = 4;
+    int mapNumber = 1;
     //std::cin >> k;
     PacmanGame *game1 = new PacmanGame(mapNumber);
 
