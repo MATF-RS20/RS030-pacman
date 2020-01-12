@@ -1800,6 +1800,11 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList \
 		../qt/ghost.h \
+		../qt/globalVariables.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsItem \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QString \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QFile \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QTextStream \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QDesktopWidget \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qwidget.h \
@@ -1810,11 +1815,7 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsItem \
-		../../../../Qt/5.12.5/gcc_64/include/QtCore/QFile \
-		../../../../Qt/5.12.5/gcc_64/include/QtCore/QTextStream \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QChar \
-		../../../../Qt/5.12.5/gcc_64/include/QtCore/QString \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QStyleOption \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyleoption.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractspinbox.h \

@@ -18,11 +18,11 @@ int main(int argc, char *argv[])
 
     QSize size = qApp->screens()[0]->size();
 
-    view->setFixedSize(17*35+3, size.height());
+    view->setFixedSize(size.width(), size.height());
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    scene->setSceneRect(0, 0, 17*35+3, size.height());
+    scene->setSceneRect(0, 0, size.width(), size.height());
     //  Creating an item to place in the scene
 
 

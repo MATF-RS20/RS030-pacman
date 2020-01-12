@@ -93,11 +93,11 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 
 void Pacman::move()
 {
-
-    if(current_score == 156*20  /*|| global::allDots.empty() == true*/ || this->eatenDots == this->dotsToEat ){
-        std::cout <<"SVAKA CAST POBEDILI STE!!" << "\n";
+    if(this->eatenDots == this->dotsToEat){
+        std::cout << "CESTITAM!!!\n";
         QCoreApplication::quit();
     }
+
     if (this->nextDirection != 0)
     {
         if (this->nextDirection == 1)
@@ -174,6 +174,7 @@ void Pacman::move()
             int n = colliding_items.size();
             for(auto x: colliding_items){
                 if(x->boundingRect().size().rwidth() == 5){
+                    this->eatenDots++;
                     scene()->removeItem(x);
                     delete x;
                     scene()->update();
@@ -181,6 +182,13 @@ void Pacman::move()
                     this->current_score +=20;
 
                 }else if(x->boundingRect().size().rwidth() == 11){
+                    this->eatenDots++;
+                    scene()->removeItem(x);
+                    delete x;
+                    scene()->update();
+                    n--;
+                }else if(x->boundingRect().size().rwidth() == 20){
+                    this->eatenDots++;
                     scene()->removeItem(x);
                     delete x;
                     scene()->update();
@@ -227,15 +235,18 @@ void Pacman::move()
 
         for(auto x: colliding_items){
             if(x->boundingRect().size().rwidth() == 5){
+                this->eatenDots++;
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
                 this->current_score +=20;
             }else if(x->boundingRect().size().rwidth() == 11){
+                this->eatenDots++;
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
             }else if(x->boundingRect().size().rwidth() == 20){
+                this->eatenDots++;
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
