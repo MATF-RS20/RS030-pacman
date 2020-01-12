@@ -27,8 +27,17 @@ void PacmanGame::setMapSelector(int x)
     mapSelector = x;
 }
 
-PacmanGame::PacmanGame()
+int PacmanGame::getX() const{
+    return this->x;
+}
+
+int PacmanGame::getY() const{
+    return this->y;
+}
+
+PacmanGame::PacmanGame(int selectMap)
 {
+    mapSelector = selectMap;
 
 /*
     // ingame sounds
@@ -60,7 +69,8 @@ PacmanGame::PacmanGame()
     char c;
 
 
-    int x = 0, y = 0, broj_duha = 0;
+    this->x = 0, this->y = 0;
+    int broj_duha = 0;
 
     int direction;                      // ideja da u fajlu mapa imamo vec odredjen smer pekmena da bismo mogli
                                         // da usmerimo animaciju, taj broj da stoji pre svega ostalog
@@ -74,6 +84,7 @@ PacmanGame::PacmanGame()
     inMap >> c;                         // kupi novi red posle ucitanog smera
     int pacPosX;
     int pacPosY;
+    int keepX;
 
     while(!inMap.atEnd()){
         width++;
@@ -96,6 +107,7 @@ PacmanGame::PacmanGame()
         else if(c == noviRed){
             width--;
             //std::cout << width << "\n";
+            keepX = x;
             x = 0;
             y+=spacing;
         }
@@ -114,6 +126,7 @@ PacmanGame::PacmanGame()
             x+=spacing;
         }
     }
+    x = keepX;
 
     // premesteno ovde da bi u konstruktoru dodali broj bobica koje treba da pojede
     // a broj se povecava u petlji stalno pa mora da se ubaci kad se petlja zavrsi

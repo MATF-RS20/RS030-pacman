@@ -255,6 +255,36 @@ static bool isValid(int x, int y) { //If our Node is an obstacle it is not valid
 
    }
 */
+std::vector<Node> makePath(std::vector <std::vector <Node*> > map, Node dest) {
+       // try {
+            std::cout << "Found a path" << std::endl;
+            int x = dest.x;
+            int y = dest.y;
+            std::stack<Node> path;
+            std::vector<Node> usablePath;
+
+            while (!(map[x][y]->parentX == x && map[x][y]->parentY == y)
+                && map[x][y]->x != -1 && map[x][y]->y != -1)
+            {
+                path.push(*map[x][y]);
+                int tempX = map[x][y]->parentX;
+                int tempY = map[x][y]->parentY;
+                x = tempX;
+                y = tempY;
+
+            }
+            path.push(*map[x][y]);
+
+            while (!path.empty()) {
+                Node top = path.top();
+                path.pop();
+                usablePath.emplace_back(top);
+            }
+            return usablePath;
+        //}catch(const exception& e){
+        //    std::cout << e.what() << std::endl;
+        //}
+    }
 
 
 // player is ghost and destination is going to be coordinates of pacman
@@ -405,35 +435,4 @@ std::vector<Node> PacmanGame::aStar(Node player, Node dest)
 
 
 //array<array<Node, (Y_MAX / Y_STEP)>, (X_MAX / X_STEP)>
-
-std::vector<Node> makePath(std::vector <std::vector <Node*> > map, Node dest) {
-       // try {
-            std::cout << "Found a path" << std::endl;
-            int x = dest.x;
-            int y = dest.y;
-            std::stack<Node> path;
-            std::vector<Node> usablePath;
-
-            while (!(map[x][y]->parentX == x && map[x][y]->parentY == y)
-                && map[x][y]->x != -1 && map[x][y]->y != -1)
-            {
-                path.push(*map[x][y]);
-                int tempX = map[x][y]->parentX;
-                int tempY = map[x][y]->parentY;
-                x = tempX;
-                y = tempY;
-
-            }
-            path.push(*map[x][y]);
-
-            while (!path.empty()) {
-                Node top = path.top();
-                path.pop();
-                usablePath.emplace_back(top);
-            }
-            return usablePath;
-        //}catch(const exception& e){
-        //    std::cout << e.what() << std::endl;
-        //}
-    }
 

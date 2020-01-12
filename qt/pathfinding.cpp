@@ -15,19 +15,19 @@ PathFinding::~PathFinding (void){
 void PathFinding::findPath(Point currentPos, Point targetPos){
     if (!m_initializedStartGoal){
 
-        for (int i = 0 ; i < m_openList.size(); i++){
+        for (unsigned i = 0 ; i < m_openList.size(); i++){
             delete m_openList[i];
         }
         m_openList.clear();
 
 
-        for (int i = 0 ; i < m_visitedList.size(); i++){
+        for (unsigned i = 0 ; i < m_visitedList.size(); i++){
             delete m_visitedList[i];
         }
         m_visitedList.clear();
 
 
-        for (int i = 0 ; i < m_pathToGoal.size(); i++){
+        for (unsigned i = 0 ; i < m_pathToGoal.size(); i++){
             delete m_pathToGoal[i];
         }
 
@@ -74,7 +74,7 @@ void PathFinding::clearPathToGoal(){
 
 Point PathFinding::nextPathPos(){
 
-    int indeks = 1;
+    unsigned indeks = 1;
 
     Point nextPos;
     nextPos.setX(m_pathToGoal[m_pathToGoal.size() - indeks]->getX() );
@@ -130,7 +130,7 @@ void PathFinding::pathOpen (int x, int y, float newCost, SearchCell *parent){
 
     int id = y*WORLD_SIZE + x;
 
-    for (int i = 0 ; i < m_visitedList.size(); i++){
+    for (unsigned i = 0 ; i < m_visitedList.size(); i++){
 
         if (id == m_visitedList[i]->m_id){
             return;
@@ -142,7 +142,7 @@ void PathFinding::pathOpen (int x, int y, float newCost, SearchCell *parent){
     newChild->H = parent->ManHattanDistance(m_goalCell);
 
 
-    for (int i = 0 ; i < m_openList.size(); i++){
+    for (unsigned i = 0 ; i < m_openList.size(); i++){
 
         if (id == m_openList[i]->m_id){
 
@@ -181,7 +181,7 @@ SearchCell* PathFinding::getNextCell(){
     int cellIndex = -1;
     SearchCell* nextCell = NULL;
 
-    for (int i = 0; i < m_openList.size(); i++){
+    for (unsigned i = 0; i < m_openList.size(); i++){
 
         if (m_openList[i]->getF() < bestF){
             bestF = m_openList[i]->getF();
@@ -253,7 +253,7 @@ void PathFinding::continuePath(){
             this->pathOpen(currentCell->m_xcoord + 1, currentCell->m_ycoord - 1, currentCell->G + 1.414f, currentCell);
 
 
-        for (int i = 0; i < m_openList.size(); i++){
+        for (unsigned i = 0; i < m_openList.size(); i++){
 
             if (currentCell->m_id == m_openList[i]->m_id){
 

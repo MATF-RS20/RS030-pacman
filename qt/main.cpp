@@ -6,7 +6,10 @@
 //#include "Character.h"
 #include "wall.h"
 #include "pacmangame.h"
+//#include "globalVariables.h"
+#include <iostream>
 
+//using namespace global;
 
 int main(int argc, char *argv[])
 {
@@ -16,17 +19,24 @@ int main(int argc, char *argv[])
     QGraphicsScene *scene = new QGraphicsScene();
     QGraphicsView *view = new QGraphicsView(scene);
 
-    QSize size = qApp->screens()[0]->size();
+    //QSize size = qApp->screens()[0]->size();
 
-    view->setFixedSize(size.width(), size.height());
+    int mapNumber = 4;
+    //std::cin >> k;
+    PacmanGame *game1 = new PacmanGame(mapNumber);
+
+    int mapWidth = game1->getX();
+    int mapHeight = game1->getY();
+    //std::cout << mapWidth << std::endl;
+
+    view->setFixedSize(mapWidth, mapHeight);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    scene->setSceneRect(0, 0, size.width(), size.height());
+    scene->setSceneRect(0, 0, mapWidth, mapHeight);
     //  Creating an item to place in the scene
 
 
-    PacmanGame *game1 = new PacmanGame();
 
     //Character *box = new Character(0, 0, 20, 35, 1000, 1000);
     // Wall *w1 = new Wall(50, 400, 10, 200);
