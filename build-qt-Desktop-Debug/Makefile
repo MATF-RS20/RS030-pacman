@@ -51,27 +51,31 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../qt/Character.cpp \
-		../qt/MyRect.cpp \
+		../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
 		../qt/wall.cpp \
-		../qt/ghost.cpp qrc_PacResources.cpp \
+		../qt/ghost.cpp \
+		../qt/searchcell.cpp \
+		../qt/pathfinding.cpp \
+		../qt/point.cpp qrc_PacResources.cpp \
 		moc_Character.cpp \
-		moc_MyRect.cpp \
 		moc_pacman.cpp \
 		moc_pacmangame.cpp \
 		moc_ghost.cpp
 OBJECTS       = Character.o \
-		MyRect.o \
+		dot.o \
 		main.o \
 		pacman.o \
 		pacmangame.o \
 		wall.o \
 		ghost.o \
+		searchcell.o \
+		pathfinding.o \
+		point.o \
 		qrc_PacResources.o \
 		moc_Character.o \
-		moc_MyRect.o \
 		moc_pacman.o \
 		moc_pacmangame.o \
 		moc_ghost.o
@@ -150,17 +154,24 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../qt/qt.pro ../qt/Character.h \
-		../qt/MyRect.h \
+		../qt/dot.h \
+		../qt/globalVariables.h \
 		../qt/pacman.h \
 		../qt/pacmangame.h \
 		../qt/wall.h \
-		../qt/ghost.h ../qt/Character.cpp \
-		../qt/MyRect.cpp \
+		../qt/ghost.h \
+		../qt/searchcell.h \
+		../qt/pathfinding.h \
+		../qt/point.h ../qt/Character.cpp \
+		../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
 		../qt/wall.cpp \
-		../qt/ghost.cpp
+		../qt/ghost.cpp \
+		../qt/searchcell.cpp \
+		../qt/pathfinding.cpp \
+		../qt/point.cpp
 QMAKE_TARGET  = qt
 DESTDIR       = 
 TARGET        = qt
@@ -347,8 +358,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt/PacResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.h ../qt/MyRect.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/MyRect.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/Character.h ../qt/dot.h ../qt/globalVariables.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h ../qt/searchcell.h ../qt/pathfinding.h ../qt/point.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp ../qt/searchcell.cpp ../qt/pathfinding.cpp ../qt/point.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -377,7 +388,17 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_PacResources.cpp
 qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		/usr/lib/qt5/bin/rcc \
-		../qt/mapa.txt
+		../qt/puckk.gif \
+		../qt/mapa2.txt \
+		../qt/mapa1.txt \
+		../qt/mapa0.txt \
+		../qt/mapa4.txt \
+		../qt/mapa3.txt \
+		../qt/pacman_eatfruit.wav \
+		../qt/pacman_eatghost.wav \
+		../qt/pacman_chomp.wav \
+		../qt/pacman_death.wav \
+		../qt/pacman_beginning.wav
 	/usr/lib/qt5/bin/rcc -name PacResources ../qt/PacResources.qrc -o qrc_PacResources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -386,21 +407,18 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Character.cpp moc_MyRect.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
+compiler_moc_header_make_all: moc_Character.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Character.cpp moc_MyRect.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
+	-$(DEL_FILE) moc_Character.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
 moc_Character.cpp: ../qt/Character.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/Character.h -o moc_Character.cpp
 
-moc_MyRect.cpp: ../qt/MyRect.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/MyRect.h -o moc_MyRect.cpp
-
-moc_pacman.cpp: ../qt/wall.h \
+moc_pacman.cpp: ../qt/dot.h \
+		../qt/wall.h \
 		../qt/Character.h \
+		../qt/ghost.h \
 		../qt/pacman.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -409,6 +427,7 @@ moc_pacman.cpp: ../qt/wall.h \
 moc_pacmangame.cpp: ../qt/wall.h \
 		../qt/Character.h \
 		../qt/pacman.h \
+		../qt/dot.h \
 		../qt/ghost.h \
 		../qt/pacmangame.h \
 		moc_predefs.h \
@@ -439,25 +458,29 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 Character.o: ../qt/Character.cpp ../qt/Character.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Character.o ../qt/Character.cpp
 
-MyRect.o: ../qt/MyRect.cpp ../qt/MyRect.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MyRect.o ../qt/MyRect.cpp
+dot.o: ../qt/dot.cpp ../qt/dot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dot.o ../qt/dot.cpp
 
-main.o: ../qt/main.cpp ../qt/Character.h \
-		../qt/wall.h \
+main.o: ../qt/main.cpp ../qt/wall.h \
+		../qt/Character.h \
 		../qt/pacmangame.h \
 		../qt/pacman.h \
+		../qt/dot.h \
 		../qt/ghost.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../qt/main.cpp
 
 pacman.o: ../qt/pacman.cpp ../qt/pacman.h \
+		../qt/dot.h \
 		../qt/wall.h \
-		../qt/Character.h
+		../qt/Character.h \
+		../qt/ghost.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pacman.o ../qt/pacman.cpp
 
 pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../qt/wall.h \
 		../qt/Character.h \
 		../qt/pacman.h \
+		../qt/dot.h \
 		../qt/ghost.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pacmangame.o ../qt/pacmangame.cpp
 
@@ -470,14 +493,22 @@ ghost.o: ../qt/ghost.cpp ../qt/ghost.h \
 		../qt/Character.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ghost.o ../qt/ghost.cpp
 
+searchcell.o: ../qt/searchcell.cpp ../qt/searchcell.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o searchcell.o ../qt/searchcell.cpp
+
+pathfinding.o: ../qt/pathfinding.cpp ../qt/pathfinding.h \
+		../qt/point.h \
+		../qt/searchcell.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pathfinding.o ../qt/pathfinding.cpp
+
+point.o: ../qt/point.cpp ../qt/point.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o point.o ../qt/point.cpp
+
 qrc_PacResources.o: qrc_PacResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_PacResources.o qrc_PacResources.cpp
 
 moc_Character.o: moc_Character.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Character.o moc_Character.cpp
-
-moc_MyRect.o: moc_MyRect.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MyRect.o moc_MyRect.cpp
 
 moc_pacman.o: moc_pacman.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pacman.o moc_pacman.cpp
