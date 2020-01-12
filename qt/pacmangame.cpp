@@ -1,5 +1,5 @@
 #include "pacmangame.h"
-//#include "globalVariables.h"
+#include "globalVariables.h"
 
 #include <iostream>
 #include <QDesktopWidget>
@@ -16,6 +16,16 @@
 #include <QString>
 #include "dot.h"
 #include <QStyleOption>
+
+// u global (od globalVariables.h) sam smestio neke promenljive (spacing, nula, bigDot...)
+// cisto radi urednosti,
+// jos neke sam ideje imao sta sa tim da uradim, ali nisam ih jos razradio
+using namespace global;
+
+void PacmanGame::setMapSelector(int x)
+{
+    mapSelector = x;
+}
 
 PacmanGame::PacmanGame()
 {
@@ -38,8 +48,9 @@ PacmanGame::PacmanGame()
     death->setMedia(QUrl("qrc:/Sounds/pacman_death.wav"));
 */
 
+    int dotNumber = 0;
     std::string mapCe = ":/new/PacFiles/mapa";
-    int mapSelector = 1;                // napravicemo vec neko biranje
+    //int mapSelector = 1;                // napravicemo vec neko biranje
     mapCe += std::to_string(mapSelector) + ".txt";
     QString gameMap = QString::fromStdString(mapCe);
     QFile mapa{gameMap};
@@ -54,22 +65,15 @@ PacmanGame::PacmanGame()
     int direction;                      // ideja da u fajlu mapa imamo vec odredjen smer pekmena da bismo mogli
                                         // da usmerimo animaciju, taj broj da stoji pre svega ostalog
     inMap >> direction;
-    QChar nula('0');                // 0 => bobica
-    QChar kec('1');                 // 1 => zid
-    QChar taraba('#');              // # => duh
-    QChar pacPosition('P');         // P => pocetna pozicija
-    QChar bigDot('B');              // B => velika bobica
-    QChar fruit('V');              // V => vockica
-    QChar emptySpace('=');          // '=' => prazan prostor
-    QChar noviRed('\n');
 
     int width = 0;
 
-    int spacing = 35;
     Wall *w1;
     Dot *tuf{};
 
     inMap >> c;                         // kupi novi red posle ucitanog smera
+    int pacPosX;
+    int pacPosY;
 
     while(!inMap.atEnd()){
         width++;
@@ -81,6 +85,7 @@ PacmanGame::PacmanGame()
             std::pair<int, int> par = {x,y};
             dots[par] = tuf;
             x+=spacing;
+            dotNumber++;
         }
         else if(c == kec){
             w1 = new Wall(x,y,spacing,spacing);
@@ -101,14 +106,21 @@ PacmanGame::PacmanGame()
             x+=spacing;
         }
         else if(c == pacPosition){
-            //this->pacman->setCurrentDirection(direction);
-            this->pacman = new Pacman(x+2,y+2);
+            pacPosX = x+2;
+            pacPosY = y+2;
             x+=spacing;
         }
         else if(c == emptySpace){
             x+=spacing;
         }
     }
+
+    // premesteno ovde da bi u konstruktoru dodali broj bobica koje treba da pojede
+    // a broj se povecava u petlji stalno pa mora da se ubaci kad se petlja zavrsi
+    this->pacman = new Pacman(pacPosX,pacPosY,dotNumber);
+    this->pacman->setCurrentDirection(direction);           // <- ako vas ovaj deo iritira zakomentarisite,
+                                                            // stavio sam jer msm da treba da ima
+    mapa.close();
 
 }
 

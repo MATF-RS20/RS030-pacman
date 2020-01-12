@@ -27,9 +27,13 @@ private:
     Ghost *ghost;
     std::list<Ghost*> ghosts{};
 //obrisala current_score, nalazi se u pacman klasi
-    Wall *walls[200];
+    //Wall *walls[200];             // <- ne treba odavno, imamo walls_and_borders listu
     std::list<Wall*> walls_and_borders{};
     std::map<std::pair<int,int>,Dot*> dots{};
+
+    // dodao da bi mozda napravili konstruktor za PacmanGame kome se prosledjuje
+    // integer koji oznacava mapu
+    int mapSelector = 1;
     //std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
     //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 /*
@@ -51,6 +55,7 @@ public:
     int getWidth();
     int getHeight();
     void populateScene(QGraphicsScene &scene);
+    void setMapSelector(int x);
 };
 
 #endif // PACMANGAME_H

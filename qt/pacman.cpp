@@ -2,11 +2,12 @@
 //#include "globalVariables.h"
 #include <QUrl>
 
-Pacman::Pacman(int x1, int y1)
-    :x1(x1),y1(y1)
+Pacman::Pacman(int x1, int y1, int dotsInMap)
+    :x1(x1),y1(y1),dotsToEat(dotsInMap)
 {
     setRect(0, 0, 29, 29);
     setPos(this->x1,this->y1);
+    eatenDots = 0;
 
     this->setBrush(Qt::yellow);
 
@@ -93,7 +94,7 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 void Pacman::move()
 {
 
-    if(current_score == 156*20  /*|| global::allDots.empty() == true*/ ){
+    if(current_score == 156*20  /*|| global::allDots.empty() == true*/ || this->eatenDots == this->dotsToEat ){
         std::cout <<"SVAKA CAST POBEDILI STE!!" << "\n";
         QCoreApplication::quit();
     }
@@ -123,6 +124,8 @@ void Pacman::move()
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
+                this->eatenDots++;
+                //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
                 this->current_score +=20;
 
             }else if(x->boundingRect().size().rwidth() == 11){
@@ -130,12 +133,16 @@ void Pacman::move()
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
+                this->eatenDots++;
+                //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() == 20){
                 scene()->removeItem(x);
                 this->current_score +=20;
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
+                this->eatenDots++;
+                //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                 std::cout << "VISE SRECE DRUGIT PT!!!\n";
                 QCoreApplication::quit();

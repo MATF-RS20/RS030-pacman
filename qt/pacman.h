@@ -22,10 +22,13 @@
 class Pacman: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    Pacman(int x1, int y1);
+    Pacman(int x1, int y1, int dotsInMap = 156);
 
     int getX();
     int getY();
+
+    int eatenDots=0;
+    int dotsToEat=156;
 
     void keyPressEvent(QKeyEvent *event);
     void setCurrentDirection(int x);

@@ -3,15 +3,30 @@
 
 #include <set>
 #include <QGraphicsItem>
+#include <QString>
+#include <QFile>
+#include <QTextStream>
 
-/*namespace global{
+namespace global{
 
-std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
+//std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
 //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 
-};
-*/
+int spacing = 35;
 
+QChar nula('0');                // 0 => bobica
+QChar kec('1');                 // 1 => zid
+QChar taraba('#');              // # => duh
+QChar pacPosition('P');         // P => pocetna pozicija
+QChar bigDot('B');              // B => velika bobica
+QChar fruit('V');              // V => vockica
+QChar emptySpace('=');          // '=' => prazan prostor
+QChar noviRed('\n');
+
+
+}
+
+/*
 class Global{
 public:
     Global(){
@@ -31,4 +46,5 @@ public:
 private:
     static std::set<QGraphicsItem*> allDots;
 };
+*/
 #endif // GLOBALVARIABLES_H
