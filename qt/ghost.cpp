@@ -49,7 +49,7 @@ Ghost::Ghost(int x1, int y1, int id)
 
 
         QTimer *timerM = new QTimer(this);
-        QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move2()));
+        QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move1()));
         timerM->start(25);
 
     }else if (ghost_id == 3){
