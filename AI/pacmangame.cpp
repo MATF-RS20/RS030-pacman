@@ -150,6 +150,9 @@ PacmanGame::PacmanGame()
             x+=spacing;
         }
     }
+    //QTimer *timer = new QTimer(this);
+    //QObject::connect(timer,SIGNAL(timeout()), this->ghost, aStar());
+    //timer->start(3000);
 
 }
 
@@ -316,7 +319,7 @@ std::vector<Node> PacmanGame::aStar(Node player, Node dest)
            this->mapa[x][y]->parentY = y;
 
            std::vector<Node> openList;
-           openList.emplace_back(mapa[x][y]);
+           openList.emplace_back(*mapa[x][y]);
            bool destinationFound = false;
 
 
@@ -333,10 +336,10 @@ std::vector<Node> PacmanGame::aStar(Node player, Node dest)
                     std::vector<Node>::iterator itNode;
                     for (std::vector<Node>::iterator it = openList.begin();
                         it != openList.end(); it = next(it)) {
-                        Node n = *it;
+                        auto n = it;
                         // treba uvesti za if it->IsNotWall == false da se ne uzima u obzir
-                        if (n.fCost < temp) {
-                            temp = n.fCost;
+                        if (n->fCost < temp) {
+                            temp = n->fCost;
                             itNode = it;
                         }
                     }
@@ -384,7 +387,7 @@ std::vector<Node> PacmanGame::aStar(Node player, Node dest)
                                             mapa[x + newX][y + newY]->hCost = hNew;
                                             mapa[x + newX][y + newY]->parentX = x;
                                             mapa[x + newX][y + newY]->parentY = y;
-                                            openList.emplace_back(mapa[x + newX][y + newY]);
+                                            openList.emplace_back(*mapa[x + newX][y + newY]);
                                         }
                                     }
                                 }//end of if
