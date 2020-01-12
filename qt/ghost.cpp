@@ -99,13 +99,13 @@ void Ghost::move1()
     if (this->nextDirection != 0)
     {
         if (this->nextDirection == 1)
-            setPos(getX() - 5, getY());
+            setPos(getX() - 3, getY());
         else if (this->nextDirection == 2)
-            setPos(getX() + 5, getY());
+            setPos(getX() + 3, getY());
         else if (this->nextDirection == 3)
-            setPos(getX(), getY() - 5);
+            setPos(getX(), getY() - 3);
         else if (this->nextDirection == 4)
-            setPos(getX(), getY() + 5);
+            setPos(getX(), getY() + 3);
 
         // pokusas sa next
         // ako ima kolizije korak unazad
@@ -131,22 +131,22 @@ void Ghost::move1()
             }
 
             if (this->nextDirection == 1)
-                setPos(getX() + 5, getY());
+                setPos(getX() + 3, getY());
             else if (this->nextDirection == 2)
-                setPos(getX() - 5, getY());
+                setPos(getX() - 3, getY());
             else if (this->nextDirection == 3)
-                setPos(getX(), getY() + 5);
+                setPos(getX(), getY() + 3);
             else if (this->nextDirection == 4)
-                setPos(getX(), getY() - 5);
+                setPos(getX(), getY() - 3);
 
             if (this->currentDirection == 1)
-                setPos(getX() - 5, getY());
+                setPos(getX() - 3, getY());
             else if (this->currentDirection == 2)
-                setPos(getX() + 5, getY());
+                setPos(getX() + 3, getY());
             else if (this->currentDirection == 3)
-                setPos(getX(), getY() - 5);
+                setPos(getX(), getY() - 3);
             else if (this->currentDirection == 4)
-                setPos(getX(), getY() + 5);
+                setPos(getX(), getY() + 3);
             colliding_items = collidingItems();
             int n = colliding_items.size();
             for(auto x: colliding_items){
@@ -163,13 +163,13 @@ void Ghost::move1()
                 }
                 // ako ima kolizije unazad
                 if (this->currentDirection == 1)
-                    setPos(getX() + 5, getY());
+                    setPos(getX() + 3, getY());
                 else if (this->currentDirection == 2)
-                    setPos(getX() - 5, getY());
+                    setPos(getX() - 3, getY());
                 else if (this->currentDirection == 3)
-                    setPos(getX(), getY() + 5);
+                    setPos(getX(), getY() + 3);
                 else if (this->currentDirection == 4)
-                    setPos(getX(), getY() - 5);
+                    setPos(getX(), getY() - 3);
 
                 this->currentDirection = 0;
             }
@@ -184,13 +184,13 @@ void Ghost::move1()
     else
     { // ako next ne postoji samo radi normalno
         if (this->currentDirection == 1)
-            setPos(getX() - 5, getY());
+            setPos(getX() - 3, getY());
         else if (this->currentDirection == 2)
-            setPos(getX() + 5, getY());
+            setPos(getX() + 3, getY());
         else if (this->currentDirection == 3)
-            setPos(getX(), getY() - 5);
+            setPos(getX(), getY() - 3);
         else if (this->currentDirection == 4)
-            setPos(getX(), getY() + 5);
+            setPos(getX(), getY() + 3);
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
@@ -207,13 +207,13 @@ void Ghost::move1()
             }
             // ako ima kolizije unazad
             if (this->currentDirection == 1)
-                setPos(getX() + 5, getY());
+                setPos(getX() + 3, getY());
             else if (this->currentDirection == 2)
-                setPos(getX() - 5, getY());
+                setPos(getX() - 3, getY());
             else if (this->currentDirection == 3)
-                setPos(getX(), getY() + 5);
+                setPos(getX(), getY() + 3);
             else if (this->currentDirection == 4)
-                setPos(getX(), getY() - 5);
+                setPos(getX(), getY() - 3);
 
             this->currentDirection = 0;
         }

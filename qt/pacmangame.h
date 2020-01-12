@@ -33,7 +33,7 @@ private:
 
     // dodao da bi mozda napravili konstruktor za PacmanGame kome se prosledjuje
     // integer koji oznacava mapu
-    int mapSelector = 1;
+    int mapSelector = 0;
     //std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
     //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 /*
