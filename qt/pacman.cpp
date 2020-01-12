@@ -93,7 +93,7 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 void Pacman::move()
 {
 
-    if(current_score == 160*20  /*|| global::allDots.empty() == true*/ )
+    if(current_score == 156*20  /*|| global::allDots.empty() == true*/ )
         QCoreApplication::quit();
     if (this->nextDirection != 0)
     {
@@ -125,6 +125,12 @@ void Pacman::move()
 
             }else if(x->boundingRect().size().rwidth() == 11){
                 scene()->removeItem(x);
+                //global::allDots.erase(x);
+                delete x;
+                scene()->update();
+            }else if(x->boundingRect().size().rwidth() == 20){
+                scene()->removeItem(x);
+                this->current_score +=20;
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();

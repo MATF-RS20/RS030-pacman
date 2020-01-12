@@ -60,7 +60,8 @@ SOURCES       = ../qt/Character.cpp \
 		../qt/wall.cpp \
 		../qt/ghost.cpp \
 		../qt/searchcell.cpp \
-		../qt/pathfinding.cpp qrc_PacResources.cpp \
+		../qt/pathfinding.cpp \
+		../qt/point.cpp qrc_PacResources.cpp \
 		moc_Character.cpp \
 		moc_pacman.cpp \
 		moc_pacmangame.cpp \
@@ -74,6 +75,7 @@ OBJECTS       = Character.o \
 		ghost.o \
 		searchcell.o \
 		pathfinding.o \
+		point.o \
 		qrc_PacResources.o \
 		moc_Character.o \
 		moc_pacman.o \
@@ -256,12 +258,14 @@ DIST          = ../../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf \
 		../qt/qt.pro ../qt/Character.h \
 		../qt/dot.h \
+		../qt/globalVariables.h \
 		../qt/pacman.h \
 		../qt/pacmangame.h \
 		../qt/wall.h \
 		../qt/ghost.h \
 		../qt/searchcell.h \
-		../qt/pathfinding.h ../qt/Character.cpp \
+		../qt/pathfinding.h \
+		../qt/point.h ../qt/Character.cpp \
 		../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
@@ -269,7 +273,8 @@ DIST          = ../../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../qt/wall.cpp \
 		../qt/ghost.cpp \
 		../qt/searchcell.cpp \
-		../qt/pathfinding.cpp
+		../qt/pathfinding.cpp \
+		../qt/point.cpp
 QMAKE_TARGET  = qt
 DESTDIR       = 
 TARGET        = qt
@@ -652,8 +657,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt/PacResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.h ../qt/dot.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h ../qt/searchcell.h ../qt/pathfinding.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp ../qt/searchcell.cpp ../qt/pathfinding.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/Character.h ../qt/dot.h ../qt/globalVariables.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h ../qt/searchcell.h ../qt/pathfinding.h ../qt/point.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp ../qt/searchcell.cpp ../qt/pathfinding.cpp ../qt/point.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -2052,11 +2057,16 @@ ghost.o: ../qt/ghost.cpp ../qt/ghost.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QSize
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ghost.o ../qt/ghost.cpp
 
-searchcell.o: ../qt/searchcell.cpp 
+searchcell.o: ../qt/searchcell.cpp ../qt/searchcell.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o searchcell.o ../qt/searchcell.cpp
 
-pathfinding.o: ../qt/pathfinding.cpp 
+pathfinding.o: ../qt/pathfinding.cpp ../qt/pathfinding.h \
+		../qt/point.h \
+		../qt/searchcell.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pathfinding.o ../qt/pathfinding.cpp
+
+point.o: ../qt/point.cpp ../qt/point.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o point.o ../qt/point.cpp
 
 qrc_PacResources.o: qrc_PacResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_PacResources.o qrc_PacResources.cpp

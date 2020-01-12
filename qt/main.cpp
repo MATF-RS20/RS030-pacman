@@ -18,11 +18,11 @@ int main(int argc, char *argv[])
 
     QSize size = qApp->screens()[0]->size();
 
-    view->setFixedSize(size.width(), size.height());
+    view->setFixedSize(24*25-2, size.height());
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    scene->setSceneRect(0, 0, size.width(), size.height());
+    scene->setSceneRect(0, 0, 24*25-2, size.height());
     //  Creating an item to place in the scene
 
 
@@ -55,7 +55,8 @@ int main(int argc, char *argv[])
     // And show it
 
     //box->setPos(0, 0);
-    view->showFullScreen();
+    view->show();
+    //view->showFullScreen();
 
 
     return a.exec();

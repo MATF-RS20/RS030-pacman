@@ -44,7 +44,7 @@ Ghost::Ghost(int x1, int y1, int id)
         this->setBrush(Qt::green);
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
-        qDebug() << nextDirection;
+        //qDebug() << nextDirection;
         timer->start(4800);
 
 
@@ -235,7 +235,7 @@ void Ghost::move2(){
             setPos(this->x() + 5, this->y());
         else if (this->nextDirection == 3){
             setPos(this->x(), this->y() - 5);
-            qDebug() << "Krenula ka gore";
+            //qDebug() << "Krenula ka gore";
         }
         else if (this->nextDirection == 4)
             setPos(this->x(), y() + 5);

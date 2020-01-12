@@ -63,6 +63,8 @@ PacmanGame::PacmanGame()
     QChar emptySpace('=');          // '=' => prazan prostor
     QChar noviRed('\n');
 
+    int width = 0;
+
     int spacing = 35;
     Wall *w1;
     Dot *tuf{};
@@ -70,6 +72,7 @@ PacmanGame::PacmanGame()
     inMap >> c;                         // kupi novi red posle ucitanog smera
 
     while(!inMap.atEnd()){
+        width++;
         inMap >> c;
         if( (c == nula || c == bigDot) || c==fruit){
             // stavi bobicu, stavimo koliziju pekmena sa
@@ -86,6 +89,8 @@ PacmanGame::PacmanGame()
             //i++; // counts walls
         }
         else if(c == noviRed){
+            width--;
+            std::cout << width << "\n";
             x = 0;
             y+=spacing;
         }
