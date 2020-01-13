@@ -5,6 +5,13 @@
 #include <random>
 
 
+#include "pacmangame.h"
+#include "score.h"
+#include "health.h"
+
+extern PacmanGame *game1;
+
+
 Ghost::Ghost(int x1, int y1, int id)
     :x1(x1), y1(y1), ghost_id(static_cast<Ghost_Id>(id))
 {
@@ -126,8 +133,11 @@ void Ghost::move1()
         if (n != 0)
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
-                std::cout << "VISE SRECE DRUGI PUT!!!\n";
-                QCoreApplication::quit();
+                //game1->health->decrease();
+                if (game1->health->getHealth() == 0){
+                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    QCoreApplication::quit();
+                }
             }
 
             if (this->nextDirection == 1)
@@ -158,8 +168,11 @@ void Ghost::move1()
             if (n != 0)
             {
                 if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
-                    std::cout << "VISE SRECE DRUGI PUT!!!\n";
-                    QCoreApplication::quit();
+                  //  game1->health->decrease();
+                    if (game1->health->getHealth() == 0){
+                        std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                        QCoreApplication::quit();
+                    }
                 }
                 // ako ima kolizije unazad
                 if (this->currentDirection == 1)
@@ -202,8 +215,11 @@ void Ghost::move1()
         if (n != 0)
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
-                std::cout << "VISE SRECE DRUGI PUT!!!\n";
-                QCoreApplication::quit();
+                //game1->health->decrease();
+                if (game1->health->getHealth() == 0){
+                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    QCoreApplication::quit();
+                }
             }
             // ako ima kolizije unazad
             if (this->currentDirection == 1)
@@ -235,140 +251,3 @@ void Ghost::move1()
 int Ghost::getX()  {return this->x();}
 int Ghost::getY()  {return this->y();}
 
-
-
-void Ghost::move2(){
-
-    // 1 - left; 2 - right; 3 - up; 4 - down; 0 - none
-
-
-        if (this->nextDirection == 1)
-            setPos(this->x() - 5, this->y());
-        else if (this->nextDirection == 2)
-            setPos(this->x() + 5, this->y());
-        else if (this->nextDirection == 3){
-            setPos(this->x(), this->y() - 5);
-            //qDebug() << "Krenula ka gore";
-        }
-        else if (this->nextDirection == 4)
-            setPos(this->x(), y() + 5);
-
-    /*if (this->nextDirection != 0)
-    {
-        if (this->nextDirection == 1)
-            setPos(this->x - 5, this->y);
-        else if (this->nextDirection == 2)
-            setPos(this->x + 5, this->y);
-        else if (this->nextDirection == 3){
-            setPos(this->x, this->y - 5);
-            qDebug() << "Krenula ka gore";
-        }
-        else if (this->nextDirection == 4)
-            setPos(this->x, y + 5);
-
-        //qDebug() << "Prvo nexDirection";
-        // pokusas sa next
-        // ako ima kolizije korak unazad
-        // i nastavis sa current
-        // ako nema kolizije super stavis da current bude next a next da bude nula
-
-        // vraca listu objkekata sa kojim je u koliziji
-        // ako lista nije prazna onda korak unazad
-        QList<QGraphicsItem *> colliding_items = collidingItems();
-        int n = colliding_items.size();
-        //qDebug() << "Prva kolizija";
-        if (n != 0)
-        {
-            if (this->nextDirection == 1)
-                setPos(x + 5, y);
-            else if (this->nextDirection == 2)
-                setPos(x - 5, y);
-            else if (this->nextDirection == 3)
-                setPos(x, y + 5);
-            else if (this->nextDirection == 4)
-                setPos(x, y - 5);
-
-            if (this->currentDirection == 1)
-                setPos(x - 5, y);
-            else if (this->currentDirection == 2)
-                setPos(x + 5, y);
-            else if (this->currentDirection == 3)
-                setPos(x, y - 5);
-            else if (this->currentDirection == 4)
-                setPos(x, y + 5);
-            colliding_items = collidingItems();
-            int n = colliding_items.size();
-            //qDebug() << "Druga kolizija";
-            if (n != 0)
-            {
-                // ako ima kolizije unazad
-                if (this->currentDirection == 1)
-                    setPos(x + 5, y);
-                else if (this->currentDirection == 2)
-                    setPos(x - 5, y);
-                else if (this->currentDirection == 3)
-                    setPos(x, y + 5);
-                else if (this->currentDirection == 4)
-                    setPos(x, y - 5);
-            }
-        }
-        else
-        {
-            //qDebug() << "Nije uslo u if drugi put, tj posle prve kolizije";
-            //ako je sve uredu staviti trenutnu poziciju na sledecu
-            this->currentDirection = this->nextDirection;
-            this->nextDirection = 0;
-        }
-    }
-    else
-    { // ako next ne postoji samo radi normalno
-        qDebug() << "nexDirection == 0 prvi put";
-        if (this->currentDirection == 1)
-            setPos(x - 5, y);
-        else if (this->currentDirection == 2)
-            setPos(x + 5, y);
-        else if (this->currentDirection == 3)
-            setPos(x, y - 5);
-        else if (this->currentDirection == 4)
-            setPos(x, y + 5);
-        QList<QGraphicsItem *> colliding_items = collidingItems();
-        int n = colliding_items.size();
-        if (n != 0)
-        {
-            // ako ima kolizije unazad
-            if (this->currentDirection == 1)
-                setPos(x + 5, y);
-            else if (this->currentDirection == 2)
-                setPos(x - 5, y);
-            else if (this->currentDirection == 3)
-                setPos(x, y + 5);
-            else if (this->currentDirection == 4)
-                setPos(x, y - 5);
-        }
-    }
-
-    if (x < -this->boundingRect().size().rwidth())
-        setPos(this->scene()->width(), y);
-    if (y < 3)
-        setPos(x, 3);
-    if (x > this->scene()->width())
-        setPos(- this->boundingRect().size().rwidth(), y);
-    if (y > this->scene()->height() - this->boundingRect().size().rheight() - 3)
-        setPos(x, this->scene()->height() - this->boundingRect().size().rheight() - 3);
-
-    } */
-
-
-   }
-
-
-
-void Ghost::move3() {
-    setPos(this->x(), this->y() + 5);
-}
-
-
-
-void Ghost::move4() {
-    setPos(this->x() + 5, this->y());
-}

@@ -28,9 +28,6 @@ public:
     int getY();
 public slots:
     void move1();
-    void move2();
-    void move3();
-    void move4();
     void chooseRandom();
 private:
     // 1 - left; 2 - right; 3 - up; 4 - down; 0 - none
