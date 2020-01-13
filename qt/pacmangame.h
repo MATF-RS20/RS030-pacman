@@ -58,6 +58,8 @@ public:
     PacmanGame(int selectMap = 1);
     Score *score;
     Health *health;
+    int pacPosX;
+    int pacPosY;
     virtual ~PacmanGame();
     Pacman* getPacman();
     Wall* getWall();

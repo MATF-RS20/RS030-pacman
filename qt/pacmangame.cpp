@@ -82,8 +82,8 @@ PacmanGame::PacmanGame(int selectMap)
     Dot *tuf{};
 
     inMap >> c;                         // kupi novi red posle ucitanog smera
-    int pacPosX;
-    int pacPosY;
+ //   int pacPosX;
+ //   int pacPosY;
     int keepX;
 
     while(!inMap.atEnd()){

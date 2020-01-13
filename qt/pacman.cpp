@@ -155,6 +155,7 @@ void Pacman::move()
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                 game1->health->decrease();
+                setPos(game1->pacPosX,game1->pacPosY);
                 if (game1->health->getHealth() == 0){
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
