@@ -11,6 +11,9 @@
 #include "wall.h"
 #include "pacman.h"
 #include "ghost.h"
+#include "score.h"
+#include "health.h"
+
 
 #include <list>
 #include <map>
@@ -53,6 +56,8 @@ private:
 
 public:
     PacmanGame(int selectMap = 1);
+    Score *score;
+    Health *health;
     virtual ~PacmanGame();
     Pacman* getPacman();
     Wall* getWall();

@@ -133,6 +133,9 @@ PacmanGame::PacmanGame(int selectMap)
     this->pacman = new Pacman(pacPosX,pacPosY,dotNumber);
     this->pacman->setCurrentDirection(direction);           // <- ako vas ovaj deo iritira zakomentarisite,
                                                             // stavio sam jer msm da treba da ima
+    this->score = new Score();
+    this->health = new Health();
+
     mapa.close();
 
 }
@@ -191,6 +194,10 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
 
 
     scene.addItem(this->pacman);
+    scene.addItem(this->score);
+    this->health->setPos(health->x() + 100, health->y());
+    scene.addItem(this->health);
+
     /*
     scene = std::accumulate(std::begin(this->walls_and_borders), std::end(this->walls_and_borders),
                     QGraphicsScene, add_to_scene);

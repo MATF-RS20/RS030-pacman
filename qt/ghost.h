@@ -1,7 +1,6 @@
 #ifndef GHOST_H
 #define GHOST_H
 
-//#include "character.h"
 #include <iostream>
 #include <QObject>
 #include <QGraphicsRectItem>
@@ -37,9 +36,9 @@ private:
     // 1 - left; 2 - right; 3 - up; 4 - down; 0 - none
     int currentDirection = 0;
     int nextDirection = 0;
-    Ghost_Id ghost_id;       // in every game there are 4 ghosts so id can be only 1,2,3,4
     int x1;
     int y1;
+    Ghost_Id ghost_id;       // in every game there are 4 ghosts so id can be only 1,2,3,4
 
 }; //end of class Ghost
 

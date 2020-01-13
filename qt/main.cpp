@@ -11,6 +11,8 @@
 
 //using namespace global;
 
+PacmanGame *game1;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -23,7 +25,7 @@ int main(int argc, char *argv[])
 
     int mapNumber = 1;
     //std::cin >> k;
-    PacmanGame *game1 = new PacmanGame(mapNumber);
+    game1 = new PacmanGame(mapNumber);
 
     int mapWidth = game1->getX();
     int mapHeight = game1->getY();

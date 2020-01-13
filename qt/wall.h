@@ -1,8 +1,15 @@
 #ifndef WALL_H
 #define WALL_H
 
-#include <Character.h>
+
 #include <QGraphicsRectItem>
+
+
+
+typedef struct position {
+    int x;
+    int y;
+}Position;
 
 
 class Wall: public QGraphicsRectItem

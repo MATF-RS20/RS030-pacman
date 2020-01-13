@@ -1,6 +1,11 @@
 #include "pacman.h"
 //#include "globalVariables.h"
 #include <QUrl>
+#include "pacmangame.h"
+#include "score.h"
+#include "health.h"
+
+extern PacmanGame *game1;
 
 Pacman::Pacman(int x1, int y1, int dotsInMap)
     :x1(x1),y1(y1),dotsToEat(dotsInMap)
@@ -126,6 +131,8 @@ void Pacman::move()
                 scene()->update();
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
+                game1->score->setScore(20);
+                //=======================
                 this->current_score +=20;
 
             }else if(x->boundingRect().size().rwidth() == 11){
@@ -137,6 +144,8 @@ void Pacman::move()
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() == 20){
                 scene()->removeItem(x);
+                game1->score->setScore(20);
+                //===================
                 this->current_score +=20;
                 //global::allDots.erase(x);
                 delete x;
@@ -144,8 +153,12 @@ void Pacman::move()
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
-                std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                QCoreApplication::quit();
+                game1->health->decrease();
+                if (game1->health == 0){
+                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    QCoreApplication::quit();
+                }
+
             }
         }
 
@@ -179,6 +192,8 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
+                    game1->score->setScore(20);
+                    //======================
                     this->current_score +=20;
 
                 }else if(x->boundingRect().size().rwidth() == 11){
@@ -193,9 +208,16 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
+                    game1->score->setScore(20);
+                    //=========================
+                    this->current_score +=20;
                 }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
-                    std::cout << "VISE SRECE DRUGI PUT!!!\n";
-                    QCoreApplication::quit();
+                    game1->health->decrease();
+                    if (game1->health == 0){
+                        std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                        QCoreApplication::quit();
+                    }
+
                 }
 
             }
@@ -239,6 +261,8 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
+                game1->score->setScore(20);
+                //======================
                 this->current_score +=20;
             }else if(x->boundingRect().size().rwidth() == 11){
                 this->eatenDots++;
@@ -250,10 +274,16 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
+                game1->score->setScore(20);
+                //=======================
                 this->current_score += 20;
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
-                std::cout<<"VISE SRECE DRUGI PUT!!!\n";
-                QCoreApplication::quit();
+                game1->health->decrease();
+                if (game1->health == 0){
+                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    QCoreApplication::quit();
+                }
+
             }
 
         }

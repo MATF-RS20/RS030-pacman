@@ -16,28 +16,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Character.cpp \
     dot.cpp \
     main.cpp \
     pacman.cpp \
     pacmangame.cpp \
     wall.cpp \
     ghost.cpp \
-    searchcell.cpp \
-    pathfinding.cpp \
-    point.cpp
+    score.cpp \
+    health.cpp
 
 HEADERS += \
-    Character.h \
     dot.h \
     globalVariables.h \
     pacman.h \
     pacmangame.h \
     wall.h \
     ghost.h \
-    searchcell.h \
-    pathfinding.h \
-    point.h
+    score.h \
+    health.h
 
 FORMS +=
 

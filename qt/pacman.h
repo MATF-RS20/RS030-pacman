@@ -5,7 +5,6 @@
 #include <iostream>
 #include "dot.h"
 #include <QGraphicsRectItem>
-//#include "character.h"
 #include <QKeyEvent>
 #include <QCoreApplication>
 
