@@ -178,7 +178,6 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
 
     for(auto x : this->walls_and_borders){
         scene.addItem(x);
-        x->setBrush(Qt::darkGray);
     }
 
     for(auto x : this->ghosts){

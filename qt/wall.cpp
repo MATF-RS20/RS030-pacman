@@ -2,7 +2,7 @@
 
 Wall::Wall(int x, int y, int width, int height){
     //setRect(x, y, width, height);
-    setRect(0,0,35,35);  // 35 is spacing from PacmanGame
+    setPixmap(QPixmap(":/Puck/pattern.jpg"));  // 35 is spacing from PacmanGame
     setPos(x,y);
     this->height = height;
     this->width = width;

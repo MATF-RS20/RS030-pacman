@@ -23,5 +23,6 @@
         <file>pacman2.jpg</file>
         <file>pacman3.jpg</file>
         <file>bg.jpg</file>
+        <file>pattern.jpg</file>
     </qresource>
 </RCC>

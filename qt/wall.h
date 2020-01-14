@@ -3,6 +3,7 @@
 
 
 #include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 
 
 
@@ -12,7 +13,7 @@ typedef struct position {
 }Position;
 
 
-class Wall: public QGraphicsRectItem
+class Wall: public QGraphicsPixmapItem
 {
 private:
     Position pos;

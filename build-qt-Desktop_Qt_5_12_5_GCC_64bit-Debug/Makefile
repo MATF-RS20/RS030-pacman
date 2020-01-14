@@ -685,6 +685,7 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/zuti.jpg \
 		../qt/pacman1.jpg \
 		../qt/puckk.gif \
+		../qt/pattern.jpg \
 		../qt/plavi.jpg \
 		../qt/mapa2.txt \
 		../qt/mapa1.txt \
@@ -933,11 +934,11 @@ moc_pacmangame.cpp: ../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qlocale.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../qt/pacman.h \
 		../qt/dot.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
-		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qevent.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qkeysequence.h \
@@ -1317,6 +1318,7 @@ main.o: ../qt/main.cpp ../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplicati
 		../qt/wall.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QTimer \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qtimer.h \
@@ -1326,7 +1328,6 @@ main.o: ../qt/main.cpp ../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplicati
 		../qt/dot.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
-		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QCoreApplication \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList \
@@ -1571,11 +1572,11 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qlocale.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qset.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../qt/pacman.h \
 		../qt/dot.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
-		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qevent.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qkeysequence.h \
@@ -1715,7 +1716,8 @@ wall.o: ../qt/wall.cpp ../qt/wall.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qrgba64.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qimage.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qpixelformat.h \
-		../../../../Qt/5.12.5/gcc_64/include/QtGui/qtransform.h
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/qtransform.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wall.o ../qt/wall.cpp
 
 ghost.o: ../qt/ghost.cpp ../qt/ghost.h \
