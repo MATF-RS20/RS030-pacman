@@ -677,7 +677,15 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_PacResources.cpp
 qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../../../../Qt/5.12.5/gcc_64/bin/rcc \
+		../qt/crveni.jpg \
+		../qt/pacman3.jpg \
+		../qt/pacman2.jpg \
+		../qt/bg.jpg \
+		../qt/zeleni.jpg \
+		../qt/zuti.jpg \
+		../qt/pacman1.jpg \
 		../qt/puckk.gif \
+		../qt/plavi.jpg \
 		../qt/mapa2.txt \
 		../qt/mapa1.txt \
 		../qt/mapa0.txt \
@@ -791,6 +799,7 @@ moc_pacman.cpp: ../qt/pacman.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qtransform.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsRectItem \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qevent.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qkeysequence.h \
@@ -928,6 +937,7 @@ moc_pacmangame.cpp: ../qt/pacmangame.h \
 		../qt/dot.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qevent.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qkeysequence.h \
@@ -1044,6 +1054,7 @@ moc_ghost.cpp: ../qt/ghost.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QCoreApplication \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicsscene.h \
@@ -1315,6 +1326,7 @@ main.o: ../qt/main.cpp ../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplicati
 		../qt/dot.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QCoreApplication \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QList \
@@ -1416,6 +1428,7 @@ pacman.o: ../qt/pacman.cpp ../qt/pacman.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qtransform.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsRectItem \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qevent.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qkeysequence.h \
@@ -1562,6 +1575,7 @@ pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../qt/dot.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QRectF \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/QKeyEvent \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qevent.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtGui/qkeysequence.h \
@@ -1797,6 +1811,7 @@ ghost.o: ../qt/ghost.cpp ../qt/ghost.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QCoreApplication \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsPixmapItem \
 		../../../../Qt/5.12.5/gcc_64/include/QtCore/QDebug \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsScene \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicsscene.h \

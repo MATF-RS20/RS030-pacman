@@ -15,5 +15,13 @@
     </qresource>
     <qresource prefix="/Puck">
         <file>puckk.gif</file>
+        <file>pacman1.jpg</file>
+        <file>crveni.jpg</file>
+        <file>plavi.jpg</file>
+        <file>zeleni.jpg</file>
+        <file>zuti.jpg</file>
+        <file>pacman2.jpg</file>
+        <file>pacman3.jpg</file>
+        <file>bg.jpg</file>
     </qresource>
 </RCC>

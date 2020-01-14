@@ -10,11 +10,13 @@ extern PacmanGame *game1;
 Pacman::Pacman(int x1, int y1, int dotsInMap)
     :x1(x1),y1(y1),dotsToEat(dotsInMap)
 {
-    setRect(0, 0, 29, 29);
+    //setRect(0, 0, 29, 29);
+    setPixmap(QPixmap(":/Puck/pacman1.jpg"));
+    setTransformOriginPoint(15,15);
     setPos(this->x1,this->y1);
     eatenDots = 0;
 
-    this->setBrush(Qt::yellow);
+    //this->setBrush(Qt::yellow);
 
     this->current_score = 0;
 
@@ -42,6 +44,11 @@ Pacman::Pacman(int x1, int y1, int dotsInMap)
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(25);
+    QTimer *timer1 = new QTimer(this);
+
+    connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));
+
+    timer1->start(150);
 }
 
 
@@ -95,9 +102,32 @@ void Pacman::keyPressEvent(QKeyEvent *event)
         QCoreApplication::quit();
     }
 }
+int i3 = 0;
+void Pacman::animation(){
+    if(i3 == 0)
+        setPixmap(QPixmap(":/Puck/pacman1.jpg"));
+    if(i3 == 1)
+        setPixmap(QPixmap(":/Puck/pacman2.jpg"));
+    if(i3 == 2)
+        setPixmap(QPixmap(":/Puck/pacman3.jpg"));
+
+    scene()->update();
+    i3 = (i3 + 1)%3;
+}
 
 void Pacman::move()
 {
+    if (this->currentDirection == 1)
+        setRotation(180);
+    else if (this->currentDirection == 2)
+        setRotation(0);
+    else if (this->currentDirection == 3)
+        setRotation(270);
+    else if (this->currentDirection == 4)
+        setRotation(90);
+
+
+
     if(this->eatenDots == this->dotsToEat){
         std::cout << "CESTITAM!!!\n";
         QCoreApplication::quit();
@@ -309,7 +339,7 @@ void Pacman::move()
     }
 
     if (getX() < -this->boundingRect().size().rwidth())
-        setPos(this->scene()->width(), getY());
+        setPos(this->scene()->width() -2, getY());
     if (getY() < 3)
         setPos(getX(), 3);
     if (getX() > this->scene()->width())

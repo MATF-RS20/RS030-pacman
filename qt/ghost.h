@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QGraphicsRectItem>
 #include <QCoreApplication>
+#include <QGraphicsPixmapItem>
 
 #include <QDebug>
 #include <QGraphicsScene>
@@ -19,7 +20,7 @@ enum Ghost_Id{
     cetvrti = 4
 };
 
-class Ghost: public QObject, public QGraphicsRectItem{
+class Ghost: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     //Ghost ();

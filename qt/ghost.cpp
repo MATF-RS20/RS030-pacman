@@ -16,7 +16,8 @@ Ghost::Ghost(int x1, int y1, int id)
     :x1(x1), y1(y1), ghost_id(static_cast<Ghost_Id>(id))
 {
     qDebug() << "Napravljen ghost";
-    setRect(0, 0, 30,30);  // same size as pacman
+    setPixmap(QPixmap(":/Puck/crveni.jpg"));
+    setTransformOriginPoint(15,15);  // same size as pacman
     setPos(this->x1,this->y1);
     //this->scene()->addItem(this);
 
@@ -36,7 +37,7 @@ Ghost::Ghost(int x1, int y1, int id)
 
     QTimer *timer = new QTimer(this);
     if (ghost_id == 1){     //random
-        this->setBrush(Qt::red);
+        setPixmap(QPixmap(":/Puck/crveni.jpg"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);
@@ -48,7 +49,7 @@ Ghost::Ghost(int x1, int y1, int id)
 
 
     }else if (ghost_id == 2){   //chaser - manhattan algorithm    ovako reba da bude samo algoritam da provalim
-        this->setBrush(Qt::green);
+        setPixmap(QPixmap(":/Puck/zeleni.jpg"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         //qDebug() << nextDirection;
@@ -60,7 +61,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timerM->start(25);
 
     }else if (ghost_id == 3){
-        this->setBrush(Qt::black);
+        setPixmap(QPixmap(":/Puck/plavi.jpg"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);
@@ -71,7 +72,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timerM->start(25);
 
     }else if (ghost_id == 4){
-        this->setBrush(Qt::darkYellow);
+        setPixmap(QPixmap(":/Puck/zuti.jpg"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);

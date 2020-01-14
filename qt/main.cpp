@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include <QScreen>
 #include <QDebug>
+
 //#include "Character.h"
 #include "wall.h"
 #include "pacmangame.h"
@@ -21,9 +22,11 @@ int main(int argc, char *argv[])
     QGraphicsScene *scene = new QGraphicsScene();
     QGraphicsView *view = new QGraphicsView(scene);
 
+    //scene->setBackgroundBrush(QBrush(QImage(":/Puck/bg.jpg")));
+
     //QSize size = qApp->screens()[0]->size();
 
-    int mapNumber = 0;
+    int mapNumber = 4;
     //std::cin >> k;
     game1 = new PacmanGame(mapNumber);
 

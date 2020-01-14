@@ -5,6 +5,7 @@
 #include <iostream>
 #include "dot.h"
 #include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QKeyEvent>
 #include <QCoreApplication>
 
@@ -18,7 +19,7 @@
 
 
 
-class Pacman: public QObject, public QGraphicsRectItem{
+class Pacman: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Pacman(int x1, int y1, int dotsInMap = 156);
@@ -39,6 +40,7 @@ public:
 // on staje samo ako udari u zid
 public slots:
     void move();
+    void animation();
 private:
 
     // We need current_direction for continual movement, and also for solving colision
