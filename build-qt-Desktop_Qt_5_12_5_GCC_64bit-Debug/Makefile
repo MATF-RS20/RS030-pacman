@@ -684,9 +684,13 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/zeleni.jpg \
 		../qt/zuti.jpg \
 		../qt/pacman1.jpg \
+		../qt/plavi-d.jpg \
+		../qt/plavi-dole.jpg \
+		../qt/plavi-l.jpg \
 		../qt/puckk.gif \
 		../qt/pattern.jpg \
 		../qt/plavi.jpg \
+		../qt/plavi-g.jpg \
 		../qt/mapa2.txt \
 		../qt/mapa1.txt \
 		../qt/mapa0.txt \

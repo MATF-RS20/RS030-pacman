@@ -24,5 +24,9 @@
         <file>pacman3.jpg</file>
         <file>bg.jpg</file>
         <file>pattern.jpg</file>
+        <file>plavi-d.jpg</file>
+        <file>plavi-dole.jpg</file>
+        <file>plavi-g.jpg</file>
+        <file>plavi-l.jpg</file>
     </qresource>
 </RCC>

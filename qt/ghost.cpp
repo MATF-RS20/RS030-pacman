@@ -104,6 +104,18 @@ void Ghost::chooseRandom() {
 
 void Ghost::move1()
 {
+    if (ghost_id == 3){
+            if (this->currentDirection == 1){
+                setPixmap(QPixmap(":/Puck/plavi-l.jpg"));
+            }else if (this->currentDirection == 2)
+                setPixmap(QPixmap(":/Puck/plavi-d.jpg"));
+            else if (this->currentDirection == 3)
+                setPixmap(QPixmap(":/Puck/plavi-g.jpg"));
+            else if (this->currentDirection == 4)
+                setPixmap(QPixmap(":/Puck/plavi-dole.jpg"));
+    }
+
+
     if (this->nextDirection != 0)
     {
         if (this->nextDirection == 1)
