@@ -215,6 +215,8 @@ void Pacman::move()
                     this->current_score +=20;
                 }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                     //game1->health->decrease();
+                    game1->health->decrease();
+                    setPos(game1->pacPosX,game1->pacPosY);
                     if (game1->health->getHealth() == 0){
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
                         QCoreApplication::quit();
@@ -281,6 +283,8 @@ void Pacman::move()
                 this->current_score += 20;
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
+                game1->health->decrease();
+                setPos(game1->pacPosX,game1->pacPosY);
                 if (game1->health->getHealth() == 0){
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();

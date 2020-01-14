@@ -134,6 +134,8 @@ void Ghost::move1()
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
+                game1->health->decrease();
+                game1->getPacman()->setPos(game1->pacPosX,game1->pacPosY);
                 if (game1->health->getHealth() == 0){
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
@@ -169,6 +171,8 @@ void Ghost::move1()
             {
                 if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                   //  game1->health->decrease();
+                    game1->health->decrease();
+                    game1->getPacman()->setPos(game1->pacPosX,game1->pacPosY);
                     if (game1->health->getHealth() == 0){
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
                         QCoreApplication::quit();
@@ -216,6 +220,8 @@ void Ghost::move1()
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
+                game1->health->decrease();
+                game1->getPacman()->setPos(game1->pacPosX,game1->pacPosY);
                 if (game1->health->getHealth() == 0){
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
