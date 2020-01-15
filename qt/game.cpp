@@ -20,7 +20,7 @@ Game::Game(QWidget *parent)
 
 void Game::displayMainManu()
 {
-    this->setPixmap(QPixmap(":/Images/pacmanManu.jpg"));
+    //this->setPixmap(QPixmap(":/Images/pacmanManu.jpg"));
 
     QGraphicsTextItem *text =  new QGraphicsTextItem(QString("P A C M A N"));
     int txPos = this->width()/2- text->boundingRect().width()/2;
