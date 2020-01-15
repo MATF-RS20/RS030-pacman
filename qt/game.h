@@ -22,11 +22,11 @@ public:
     QGraphicsScene *scene;
     Game(QWidget *parent = NULL);
     void displayMainManu();
-    void youLost();
-    void youWon();
+    void gameOver(QString message);
 
 public slots:
-    void start();
+    void start(int level_map);
+    void resetGame();
 };
 
 #endif // GAME_H

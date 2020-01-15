@@ -29,12 +29,13 @@ void Game::displayMainManu()
     scene->addItem(text);
 
 
+    int level_map = 1;
 
     Button *playButton = new Button(QString("Play"));
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;
     int byPos = 275;
     playButton->setPos(bxPos,byPos);
-    QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start()) );
+    QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start( level_map )) );
     this->scene->addItem(playButton);
 
 
@@ -47,15 +48,21 @@ void Game::displayMainManu()
 
 }
 
-void Game::youLost()
+void Game::gameOver(QString message)
 {
+    for (size_t i=0, n = scene->items().size(); i<n; i++){
+        scene->items()[i]->setEnabled(false);
+    }
+
+
+    //scene->removeItem(game1);
     //delete game1;
-    qDebug() << "usli smo u funkciju youLost()";
-    scene->clear();
+    qDebug() << "usli smo u funkciju gameOver()";
+    //scene->clear();
     qDebug() << "ocistili smo ekran";
 
 
-    QGraphicsTextItem *text1 =  new QGraphicsTextItem(QString("YOU LOST!!! :("));
+    QGraphicsTextItem *text1 =  new QGraphicsTextItem(message);
     //QFont font;
     //font.setPixelSize(60);
     //text->setFont(font);
@@ -64,42 +71,37 @@ void Game::youLost()
     text1->setPos(txPos1,tyPos1);
     scene->addItem(text1);
 
-    scene->clear();
-    this->displayMainManu();
+    Button *resetButton = new Button(QString("Play again"));
+    int bxPos = this->width()/2- resetButton->boundingRect().width()/2;
+    int byPos = 125;
+    resetButton->setPos(bxPos,byPos);
+    QObject::connect(resetButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
+    this->scene->addItem(resetButton);
 
 
 
-
-}
-
-void Game::youWon()
-{
-    //delete game1;
-    qDebug() << "usli smo u funkciju youWon()";
-    scene->clear();
-    qDebug() << "ocistili smo ekran";
+    Button *quitButton = new Button(QString("Quit"));
+    bxPos = this->width()/2- quitButton->boundingRect().width()/2;
+    byPos = 350;
+    quitButton->setPos(bxPos,byPos);
+    QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
+    this->scene->addItem(quitButton);
 
 
-    QGraphicsTextItem *text1 =  new QGraphicsTextItem(QString("CONGRATULATIONS, YOU WON!!! :("));
-    //QFont font;
-    //font.setPixelSize(60);
-    //text->setFont(font);
-    int txPos1 = this->width()/2- text1->boundingRect().width()/2;
-    int tyPos1 = 150;
-    text1->setPos(txPos1,tyPos1);
-    scene->addItem(text1);
 
-
-    scene->clear();
-    this->displayMainManu();
+    //scene->update();
+   // scene->clear();
+    //this->displayMainManu();
 
 }
 
-void Game::start()
+
+
+void Game::start(int level_map)
 {
     this->scene->clear();
 
-    int level_map =1;
+    //int level_map =1;
     game1 = new PacmanGame(level_map);
 
     game1->getPacman()->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -111,4 +113,17 @@ void Game::start()
     this->scene->addItem(game1);
     //scene->addItem(game1->getPacman());
 
+}
+
+void Game::resetGame()
+{
+    //delete game1->pacman;
+    //for (size_t i =0 ; i<4; i++){
+    //game1->ghosts.clear();
+    //}
+    //game1->walls_and_borders.clear();
+    //game1->dots.clear();
+    int level_map =1;
+    scene->clear();
+    start(level_map);
 }

@@ -131,9 +131,15 @@ void Pacman::move()
 
 
 
-    if(this->eatenDots == this->dotsToEat){
+    if(this->eatenDots == this->dotsToEat && game->game1->mapSelector == 4){
+        QString message = "Congratulations";
+        game->gameOver(message);
         std::cout << "CESTITAM!!!\n";
-        QCoreApplication::quit();
+        //QCoreApplication::quit();
+    } else if (this->eatenDots == this->dotsToEat){
+       game->game1->mapSelector += 1;
+       //sledeci nivo
+       game->start(game->game1->mapSelector);
     }
 
 
@@ -190,9 +196,10 @@ void Pacman::move()
                 game->game1->health->decrease();
                 setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
-                    game->youLost();
+                    QString message = "You lost :(";
+                    game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                    QCoreApplication::quit();
+                    //QCoreApplication::quit();
                 }
 
             }
@@ -252,9 +259,10 @@ void Pacman::move()
                     game->game1->health->decrease();
                     setPos(game->game1->pacPosX,game->game1->pacPosY);
                     if (game->game1->health->getHealth() == 0){
-                        game->youLost();
+                        QString message = "You lost :(";
+                        game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                        QCoreApplication::quit();
+                        //QCoreApplication::quit();
                     }
 
                 }
@@ -321,9 +329,10 @@ void Pacman::move()
                 game->game1->health->decrease();
                 setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
-                    game->youLost();
+                    QString message = "You lost :(";
+                    game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                    QCoreApplication::quit();
+                    //QCoreApplication::quit();
                 }
 
             }

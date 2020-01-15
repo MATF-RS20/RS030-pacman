@@ -153,9 +153,10 @@ void Ghost::move1()
                 game->game1->health->decrease();
                 game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
-                    game->youLost();
+                    QString message = "You lost :(";
+                    game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                    QCoreApplication::quit();
+                    //QCoreApplication::quit();
                 }
             }
 
@@ -191,9 +192,10 @@ void Ghost::move1()
                     game->game1->health->decrease();
                     game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                     if (game->game1->health->getHealth() == 0){
-                        game->youLost();
+                        QString message = "You lost :(";
+                        game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                        QCoreApplication::quit();
+                        //QCoreApplication::quit();
                     }
                 }
                 // ako ima kolizije unazad
@@ -241,9 +243,10 @@ void Ghost::move1()
                 game->game1->health->decrease();
                 game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
-                    game->youLost();
+                    QString message = "You lost :(";
+                    game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
-                    QCoreApplication::quit();
+                    //QCoreApplication::quit();
                 }
             }
             // ako ima kolizije unazad

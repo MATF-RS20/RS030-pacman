@@ -36,7 +36,7 @@ private:
 
     // dodao da bi mozda napravili konstruktor za PacmanGame kome se prosledjuje
     // integer koji oznacava mapu
-    int mapSelector;
+
     //std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
     //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 /*
@@ -55,11 +55,12 @@ private:
     int y;
 
 public:
-    PacmanGame(int selectMap = 1);
+    PacmanGame(int selectMap);
     Score *score;
     Health *health;
     int pacPosX;
     int pacPosY;
+    int mapSelector;
     virtual ~PacmanGame();
     Pacman* getPacman();
     Wall* getWall();
