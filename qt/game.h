@@ -11,6 +11,7 @@
 
 #include <QDebug>
 #include "wall.h"
+#include <QGraphicsPixmapItem>
 
 class Game: public QGraphicsView
 {

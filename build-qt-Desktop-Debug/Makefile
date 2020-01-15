@@ -390,6 +390,9 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_PacResources.cpp
 qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		/usr/lib/qt5/bin/rcc \
+		../qt/congratulations.jpg \
+		../qt/loser.jpeg \
+		../qt/pacmanManu.jpg \
 		../qt/crveni.jpg \
 		../qt/pacman3.jpg \
 		../qt/pacman2.jpg \

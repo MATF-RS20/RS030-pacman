@@ -29,4 +29,9 @@
         <file>plavi-g.jpg</file>
         <file>plavi-l.jpg</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>congratulations.jpg</file>
+        <file>pacmanManu.jpg</file>
+        <file>loser.jpeg</file>
+    </qresource>
 </RCC>

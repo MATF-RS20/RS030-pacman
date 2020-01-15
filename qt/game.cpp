@@ -19,7 +19,10 @@ Game::Game(QWidget *parent)
 }
 
 void Game::displayMainManu()
-{   QGraphicsTextItem *text =  new QGraphicsTextItem(QString("P A C M A N"));
+{
+    this->setPixmap(QPixmap(":/Images/pacmanManu.jpg"));
+
+    QGraphicsTextItem *text =  new QGraphicsTextItem(QString("P A C M A N"));
     int txPos = this->width()/2- text->boundingRect().width()/2;
     int tyPos = 150;
     text->setPos(txPos,tyPos);
@@ -61,6 +64,9 @@ void Game::youLost()
     text1->setPos(txPos1,tyPos1);
     scene->addItem(text1);
 
+    scene->clear();
+    this->displayMainManu();
+
 
 
 
@@ -82,6 +88,10 @@ void Game::youWon()
     int tyPos1 = 150;
     text1->setPos(txPos1,tyPos1);
     scene->addItem(text1);
+
+
+    scene->clear();
+    this->displayMainManu();
 
 }
 
