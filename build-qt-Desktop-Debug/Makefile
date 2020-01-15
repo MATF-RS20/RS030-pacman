@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = qt1.0.0
-DISTDIR = /home/ariel/RS030-pacman/build-qt-Desktop-Debug/.tmp/qt1.0.0
+DISTDIR = /home/ariel/Desktop/RS030-pacman/build-qt-Desktop-Debug/.tmp/qt1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -50,35 +50,37 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../qt/Character.cpp \
-		../qt/dot.cpp \
+SOURCES       = ../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
 		../qt/wall.cpp \
 		../qt/ghost.cpp \
-		../qt/searchcell.cpp \
-		../qt/pathfinding.cpp \
-		../qt/point.cpp qrc_PacResources.cpp \
-		moc_Character.cpp \
+		../qt/score.cpp \
+		../qt/health.cpp \
+		../qt/button.cpp \
+		../qt/game.cpp qrc_PacResources.cpp \
 		moc_pacman.cpp \
 		moc_pacmangame.cpp \
-		moc_ghost.cpp
-OBJECTS       = Character.o \
-		dot.o \
+		moc_ghost.cpp \
+		moc_button.cpp \
+		moc_game.cpp
+OBJECTS       = dot.o \
 		main.o \
 		pacman.o \
 		pacmangame.o \
 		wall.o \
 		ghost.o \
-		searchcell.o \
-		pathfinding.o \
-		point.o \
+		score.o \
+		health.o \
+		button.o \
+		game.o \
 		qrc_PacResources.o \
-		moc_Character.o \
 		moc_pacman.o \
 		moc_pacmangame.o \
-		moc_ghost.o
+		moc_ghost.o \
+		moc_button.o \
+		moc_game.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -153,25 +155,25 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../qt/qt.pro ../qt/Character.h \
-		../qt/dot.h \
+		../qt/qt.pro ../qt/dot.h \
 		../qt/globalVariables.h \
 		../qt/pacman.h \
 		../qt/pacmangame.h \
 		../qt/wall.h \
 		../qt/ghost.h \
-		../qt/searchcell.h \
-		../qt/pathfinding.h \
-		../qt/point.h ../qt/Character.cpp \
-		../qt/dot.cpp \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/button.h \
+		../qt/game.h ../qt/dot.cpp \
 		../qt/main.cpp \
 		../qt/pacman.cpp \
 		../qt/pacmangame.cpp \
 		../qt/wall.cpp \
 		../qt/ghost.cpp \
-		../qt/searchcell.cpp \
-		../qt/pathfinding.cpp \
-		../qt/point.cpp
+		../qt/score.cpp \
+		../qt/health.cpp \
+		../qt/button.cpp \
+		../qt/game.cpp
 QMAKE_TARGET  = qt
 DESTDIR       = 
 TARGET        = qt
@@ -358,8 +360,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../qt/PacResources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.h ../qt/dot.h ../qt/globalVariables.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h ../qt/searchcell.h ../qt/pathfinding.h ../qt/point.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../qt/Character.cpp ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp ../qt/searchcell.cpp ../qt/pathfinding.cpp ../qt/point.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/dot.h ../qt/globalVariables.h ../qt/pacman.h ../qt/pacmangame.h ../qt/wall.h ../qt/ghost.h ../qt/score.h ../qt/health.h ../qt/button.h ../qt/game.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../qt/dot.cpp ../qt/main.cpp ../qt/pacman.cpp ../qt/pacmangame.cpp ../qt/wall.cpp ../qt/ghost.cpp ../qt/score.cpp ../qt/health.cpp ../qt/button.cpp ../qt/game.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -388,7 +390,20 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_PacResources.cpp
 qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		/usr/lib/qt5/bin/rcc \
+		../qt/crveni.jpg \
+		../qt/pacman3.jpg \
+		../qt/pacman2.jpg \
+		../qt/bg.jpg \
+		../qt/zeleni.jpg \
+		../qt/zuti.jpg \
+		../qt/pacman1.jpg \
+		../qt/plavi-d.jpg \
+		../qt/plavi-dole.jpg \
+		../qt/plavi-l.jpg \
 		../qt/puckk.gif \
+		../qt/pattern.jpg \
+		../qt/plavi.jpg \
+		../qt/plavi-g.jpg \
 		../qt/mapa2.txt \
 		../qt/mapa1.txt \
 		../qt/mapa0.txt \
@@ -407,39 +422,51 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Character.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
+compiler_moc_header_make_all: moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp moc_button.cpp moc_game.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Character.cpp moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp
-moc_Character.cpp: ../qt/Character.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/Character.h -o moc_Character.cpp
-
+	-$(DEL_FILE) moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp moc_button.cpp moc_game.cpp
 moc_pacman.cpp: ../qt/dot.h \
 		../qt/wall.h \
-		../qt/Character.h \
 		../qt/ghost.h \
 		../qt/pacman.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacman.h -o moc_pacman.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/Desktop/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacman.h -o moc_pacman.cpp
 
 moc_pacmangame.cpp: ../qt/wall.h \
-		../qt/Character.h \
 		../qt/pacman.h \
 		../qt/dot.h \
 		../qt/ghost.h \
+		../qt/score.h \
+		../qt/health.h \
 		../qt/pacmangame.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacmangame.h -o moc_pacmangame.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/Desktop/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacmangame.h -o moc_pacmangame.cpp
 
 moc_ghost.cpp: ../qt/wall.h \
-		../qt/Character.h \
 		../qt/ghost.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/ghost.h -o moc_ghost.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/Desktop/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/ghost.h -o moc_ghost.cpp
+
+moc_button.cpp: ../qt/button.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/Desktop/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/button.h -o moc_button.cpp
+
+moc_game.cpp: ../qt/pacmangame.h \
+		../qt/wall.h \
+		../qt/pacman.h \
+		../qt/dot.h \
+		../qt/ghost.h \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/button.h \
+		../qt/game.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ariel/Desktop/RS030-pacman/qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/game.h -o moc_game.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -455,60 +482,77 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-Character.o: ../qt/Character.cpp ../qt/Character.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Character.o ../qt/Character.cpp
-
 dot.o: ../qt/dot.cpp ../qt/dot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dot.o ../qt/dot.cpp
 
 main.o: ../qt/main.cpp ../qt/wall.h \
-		../qt/Character.h \
 		../qt/pacmangame.h \
 		../qt/pacman.h \
 		../qt/dot.h \
-		../qt/ghost.h
+		../qt/ghost.h \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/game.h \
+		../qt/button.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../qt/main.cpp
 
 pacman.o: ../qt/pacman.cpp ../qt/pacman.h \
 		../qt/dot.h \
 		../qt/wall.h \
-		../qt/Character.h \
-		../qt/ghost.h
+		../qt/ghost.h \
+		../qt/pacmangame.h \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/game.h \
+		../qt/button.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pacman.o ../qt/pacman.cpp
 
 pacmangame.o: ../qt/pacmangame.cpp ../qt/pacmangame.h \
 		../qt/wall.h \
-		../qt/Character.h \
 		../qt/pacman.h \
 		../qt/dot.h \
-		../qt/ghost.h
+		../qt/ghost.h \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/globalVariables.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pacmangame.o ../qt/pacmangame.cpp
 
-wall.o: ../qt/wall.cpp ../qt/wall.h \
-		../qt/Character.h
+wall.o: ../qt/wall.cpp ../qt/wall.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wall.o ../qt/wall.cpp
 
 ghost.o: ../qt/ghost.cpp ../qt/ghost.h \
 		../qt/wall.h \
-		../qt/Character.h
+		../qt/pacmangame.h \
+		../qt/pacman.h \
+		../qt/dot.h \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/game.h \
+		../qt/button.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ghost.o ../qt/ghost.cpp
 
-searchcell.o: ../qt/searchcell.cpp ../qt/searchcell.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o searchcell.o ../qt/searchcell.cpp
+score.o: ../qt/score.cpp ../qt/score.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o score.o ../qt/score.cpp
 
-pathfinding.o: ../qt/pathfinding.cpp ../qt/pathfinding.h \
-		../qt/point.h \
-		../qt/searchcell.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pathfinding.o ../qt/pathfinding.cpp
+health.o: ../qt/health.cpp ../qt/health.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o health.o ../qt/health.cpp
 
-point.o: ../qt/point.cpp ../qt/point.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o point.o ../qt/point.cpp
+button.o: ../qt/button.cpp ../qt/button.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o button.o ../qt/button.cpp
+
+game.o: ../qt/game.cpp ../qt/game.h \
+		../qt/pacmangame.h \
+		../qt/wall.h \
+		../qt/pacman.h \
+		../qt/dot.h \
+		../qt/ghost.h \
+		../qt/score.h \
+		../qt/health.h \
+		../qt/button.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o ../qt/game.cpp
 
 qrc_PacResources.o: qrc_PacResources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_PacResources.o qrc_PacResources.cpp
-
-moc_Character.o: moc_Character.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Character.o moc_Character.cpp
 
 moc_pacman.o: moc_pacman.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pacman.o moc_pacman.cpp
@@ -518,6 +562,12 @@ moc_pacmangame.o: moc_pacmangame.cpp
 
 moc_ghost.o: moc_ghost.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ghost.o moc_ghost.cpp
+
+moc_button.o: moc_button.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_button.o moc_button.cpp
+
+moc_game.o: moc_game.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_game.o moc_game.cpp
 
 ####### Install
 

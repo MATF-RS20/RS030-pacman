@@ -9,14 +9,26 @@
 #include "pacmangame.h"
 //#include "globalVariables.h"
 #include <iostream>
+#include "game.h"
 
 //using namespace global;
 
-PacmanGame *game1;
+//PacmanGame *game1;
+Game * game;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+
+
+    game = new Game();
+
+    game->show();
+    game->displayMainManu();
+
+
+    /*
 
     //  Creating a scene
     QGraphicsScene *scene = new QGraphicsScene();
@@ -73,6 +85,6 @@ int main(int argc, char *argv[])
     view->show();
     //view->showFullScreen();
 
-
+*/
     return a.exec();
 }

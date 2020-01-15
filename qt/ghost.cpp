@@ -8,8 +8,11 @@
 #include "pacmangame.h"
 #include "score.h"
 #include "health.h"
+#include "game.h"
+
 
 extern PacmanGame *game1;
+extern Game *game;
 
 
 Ghost::Ghost(int x1, int y1, int id)
@@ -147,9 +150,10 @@ void Ghost::move1()
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
-                game1->health->decrease();
-                game1->getPacman()->setPos(game1->pacPosX,game1->pacPosY);
-                if (game1->health->getHealth() == 0){
+                game->game1->health->decrease();
+                game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
+                if (game->game1->health->getHealth() == 0){
+                    game->youLost();
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
                 }
@@ -184,9 +188,10 @@ void Ghost::move1()
             {
                 if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                   //  game1->health->decrease();
-                    game1->health->decrease();
-                    game1->getPacman()->setPos(game1->pacPosX,game1->pacPosY);
-                    if (game1->health->getHealth() == 0){
+                    game->game1->health->decrease();
+                    game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
+                    if (game->game1->health->getHealth() == 0){
+                        game->youLost();
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
                         QCoreApplication::quit();
                     }
@@ -233,9 +238,10 @@ void Ghost::move1()
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
-                game1->health->decrease();
-                game1->getPacman()->setPos(game1->pacPosX,game1->pacPosY);
-                if (game1->health->getHealth() == 0){
+                game->game1->health->decrease();
+                game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
+                if (game->game1->health->getHealth() == 0){
+                    game->youLost();
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
                 }

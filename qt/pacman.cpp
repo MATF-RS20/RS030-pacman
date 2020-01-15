@@ -5,7 +5,10 @@
 #include "score.h"
 #include "health.h"
 
+#include "game.h"
+
 extern PacmanGame *game1;
+extern Game * game;
 
 Pacman::Pacman(int x1, int y1, int dotsInMap)
     :x1(x1),y1(y1),dotsToEat(dotsInMap)
@@ -162,7 +165,7 @@ void Pacman::move()
                 scene()->update();
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
-                game1->score->setScore(20);
+                game->game1->score->setScore(20);
                 //=======================
                 this->current_score +=20;
 
@@ -175,7 +178,7 @@ void Pacman::move()
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() == 20){
                 scene()->removeItem(x);
-                game1->score->setScore(20);
+                game->game1->score->setScore(20);
                 //===================
                 this->current_score +=20;
                 //global::allDots.erase(x);
@@ -184,9 +187,10 @@ void Pacman::move()
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
-                game1->health->decrease();
-                setPos(game1->pacPosX,game1->pacPosY);
-                if (game1->health->getHealth() == 0){
+                game->game1->health->decrease();
+                setPos(game->game1->pacPosX,game->game1->pacPosY);
+                if (game->game1->health->getHealth() == 0){
+                    game->youLost();
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
                 }
@@ -224,7 +228,7 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
-                    game1->score->setScore(20);
+                    game->game1->score->setScore(20);
                     //======================
                     this->current_score +=20;
 
@@ -240,14 +244,15 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
-                    game1->score->setScore(20);
+                    game->game1->score->setScore(20);
                     //=========================
                     this->current_score +=20;
                 }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                     //game1->health->decrease();
-                    game1->health->decrease();
-                    setPos(game1->pacPosX,game1->pacPosY);
-                    if (game1->health->getHealth() == 0){
+                    game->game1->health->decrease();
+                    setPos(game->game1->pacPosX,game->game1->pacPosY);
+                    if (game->game1->health->getHealth() == 0){
+                        game->youLost();
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
                         QCoreApplication::quit();
                     }
@@ -295,7 +300,7 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
-                game1->score->setScore(20);
+                game->game1->score->setScore(20);
                 //======================
                 this->current_score +=20;
             }else if(x->boundingRect().size().rwidth() == 11){
@@ -308,14 +313,15 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
-                game1->score->setScore(20);
+                game->game1->score->setScore(20);
                 //=======================
                 this->current_score += 20;
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
-                game1->health->decrease();
-                setPos(game1->pacPosX,game1->pacPosY);
-                if (game1->health->getHealth() == 0){
+                game->game1->health->decrease();
+                setPos(game->game1->pacPosX,game->game1->pacPosY);
+                if (game->game1->health->getHealth() == 0){
+                    game->youLost();
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     QCoreApplication::quit();
                 }

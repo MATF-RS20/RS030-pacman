@@ -23,7 +23,9 @@ SOURCES += \
     wall.cpp \
     ghost.cpp \
     score.cpp \
-    health.cpp
+    health.cpp \
+    button.cpp \
+    game.cpp
 
 HEADERS += \
     dot.h \
@@ -33,7 +35,9 @@ HEADERS += \
     wall.h \
     ghost.h \
     score.h \
-    health.h
+    health.h \
+    button.h \
+    game.h
 
 FORMS +=
 
