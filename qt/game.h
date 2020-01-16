@@ -13,11 +13,12 @@
 #include "wall.h"
 #include <QGraphicsPixmapItem>
 
+
 class Game: public QGraphicsView
 {
        Q_OBJECT
 public:
-
+    int mapSelector;
     PacmanGame *game1;
     QGraphicsScene *scene;
     Game(QWidget *parent = NULL);
@@ -25,7 +26,7 @@ public:
     void gameOver(QString message);
 
 public slots:
-    void start(int level_map);
+    void start();
     void resetGame();
 };
 

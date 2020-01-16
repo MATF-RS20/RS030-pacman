@@ -1,5 +1,21 @@
 #include "game.h"
 #include <QDebug>
+#include <iterator>
+
+
+#include "wall.h"
+#include "pacman.h"
+#include "ghost.h"
+#include "score.h"
+#include "health.h"
+
+
+#include <list>
+#include <map>
+//#include <QMediaPlayer>
+#include "dot.h"
+
+extern int level_map;
 
 Game::Game(QWidget *parent)
 {
@@ -29,13 +45,13 @@ void Game::displayMainManu()
     scene->addItem(text);
 
 
-    int level_map = 1;
+    level_map = 1;
 
     Button *playButton = new Button(QString("Play"));
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;
     int byPos = 275;
     playButton->setPos(bxPos,byPos);
-    QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start( level_map )) );
+    QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start()) );
     this->scene->addItem(playButton);
 
 
@@ -54,11 +70,8 @@ void Game::gameOver(QString message)
         scene->items()[i]->setEnabled(false);
     }
 
-
-    //scene->removeItem(game1);
-    //delete game1;
     qDebug() << "usli smo u funkciju gameOver()";
-    //scene->clear();
+  //  scene->clear();
     qDebug() << "ocistili smo ekran";
 
 
@@ -89,15 +102,12 @@ void Game::gameOver(QString message)
 
 
 
-    //scene->update();
-   // scene->clear();
-    //this->displayMainManu();
 
 }
 
 
 
-void Game::start(int level_map)
+void Game::start()
 {
     this->scene->clear();
 
@@ -117,13 +127,12 @@ void Game::start(int level_map)
 
 void Game::resetGame()
 {
-    //delete game1->pacman;
-    //for (size_t i =0 ; i<4; i++){
-    //game1->ghosts.clear();
-    //}
-    //game1->walls_and_borders.clear();
-    //game1->dots.clear();
-    int level_map =1;
+    qDebug() << "poziva se reset";
+    for (size_t i=0, n = scene->items().size(); i<n; i++){
+        scene->items()[i]->setEnabled(false);
+    }
+    level_map =1;
     scene->clear();
-    start(level_map);
+    this->displayMainManu();
+    //start();
 }

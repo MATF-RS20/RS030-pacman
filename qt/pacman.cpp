@@ -9,6 +9,8 @@
 
 extern PacmanGame *game1;
 extern Game * game;
+extern int level_map;
+
 
 Pacman::Pacman(int x1, int y1, int dotsInMap)
     :x1(x1),y1(y1),dotsToEat(dotsInMap)
@@ -138,8 +140,9 @@ void Pacman::move()
         //QCoreApplication::quit();
     } else if (this->eatenDots == this->dotsToEat){
        game->game1->mapSelector += 1;
+       level_map = game->game1->mapSelector;
        //sledeci nivo
-       game->start(game->game1->mapSelector);
+       game->start();
     }
 
 
