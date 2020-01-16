@@ -109,6 +109,11 @@ void Game::gameOver(QString message)
 
 void Game::start()
 {
+   // qDebug() << "poziva se reset";
+    for (size_t i=0, n = scene->items().size(); i<n; i++){
+        scene->items()[i]->setEnabled(false);
+    }
+    qDebug() << "uslo u funkciju start()";
     this->scene->clear();
 
     //int level_map =1;
