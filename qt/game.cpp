@@ -54,10 +54,17 @@ void Game::displayMainManu()
     QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start()) );
     this->scene->addItem(playButton);
 
+    Button *scoreButton = new Button(QString("Score"));
+    bxPos = this->width()/2- scoreButton->boundingRect().width()/2;
+    byPos = 350;
+    scoreButton->setPos(bxPos,byPos);
+    QObject::connect(scoreButton, SIGNAL(clicked()),this, SLOT(score()) );
+    this->scene->addItem(scoreButton);
+
 
     Button *quitButton = new Button(QString("Quit"));
     bxPos = this->width()/2- quitButton->boundingRect().width()/2;
-    byPos = 350;
+    byPos = 425;
     quitButton->setPos(bxPos,byPos);
     QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
     this->scene->addItem(quitButton);
@@ -105,7 +112,53 @@ void Game::gameOver(QString message)
 
 }
 
+void Game::score(){
+    scene->clear();
 
+    QGraphicsTextItem *text =  new QGraphicsTextItem(QString("P A C M A N"));
+    int txPos = this->width()/2- text->boundingRect().width()/2;
+    int tyPos = 150;
+    text->setPos(txPos,tyPos);
+    scene->addItem(text);
+
+    QFile inputFile(":/new/PacFiles/score.txt");
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       int i = 0;
+       QTextStream in(&inputFile);
+       while (!in.atEnd())
+       {
+          QString tekst = in.readLine();
+
+              text =  new QGraphicsTextItem(QString(tekst));
+              txPos = this->width()/2- text->boundingRect().width()/2;
+              tyPos = 200+i*20;
+              text->setPos(txPos,tyPos);
+              scene->addItem(text);
+              i++;
+       }
+       inputFile.close();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    Button *quitButton = new Button(QString("Quit"));
+    int bxPos = this->width()/2- quitButton->boundingRect().width()/2;
+    int byPos = 450;
+    quitButton->setPos(bxPos,byPos);
+    QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
+    this->scene->addItem(quitButton);
+
+    scene->update();
+}
 
 
 

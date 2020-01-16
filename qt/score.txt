@@ -1,0 +1,9 @@
+marko 100
+janko 10
+mirko 14
+stanko 2143
+saf 341
+sdf 134
+casdf 34
+adsf 3421
+asdf 4312

@@ -699,6 +699,7 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/zeleni.jpg \
 		../qt/zuti.jpg \
 		../qt/pacman1.jpg \
+		../qt/pattern1.jpg \
 		../qt/plavi-d.jpg \
 		../qt/plavi-dole.jpg \
 		../qt/plavi-l.jpg \
@@ -710,6 +711,7 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/mapa1.txt \
 		../qt/mapa0.txt \
 		../qt/mapa4.txt \
+		../qt/score.txt \
 		../qt/mapa3.txt \
 		../qt/pacman_eatfruit.wav \
 		../qt/pacman_eatghost.wav \

@@ -5,6 +5,7 @@
         <file>mapa2.txt</file>
         <file>mapa3.txt</file>
         <file>mapa4.txt</file>
+        <file>score.txt</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>pacman_beginning.wav</file>
@@ -28,10 +29,12 @@
         <file>plavi-dole.jpg</file>
         <file>plavi-g.jpg</file>
         <file>plavi-l.jpg</file>
+        <file>pattern1.jpg</file>
     </qresource>
     <qresource prefix="/images">
         <file>congratulations.jpg</file>
         <file>pacmanManu.jpg</file>
         <file>loser.jpeg</file>
     </qresource>
+    <qresource prefix="/score"/>
 </RCC>

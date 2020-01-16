@@ -28,6 +28,7 @@ public:
 
 public slots:
     void start();
+    void score();
     void resetGame();
 };
 
