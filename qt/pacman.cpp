@@ -138,6 +138,7 @@ void Pacman::move()
         //QApplication::quit();
         game->gameOver(message);
         std::cout << "CESTITAM!!!\n";
+        this->eatenDots = 0;
         //QCoreApplication::quit();
     } else if (this->eatenDots == this->dotsToEat){
        //game->game1->mapSelector += 1;

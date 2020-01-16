@@ -87,16 +87,23 @@ void Game::gameOver(QString message)
     //font.setPixelSize(60);
     //text->setFont(font);
     int txPos1 = this->width()/2- text1->boundingRect().width()/2;
-    int tyPos1 = 150;
+    int tyPos1 = 100;
     text1->setPos(txPos1,tyPos1);
     scene->addItem(text1);
 
-    Button *resetButton = new Button(QString("Play again"));
-    int bxPos = this->width()/2- resetButton->boundingRect().width()/2;
+    Button *scoreButton = new Button(QString("Score"));
+    int bxPos = this->width()/2- scoreButton->boundingRect().width()/2;
     int byPos = 125;
-    resetButton->setPos(bxPos,byPos);
-    QObject::connect(resetButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
-    this->scene->addItem(resetButton);
+    scoreButton->setPos(bxPos,byPos);
+    QObject::connect(scoreButton, SIGNAL(clicked()),this, SLOT(score()) );
+    this->scene->addItem(scoreButton);
+
+    Button *mainButton = new Button(QString("Main Menu"));
+    bxPos = this->width()/2- mainButton->boundingRect().width()/2;
+    byPos = 200;
+    mainButton->setPos(bxPos,byPos);
+    QObject::connect(mainButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
+    this->scene->addItem(mainButton);
 
 
 
@@ -115,7 +122,7 @@ void Game::gameOver(QString message)
 void Game::score(){
     scene->clear();
 
-    QGraphicsTextItem *text =  new QGraphicsTextItem(QString("P A C M A N"));
+    QGraphicsTextItem *text =  new QGraphicsTextItem(QString("S C O R E"));
     int txPos = this->width()/2- text->boundingRect().width()/2;
     int tyPos = 150;
     text->setPos(txPos,tyPos);
@@ -146,13 +153,18 @@ void Game::score(){
 
 
 
-
+    Button *mainButton = new Button(QString("Main Menu"));
+    int bxPos = this->width()/2- mainButton->boundingRect().width()/2;
+    int byPos = 450;
+    mainButton->setPos(bxPos,byPos);
+    QObject::connect(mainButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
+    this->scene->addItem(mainButton);
 
 
 
     Button *quitButton = new Button(QString("Quit"));
-    int bxPos = this->width()/2- quitButton->boundingRect().width()/2;
-    int byPos = 450;
+    bxPos = this->width()/2- quitButton->boundingRect().width()/2;
+    byPos = 525;
     quitButton->setPos(bxPos,byPos);
     QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
     this->scene->addItem(quitButton);
@@ -179,6 +191,22 @@ void Game::again(){
     resetButton->setPos(bxPos,byPos);
     QObject::connect(resetButton, SIGNAL(clicked()),this, SLOT(start()) );
     this->scene->addItem(resetButton);
+
+
+    Button *mainButton = new Button(QString("Main Menu"));
+    bxPos = this->width()/2- mainButton->boundingRect().width()/2;
+    byPos = 200;
+    mainButton->setPos(bxPos,byPos);
+    QObject::connect(mainButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
+    this->scene->addItem(mainButton);
+
+
+    Button *quitButton = new Button(QString("Quit"));
+    bxPos = this->width()/2- quitButton->boundingRect().width()/2;
+    byPos = 275;
+    quitButton->setPos(bxPos,byPos);
+    QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
+    this->scene->addItem(quitButton);
 }
 
 

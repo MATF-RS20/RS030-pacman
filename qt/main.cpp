@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-    level_map = 1;
+    level_map = 4;
     game = new Game();
 
     game->show();
