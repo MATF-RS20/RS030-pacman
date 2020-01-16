@@ -51,7 +51,7 @@ Pacman::Pacman(int x1, int y1, int dotsInMap)
     timer->start(25);
     QTimer *timer1 = new QTimer(this);
 
-    connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));
+    connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));// i korektivni_faktor
 
     timer1->start(150);
 }
@@ -118,6 +118,7 @@ void Pacman::animation(){
 
     scene()->update();
     i3 = (i3 + 1)%3;
+    korektivni_faktor -= 0.001;
 }
 
 void Pacman::move()
@@ -171,16 +172,16 @@ void Pacman::move()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5){
+            if(x->boundingRect().size().rwidth() == 5*korektivni_faktor){
                 scene()->removeItem(x);
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
-                game->game1->score->setScore(20);
+                game->game1->score->setScore(5*korektivni_faktor);
                 //=======================
-                this->current_score +=20;
+                this->current_score +=5;
 
             }else if(x->boundingRect().size().rwidth() == 11){
                 scene()->removeItem(x);
@@ -188,12 +189,15 @@ void Pacman::move()
                 delete x;
                 scene()->update();
                 this->eatenDots++;
+                game->game1->score->setScore(20*korektivni_faktor);
+                //=======================
+                this->current_score +=20*korektivni_faktor;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() == 20){
                 scene()->removeItem(x);
-                game->game1->score->setScore(20);
+                game->game1->score->setScore(100*korektivni_faktor);
                 //===================
-                this->current_score +=20;
+                this->current_score +=100*korektivni_faktor;
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
@@ -242,9 +246,9 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
-                    game->game1->score->setScore(20);
+                    game->game1->score->setScore(5*korektivni_faktor);
                     //======================
-                    this->current_score +=20;
+                    this->current_score +=5*korektivni_faktor;
 
                 }else if(x->boundingRect().size().rwidth() == 11){
                     this->eatenDots++;
@@ -252,15 +256,18 @@ void Pacman::move()
                     delete x;
                     scene()->update();
                     n--;
+                    game->game1->score->setScore(20*korektivni_faktor);
+                    //======================
+                    this->current_score +=20*korektivni_faktor;
                 }else if(x->boundingRect().size().rwidth() == 20){
                     this->eatenDots++;
                     scene()->removeItem(x);
                     delete x;
                     scene()->update();
                     n--;
-                    game->game1->score->setScore(20);
+                    game->game1->score->setScore(100*korektivni_faktor);
                     //=========================
-                    this->current_score +=20;
+                    this->current_score +=100*korektivni_faktor;
                 }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                     //game1->health->decrease();
                     game->game1->health->decrease();
@@ -315,22 +322,25 @@ void Pacman::move()
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
-                game->game1->score->setScore(20);
+                game->game1->score->setScore(5*korektivni_faktor);
                 //======================
-                this->current_score +=20;
+                this->current_score +=5*korektivni_faktor;
             }else if(x->boundingRect().size().rwidth() == 11){
                 this->eatenDots++;
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
+                game->game1->score->setScore(20*korektivni_faktor);
+                //=======================
+                this->current_score += 20*korektivni_faktor;
             }else if(x->boundingRect().size().rwidth() == 20){
                 this->eatenDots++;
                 scene()->removeItem(x);
                 delete x;
                 scene()->update();
-                game->game1->score->setScore(20);
+                game->game1->score->setScore(100*korektivni_faktor);
                 //=======================
-                this->current_score += 20;
+                this->current_score += 100*korektivni_faktor;
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
                 game->game1->health->decrease();

@@ -21,6 +21,7 @@
 // cisto radi urednosti,
 // jos neke sam ideje imao sta sa tim da uradim, ali nisam ih jos razradio
 using namespace global;
+extern int level_map;
 
 void PacmanGame::setMapSelector(int x)
 {
@@ -76,7 +77,7 @@ PacmanGame::PacmanGame(int selectMap)
                                         // da usmerimo animaciju, taj broj da stoji pre svega ostalog
     inMap >> direction;
 
-    int width = 0;
+
 
     Wall *w1;
     Dot *tuf{};
@@ -100,6 +101,11 @@ PacmanGame::PacmanGame(int selectMap)
         }
         else if(c == kec){
             w1 = new Wall(x,y,spacing,spacing);
+            this->walls_and_borders.push_back(w1);
+            x+=spacing;
+            //i++; // counts walls
+        }else if(c == '-'){
+            w1 = new Wall(x,y,20,spacing);
             this->walls_and_borders.push_back(w1);
             x+=spacing;
             //i++; // counts walls
@@ -127,6 +133,7 @@ PacmanGame::PacmanGame(int selectMap)
         }
     }
     x = keepX;
+
 
     // premesteno ovde da bi u konstruktoru dodali broj bobica koje treba da pojede
     // a broj se povecava u petlji stalno pa mora da se ubaci kad se petlja zavrsi
@@ -194,8 +201,15 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
 
     scene.addItem(this->pacman);
     scene.addItem(this->score);
-    this->health->setPos(health->x() + 100, health->y());
+    this->health->setPos(health->x() + 155, health->y() + 5);
+    this->score->setPos(score->x()+55, score->y() + 5);
     scene.addItem(this->health);
+
+    QGraphicsTextItem *text =  new QGraphicsTextItem(QString("Level: ") + QString::number(level_map));
+
+    text->setPos(text->x()+250, text->y()+5);
+    scene.addItem(text);
+    scene.update();
 
     /*
     scene = std::accumulate(std::begin(this->walls_and_borders), std::end(this->walls_and_borders),

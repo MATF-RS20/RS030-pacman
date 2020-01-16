@@ -53,7 +53,7 @@ private:
 
     int x;
     int y;
-
+    int width = 0;
 public:
     PacmanGame(int selectMap);
     Score *score;

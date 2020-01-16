@@ -61,6 +61,7 @@ private:
     int x1;
     int y1;
     int current_score = 0;
+    double korektivni_faktor = 1;
 }; //end of class Pacman
 
 #endif // PACMAN_H

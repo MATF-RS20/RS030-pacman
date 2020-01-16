@@ -150,6 +150,7 @@ void Ghost::move1()
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
+                game->game1->score->setScore(-50);
                 game->game1->health->decrease();
                 game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
@@ -191,6 +192,7 @@ void Ghost::move1()
                   //  game1->health->decrease();
                     game->game1->health->decrease();
                     game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
+                    game->game1->score->setScore(-50);
                     if (game->game1->health->getHealth() == 0){
                         QString message = "You lost :(";
                         game->gameOver(message);
@@ -242,6 +244,7 @@ void Ghost::move1()
                 //game1->health->decrease();
                 game->game1->health->decrease();
                 game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
+                game->game1->score->setScore(-50);
                 if (game->game1->health->getHealth() == 0){
                     QString message = "You lost :(";
                     game->gameOver(message);

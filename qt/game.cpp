@@ -34,6 +34,7 @@ Game::Game(QWidget *parent)
 
 }
 
+
 void Game::displayMainManu()
 {
     //this->setPixmap(QPixmap(":/Images/pacmanManu.jpg"));
@@ -46,6 +47,7 @@ void Game::displayMainManu()
 
 
     //level_map = 0;
+
 
     Button *playButton = new Button(QString("Play"));
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;

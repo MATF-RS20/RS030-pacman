@@ -17,12 +17,13 @@
 Game * game;
 int level_map;
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
 
-    level_map = 4;
+    level_map = 1;
     game = new Game();
 
     game->show();
