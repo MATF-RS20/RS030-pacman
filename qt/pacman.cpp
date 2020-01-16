@@ -135,14 +135,17 @@ void Pacman::move()
 
     if(this->eatenDots == this->dotsToEat && level_map == 4){
         QString message = "Congratulations";
+        //QApplication::quit();
         game->gameOver(message);
         std::cout << "CESTITAM!!!\n";
         //QCoreApplication::quit();
     } else if (this->eatenDots == this->dotsToEat){
        //game->game1->mapSelector += 1;
-       level_map += 1;
+       level_map =(level_map + 1)%5;
+        std::cout << "level je "<< level_map <<"\n";
        //sledeci nivo
-       game->start();
+       game->again();
+       this->eatenDots = 0;
     }
 
 

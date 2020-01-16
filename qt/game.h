@@ -24,6 +24,7 @@ public:
     Game(QWidget *parent = NULL);
     void displayMainManu();
     void gameOver(QString message);
+    void again();
 
 public slots:
     void start();

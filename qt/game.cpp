@@ -45,7 +45,7 @@ void Game::displayMainManu()
     scene->addItem(text);
 
 
-    level_map = 1;
+    //level_map = 0;
 
     Button *playButton = new Button(QString("Play"));
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;
@@ -107,6 +107,33 @@ void Game::gameOver(QString message)
 
 
 
+
+
+void Game::again(){
+    for (size_t i=0, n = scene->items().size(); i<n; i++){
+        scene->items()[i]->setEnabled(false);
+    }
+
+    qDebug() << "usli smo u funkciju again()";
+    //scene->clear();
+
+
+
+
+    Button *resetButton = new Button(QString("NEXT LEVEL"));
+    int bxPos = this->width()/2- resetButton->boundingRect().width()/2;
+    int byPos = 125;
+    resetButton->setPos(bxPos,byPos);
+    QObject::connect(resetButton, SIGNAL(clicked()),this, SLOT(start()) );
+    this->scene->addItem(resetButton);
+}
+
+
+
+
+
+
+
 void Game::start()
 {
    // qDebug() << "poziva se reset";
@@ -114,18 +141,22 @@ void Game::start()
         scene->items()[i]->setEnabled(false);
     }
     qDebug() << "uslo u funkciju start()";
+
     this->scene->clear();
 
     //int level_map =1;
     game1 = new PacmanGame(level_map);
 
+
     game1->getPacman()->setFlag(QGraphicsItem::ItemIsFocusable);
     game1->getPacman()->setFocus();
     game1->populateScene(*this->scene);
 
+
     //  Adding a view so that we can see something
 
     this->scene->addItem(game1);
+    qDebug() << "level je "<< level_map <<"\n";
     //scene->addItem(game1->getPacman());
 
 }
