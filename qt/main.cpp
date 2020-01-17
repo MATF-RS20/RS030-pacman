@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
 
 
-    level_map = 1;
+    level_map = 0;
     game = new Game();
 
     game->show();

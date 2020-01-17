@@ -17,6 +17,7 @@
 #include <QPixmap>
 #include <vector>
 #include <algorithm>
+#include <QImage>
 
 extern int level_map;
 
@@ -41,6 +42,7 @@ Game::Game(QWidget *parent)
 void Game::displayMainManu()
 {
     //QPixmap m(":/Images/pacmanManu.jpg");
+    //QImage l(":/Images/pacmanManu.jpg");
     //scene->addPixmap(m);
     //this->setPixmap(QPixmap(":/Images/pacmanManu.jpg"));
    // scene->setBackgroundBrush(m.scaled(100,100,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
