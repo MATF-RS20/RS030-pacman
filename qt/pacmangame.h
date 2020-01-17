@@ -61,6 +61,7 @@ public:
     int pacPosX;
     int pacPosY;
     int mapSelector;
+    int flag =0;
     virtual ~PacmanGame();
     Pacman* getPacman();
     Wall* getWall();

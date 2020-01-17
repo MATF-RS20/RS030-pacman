@@ -143,6 +143,7 @@ void Pacman::move()
         //QCoreApplication::quit();
     } else if (this->eatenDots == this->dotsToEat){
        //game->game1->mapSelector += 1;
+        game->game1->flag = 1;
        level_map =(level_map + 1)%5;
         std::cout << "level je "<< level_map <<"\n";
        //sledeci nivo
@@ -207,6 +208,7 @@ void Pacman::move()
                 game->game1->health->decrease();
                 setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
+                    game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
@@ -273,6 +275,7 @@ void Pacman::move()
                     game->game1->health->decrease();
                     setPos(game->game1->pacPosX,game->game1->pacPosY);
                     if (game->game1->health->getHealth() == 0){
+                        game->game1->flag = 1;
                         QString message = "You lost :(";
                         game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
@@ -346,6 +349,7 @@ void Pacman::move()
                 game->game1->health->decrease();
                 setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
+                    game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";

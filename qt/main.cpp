@@ -10,17 +10,69 @@
 //#include "globalVariables.h"
 #include <iostream>
 #include "game.h"
-
+#include <QFile>
+#include <QTextStream>
+#include <algorithm>
+#include <string>
 //using namespace global;
 
 //PacmanGame *game1;
 Game * game;
 int level_map;
+std::list<std::pair<std::string, int> > listOfScores;
+
+
+
+std::pair<std::string, int> split(const std::string & str)
+{
+    std::vector<std::string> result;
+
+    auto word_begin = str.cbegin();
+
+    // Idemo dok ne stignemo do kraja stringa
+    while (word_begin != str.cend())
+    {
+        // Preskacemo razmake sa pocetka
+        word_begin = std::find_if_not(word_begin, str.cend(), isspace);
+
+        // Trazimo kraj reci
+        const auto word_end = std::find_if(word_begin, str.cend(), isspace);
+
+        // Kopiramo karaktere u izlazni vektor
+        if (word_begin != str.cend())
+        {
+            result.emplace_back(word_begin, word_end);
+        }
+
+        // Zavrsavamo petlju nastavljajuci od kraja prethodne reci
+        word_begin = word_end;
+    }
+    std::pair<std::string, int> tmp(result[0], stoi(result[1]));
+
+    return tmp;
+}
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QFile inputFile(":/new/PacFiles/score.txt");
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       int i = 0;
+       QTextStream in(&inputFile);
+       while (!in.atEnd())
+       {
+          QString tekst = in.readLine(); // ime i poeni
+
+          std::pair<std::string, int> tmp = split (tekst.toStdString());
+          listOfScores.push_back(tmp);
+          i++;
+       }
+       inputFile.close();
+    }
+
 
 
     level_map = 1;

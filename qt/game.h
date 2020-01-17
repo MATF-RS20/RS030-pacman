@@ -12,6 +12,9 @@
 #include <QDebug>
 #include "wall.h"
 #include <QGraphicsPixmapItem>
+#include <list>
+
+extern std::list<std::pair<std::string, int> > listOfScores;
 
 
 class Game: public QGraphicsView

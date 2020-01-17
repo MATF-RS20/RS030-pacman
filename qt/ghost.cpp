@@ -38,18 +38,16 @@ Ghost::Ghost(int x1, int y1, int id)
 
 
 
-    QTimer *timer = new QTimer(this);
+    timer = new QTimer(this);
     if (ghost_id == 1){     //random
         setPixmap(QPixmap(":/Puck/crveni.jpg"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);
 
-
-        QTimer *timerM = new QTimer(this);
+        timerM = new QTimer(this);
         QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move1()));
         timerM->start(25);
-
 
     }else if (ghost_id == 2){   //chaser - manhattan algorithm    ovako reba da bude samo algoritam da provalim
         setPixmap(QPixmap(":/Puck/zeleni.jpg"));
@@ -59,7 +57,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timer->start(4800);
 
 
-        QTimer *timerM = new QTimer(this);
+        timerM = new QTimer(this);
         QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move1()));
         timerM->start(25);
 
@@ -70,7 +68,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timer->start(4800);
 
 
-        QTimer *timerM = new QTimer(this);
+        timerM = new QTimer(this);
         QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move1()));
         timerM->start(25);
 
@@ -81,7 +79,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timer->start(4800);
 
 
-        QTimer *timerM = new QTimer(this);
+        timerM = new QTimer(this);
         QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move1()));
         timerM->start(25);
 
@@ -90,6 +88,12 @@ Ghost::Ghost(int x1, int y1, int id)
 }
 
 void Ghost::chooseRandom() {
+
+
+    if (game->game1->flag ==1){
+        this->timer->stop();
+        return;
+    }
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -107,6 +111,13 @@ void Ghost::chooseRandom() {
 
 void Ghost::move1()
 {
+
+    if (game->game1->flag ==1){
+        this->timerM->stop();
+        return;
+    }
+
+
     if (ghost_id == 3){
             if (this->currentDirection == 1){
                 setPixmap(QPixmap(":/Puck/plavi-l.jpg"));
@@ -154,6 +165,7 @@ void Ghost::move1()
                 game->game1->health->decrease();
                 game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
+                    game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
@@ -194,6 +206,7 @@ void Ghost::move1()
                     game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                     game->game1->score->setScore(-50);
                     if (game->game1->health->getHealth() == 0){
+                        game->game1->flag = 1;
                         QString message = "You lost :(";
                         game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PT!!!\n";
@@ -246,6 +259,7 @@ void Ghost::move1()
                 game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 game->game1->score->setScore(-50);
                 if (game->game1->health->getHealth() == 0){
+                    game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";

@@ -37,6 +37,8 @@ private:
     int x1;
     int y1;
     Ghost_Id ghost_id;       // in every game there are 4 ghosts so id can be only 1,2,3,4
+    QTimer *timer;
+    QTimer *timerM;
 
 }; //end of class Ghost
 
