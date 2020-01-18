@@ -28,6 +28,8 @@ public:
     void displayMainManu();
     void gameOver(QString message);
     void again();
+    int getMapX() const;
+    int getMapY() const;
 
 public slots:
     void start();

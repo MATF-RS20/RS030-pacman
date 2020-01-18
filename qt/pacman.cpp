@@ -205,14 +205,16 @@ void Pacman::move()
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
-                game->game1->health->decrease();
-                setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
                     game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PT!!!\n";
                     //QCoreApplication::quit();
+                }
+                else {
+                    game->game1->health->decrease();
+                    setPos(game->game1->pacPosX,game->game1->pacPosY);
                 }
 
             }

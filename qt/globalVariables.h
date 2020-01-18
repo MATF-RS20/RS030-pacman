@@ -13,6 +13,8 @@ namespace global{
 //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 
 int spacing = 35;
+int screen1width = 500;
+int screen1height = 600;
 
 QChar nula('0');                // 0 => bobica
 QChar kec('1');                 // 1 => zid

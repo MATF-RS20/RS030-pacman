@@ -18,20 +18,40 @@
 #include <vector>
 #include <algorithm>
 #include <QImage>
+//#include "globalVariables.h"
 
 extern int level_map;
+//using namespace global;
+
+int screen1width = 600;
+int screen1height = 800;
+
+
+int Game::getMapX() const
+{
+    return this->game1->getX();
+}
+int Game::getMapY() const{
+    return this->game1->getY();
+}
 
 Game::Game(QWidget *parent)
 {
-    QSize size = qApp->screens()[0]->size();
+    //QSize size = qApp->screens()[0]->size();
 
-    this->setFixedSize(size.width(), size.height());
+    //this->setFixedSize(size.width(), size.height());
+    /*
+        PacmanGame g(1);
+        this->setFixedSize(g.getX()+200,g.getY()+50);
+    */
+    this->setFixedSize(screen1width,screen1height); //(size.width(), size.height())
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
     scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, size.width(), size.height());
+    //scene->setSceneRect(0, 0, size.width(), size.height());
+    scene->setSceneRect(0, 0, screen1width, screen1height);
     //  Creating an item to place in the scene
     setScene(scene);
 
@@ -61,6 +81,7 @@ void Game::displayMainManu()
     //text->setScale(100);
     text->setDefaultTextColor(Qt::white);
     int txPos = this->width()/2- text->boundingRect().width()/2;
+    //int txPos = screen1width/2- text->boundingRect().width()/2;
     int tyPos = 150;
     text->setPos(txPos,tyPos);
     scene->addItem(text);
@@ -71,6 +92,7 @@ void Game::displayMainManu()
 
     Button *playButton = new Button(QString("Play"));
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;
+    //int bxPos = screen1width/2- playButton->boundingRect().width()/2;
     int byPos = 275;
     playButton->setPos(bxPos,byPos);
     QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start()) );
@@ -78,6 +100,7 @@ void Game::displayMainManu()
 
     Button *scoreButton = new Button(QString("Score"));
     bxPos = this->width()/2- scoreButton->boundingRect().width()/2;
+    //bxPos = screen1width/2- scoreButton->boundingRect().width()/2;
     byPos = 350;
     scoreButton->setPos(bxPos,byPos);
     QObject::connect(scoreButton, SIGNAL(clicked()),this, SLOT(score()) );
@@ -86,6 +109,7 @@ void Game::displayMainManu()
 
     Button *quitButton = new Button(QString("Quit"));
     bxPos = this->width()/2- quitButton->boundingRect().width()/2;
+    //bxPos = screen1width/2- quitButton->boundingRect().width()/2;
     byPos = 425;
     quitButton->setPos(bxPos,byPos);
     QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
@@ -307,7 +331,9 @@ void Game::start()
 
     //int level_map =1;
     game1 = new PacmanGame(level_map);
-
+//OVDE brE
+    this->setFixedSize(game1->getX(),game1->getY());
+    scene->setSceneRect(0, 0, game1->getX(), game1->getY());
 
     game1->getPacman()->setFlag(QGraphicsItem::ItemIsFocusable);
     game1->getPacman()->setFocus();
