@@ -19,7 +19,8 @@
 #include <algorithm>
 #include <QImage>
 
-#include <cstdlib>
+//#include <cstdlib>
+#include <bits/stdc++.h>
 //#include "globalVariables.h"
 
 extern int level_map;
@@ -267,6 +268,8 @@ void Game::gameOver(QString message)
 
 }
 
+bool myfunction (std::pair<QString*,int> i,std::pair<QString*,int> j) { return (i.second>j.second); }
+
 void Game::score(){
     scene->clear();
 
@@ -286,10 +289,12 @@ void Game::score(){
        QTextStream in(&inputFile);
        QString s;
        int sk;
-       while (!in.atEnd())
+       while (!in.atEnd() && i < 10)
        {
            in >> s;
            in >> sk;
+           //in.readLine();
+           highScores[i] = std::pair<QString*,int>(new QString(s),sk);
            //qDebug() << sk;
            QString tekst(s + " " + QString::fromStdString(std::to_string(sk)));
 
@@ -300,7 +305,21 @@ void Game::score(){
               scene->addItem(text);
               i++;
        }
+       std::sort(std::begin(highScores),std::end(highScores),myfunction);
+       for(auto x : highScores)
+       {
+           qDebug() << QString(*x.first) << " " << x.second << "\n";
+       }
+
        inputFile.close();
+       /*
+       QFile outputFile{":/new/PacFiles/score.txt"};
+       outputFile.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Text);
+       QTextStream out(&outputFile);
+       for(auto x : highScores)
+           out << *x.first + " " + QString::number(x.second) + "\n";
+       outputFile.close();
+       */
     }
 
 /*
