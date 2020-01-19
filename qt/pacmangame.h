@@ -28,7 +28,7 @@ class PacmanGame:  public QObject, public QGraphicsRectItem{
 private:
     Pacman *pacman;
     Ghost *ghost;
-    std::list<Ghost*> ghosts{};
+
 //obrisala current_score, nalazi se u pacman klasi
     //Wall *walls[200];             // <- ne treba odavno, imamo walls_and_borders listu
     std::list<Wall*> walls_and_borders{};
@@ -55,10 +55,12 @@ private:
     int y;
     int width = 0;
 public:
+    std::list<Ghost*> ghosts{};
     PacmanGame(int selectMap, int hearts = 3, int scr = 0);
     Score *score;
     std::vector<std::pair<QString*,int>> highScores{10};
     void readScores();
+    bool pojedi = false;
 
     Health *health;
     int pacPosX;

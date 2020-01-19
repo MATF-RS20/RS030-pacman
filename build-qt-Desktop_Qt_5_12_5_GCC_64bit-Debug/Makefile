@@ -721,6 +721,7 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/zuti-dole.png \
 		../qt/pacman-polu.png \
 		../qt/pacman-zatvoren.png \
+		../qt/duh-jedi.png \
 		../qt/puckk.gif \
 		../qt/pacman-otvoren.png \
 		../qt/crveni-gore.png \

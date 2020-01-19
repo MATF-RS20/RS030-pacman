@@ -34,6 +34,7 @@ public:
     void setCurrentDirection(int x);
     void setNextDirection(int x);
     void setDirs0();
+    QTimer *timer_jedi = new QTimer(this);
 
 // move se nalazi u slots da bi mogao tajmer da ga zove
 // da, ovde sam odustao od engleskog
@@ -43,6 +44,7 @@ public:
 public slots:
     void move();
     void animation();
+    void jedi();
 private:
 
     // We need current_direction for continual movement, and also for solving colision

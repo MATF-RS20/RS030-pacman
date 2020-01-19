@@ -126,48 +126,50 @@ void Ghost::move1()
         return;
     }
 
-
-    if (ghost_id == 1){
-            if (this->currentDirection == 1){
-                setPixmap(QPixmap(":/Puck/crveni-levo.png"));
-            }else if (this->currentDirection == 2)
-                setPixmap(QPixmap(":/Puck/crveni-desno.png"));
-            else if (this->currentDirection == 3)
-                setPixmap(QPixmap(":/Puck/crveni-gore.png"));
-            else if (this->currentDirection == 4)
-                setPixmap(QPixmap(":/Puck/crveni-dole.png"));
+    if(!game->game1->pojedi){
+        if (ghost_id == 1){
+                if (this->currentDirection == 1){
+                    setPixmap(QPixmap(":/Puck/crveni-levo.png"));
+                }else if (this->currentDirection == 2)
+                    setPixmap(QPixmap(":/Puck/crveni-desno.png"));
+                else if (this->currentDirection == 3)
+                    setPixmap(QPixmap(":/Puck/crveni-gore.png"));
+                else if (this->currentDirection == 4)
+                    setPixmap(QPixmap(":/Puck/crveni-dole.png"));
+        }
+        if (ghost_id == 2){
+                if (this->currentDirection == 1){
+                    setPixmap(QPixmap(":/Puck/zeleni-levo.png"));
+                }else if (this->currentDirection == 2)
+                    setPixmap(QPixmap(":/Puck/zeleni-desno.png"));
+                else if (this->currentDirection == 3)
+                    setPixmap(QPixmap(":/Puck/zeleni-gore.png"));
+                else if (this->currentDirection == 4)
+                    setPixmap(QPixmap(":/Puck/zeleni-dole.png"));
+        }
+        if (ghost_id == 3){
+                if (this->currentDirection == 1){
+                    setPixmap(QPixmap(":/Puck/plavi-levo.png"));
+                }else if (this->currentDirection == 2)
+                    setPixmap(QPixmap(":/Puck/plavi-desno.png"));
+                else if (this->currentDirection == 3)
+                    setPixmap(QPixmap(":/Puck/plavi-gore.png"));
+                else if (this->currentDirection == 4)
+                    setPixmap(QPixmap(":/Puck/plavi-dole.png"));
+        }
+        if (ghost_id == 4){
+                if (this->currentDirection == 1){
+                    setPixmap(QPixmap(":/Puck/zuti-levo.png"));
+                }else if (this->currentDirection == 2)
+                    setPixmap(QPixmap(":/Puck/zuti-desno.png"));
+                else if (this->currentDirection == 3)
+                    setPixmap(QPixmap(":/Puck/zuti-gore.png"));
+                else if (this->currentDirection == 4)
+                    setPixmap(QPixmap(":/Puck/zuti-dole.png"));
+        }
+    } else {
+        setPixmap(QPixmap(":/Puck/duh-jedi.png"));
     }
-    if (ghost_id == 2){
-            if (this->currentDirection == 1){
-                setPixmap(QPixmap(":/Puck/zeleni-levo.png"));
-            }else if (this->currentDirection == 2)
-                setPixmap(QPixmap(":/Puck/zeleni-desno.png"));
-            else if (this->currentDirection == 3)
-                setPixmap(QPixmap(":/Puck/zeleni-gore.png"));
-            else if (this->currentDirection == 4)
-                setPixmap(QPixmap(":/Puck/zeleni-dole.png"));
-    }
-    if (ghost_id == 3){
-            if (this->currentDirection == 1){
-                setPixmap(QPixmap(":/Puck/plavi-levo.png"));
-            }else if (this->currentDirection == 2)
-                setPixmap(QPixmap(":/Puck/plavi-desno.png"));
-            else if (this->currentDirection == 3)
-                setPixmap(QPixmap(":/Puck/plavi-gore.png"));
-            else if (this->currentDirection == 4)
-                setPixmap(QPixmap(":/Puck/plavi-dole.png"));
-    }
-    if (ghost_id == 4){
-            if (this->currentDirection == 1){
-                setPixmap(QPixmap(":/Puck/zuti-levo.png"));
-            }else if (this->currentDirection == 2)
-                setPixmap(QPixmap(":/Puck/zuti-desno.png"));
-            else if (this->currentDirection == 3)
-                setPixmap(QPixmap(":/Puck/zuti-gore.png"));
-            else if (this->currentDirection == 4)
-                setPixmap(QPixmap(":/Puck/zuti-dole.png"));
-    }
-
 
     if (this->nextDirection != 0)
     {
@@ -190,7 +192,7 @@ void Ghost::move1()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20){
+            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
                 n--;
             }
             //else if(x->boundingRect().size().rwidth() == this->boundingRect().rwidth())
@@ -198,9 +200,11 @@ void Ghost::move1()
         }
         if (n != 0)
         {
-            if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
-                game->game1->score->setScore(-50);
-                game->game1->health->decrease();
+                if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                    this->sendToInitial();
+                }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                    game->game1->score->setScore(-50);
+                    game->game1->health->decrease();
                 if (game->game1->health->getHealth() == 0){
                     game->game1->flag = 1;
                     QString message = "You lost :(";
@@ -237,14 +241,16 @@ void Ghost::move1()
             colliding_items = collidingItems();
             int n = colliding_items.size();
             for(auto x: colliding_items){
-                if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20){
+                if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
                     n--;
                 }
 
             }
             if (n != 0)
             {
-                if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                    this->sendToInitial();
+                }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     //  game1->health->decrease();
                       game->game1->health->decrease();
                       game->game1->score->setScore(-50);
@@ -295,14 +301,16 @@ void Ghost::move1()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20){
+            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
                 n--;
             }
 
         }
         if (n != 0)
         {
-            if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+            if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                this->sendToInitial();
+            }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
                 game->game1->health->decrease();
                 game->game1->score->setScore(-50);

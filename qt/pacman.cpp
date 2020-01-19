@@ -77,6 +77,10 @@ Pacman::Pacman(int x1, int y1, int dotsInMap)
     connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));// i korektivni_faktor
 
     timer1->start(150);
+
+
+
+    connect(timer_jedi, SIGNAL(timeout()), this, SLOT(jedi()));// i korektivni_faktor
 }
 
 
@@ -143,7 +147,12 @@ void Pacman::animation(){
     i3 = (i3 + 1)%3;
     korektivni_faktor -= 0.001;
 }
-
+void Pacman::jedi(){
+    if(!game->game1->pojedi){
+        timer_jedi->stop();
+    }
+    game->game1->pojedi = false;
+}
 void Pacman::move()
 {
     if (this->currentDirection == 1)
@@ -228,6 +237,8 @@ void Pacman::move()
                 scene()->update();
                 this->eatenDots++;
                 game->game1->score->setScore(20*korektivni_faktor);
+                game->game1->pojedi = true;
+                timer_jedi->start(7000);
                 //=======================
                 this->current_score +=20*korektivni_faktor;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
@@ -241,6 +252,14 @@ void Pacman::move()
                 scene()->update();
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
+            }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                //game->game1->sendGhostsToStartPos();
+                x->boundingRect().size().rwidth() -= 2;
+                for(auto a: game->game1->ghosts){
+                    if(a->boundingRect().size().rwidth() == x->boundingRect().size().rwidth() - 3)
+                        a->sendToInitial();
+                }
+                x->boundingRect().size().rwidth() += 2;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                 game->game1->health->decrease();
                 if (game->game1->health->getHealth() == 0){
@@ -298,6 +317,8 @@ void Pacman::move()
                     this->eatenDots++;
                     scene()->removeItem(x);
                     delete x;
+                    game->game1->pojedi = true;
+                    timer_jedi->start(7000);
                     scene()->update();
                     n--;
                     game->game1->score->setScore(20*korektivni_faktor);
@@ -312,6 +333,14 @@ void Pacman::move()
                     game->game1->score->setScore(100*korektivni_faktor);
                     //=========================
                     this->current_score +=100*korektivni_faktor;
+                }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                    //game->game1->sendGhostsToStartPos();
+                    x->boundingRect().size().rwidth() -= 2;
+                    for(auto a: game->game1->ghosts){
+                        if(a->boundingRect().size().rwidth() == x->boundingRect().size().rwidth() - 3)
+                            a->sendToInitial();
+                    }
+                    x->boundingRect().size().rwidth() += 2;
                 }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                     //game1->health->decrease();
                     game->game1->health->decrease();
@@ -380,6 +409,8 @@ void Pacman::move()
                 this->eatenDots++;
                 scene()->removeItem(x);
                 delete x;
+                game->game1->pojedi = true;
+                timer_jedi->start(7000);
                 scene()->update();
                 game->game1->score->setScore(20*korektivni_faktor);
                 //=======================
@@ -392,6 +423,14 @@ void Pacman::move()
                 game->game1->score->setScore(100*korektivni_faktor);
                 //=======================
                 this->current_score += 100*korektivni_faktor;
+            }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                //game->game1->sendGhostsToStartPos();
+                x->boundingRect().size().rwidth() -= 2;
+                for(auto a: game->game1->ghosts){
+                    if(a->boundingRect().size().rwidth() == x->boundingRect().size().rwidth() - 3)
+                        a->sendToInitial();
+                }
+                x->boundingRect().size().rwidth() += 2;
             }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
                 game->game1->health->decrease();
