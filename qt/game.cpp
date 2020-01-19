@@ -67,25 +67,29 @@ Game::Game(QWidget *parent)
 
 void Game::displayMainManu()
 {
+    scene->clear();
 
-    QFile inputFile(":/new/PacFiles/score.txt");
-    if (inputFile.open(QIODevice::ReadOnly))
-    {
-       int i = 0;
-       QTextStream in(&inputFile);
-       QString s;
-       int sk;
-       while (!in.atEnd() && i < 10)
-       {
-           in >> s;
-           in >> sk;
-           highScores[i] = std::pair<QString*,int>(new QString(s),sk);
-              i++;
-       }
-       std::sort(std::begin(highScores),std::end(highScores),myfunction);
-       inputFile.close();
+    if(!highScoresLoaded){
+
+        QFile inputFile(":/new/PacFiles/score.txt");
+        if (inputFile.open(QIODevice::ReadOnly))
+        {
+           int i = 0;
+           QTextStream in(&inputFile);
+           QString s;
+           int sk;
+           while (!in.atEnd() && i < 10)
+           {
+               in >> s;
+               in >> sk;
+               highScores[i] = std::pair<QString*,int>(new QString(s),sk);
+                  i++;
+           }
+           std::sort(std::begin(highScores),std::end(highScores),myfunction);
+           inputFile.close();
+        }
+        highScoresLoaded = true;
     }
-
 
 
 
