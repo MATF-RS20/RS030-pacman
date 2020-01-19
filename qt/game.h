@@ -32,7 +32,6 @@ public:
     int getMapY() const;
     void gameStop();
     std::vector<std::pair<QString*,int>> highScores{10};
-    void readScores();
 
 public slots:
     void start();

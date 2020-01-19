@@ -168,7 +168,7 @@ void Ghost::move1()
                     game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
-                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
                 }
             }
@@ -209,7 +209,7 @@ void Ghost::move1()
                         game->game1->flag = 1;
                         QString message = "You lost :(";
                         game->gameOver(message);
-                        std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                        std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                         //QCoreApplication::quit();
                     }
                 }
@@ -262,7 +262,7 @@ void Ghost::move1()
                     game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
-                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
                 }
             }

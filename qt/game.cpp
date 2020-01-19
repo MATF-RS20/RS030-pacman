@@ -29,6 +29,7 @@ extern int level_map;
 int screen1width = 800;
 int screen1height = 800;
 
+bool myfunction (std::pair<QString*,int> i,std::pair<QString*,int> j) { return (i.second>j.second); }
 
 int Game::getMapX() const
 {
@@ -37,40 +38,6 @@ int Game::getMapX() const
 int Game::getMapY() const{
     return this->game1->getY();
 }
-
-void Game::readScores(){
-    QString scoreFile = ":/new/PacFiles/score.txt";
-    QFile scanScore{scoreFile};
-    if(scanScore.open(QFile::ReadOnly | QFile::Text)){
-    QTextStream scoreLoader{&scanScore};
-
-    //char name[5];
-    int highScore;
-    QString s;
-    int i = 0;
-    while( i<10 || !scoreLoader.atEnd() ){
-        scoreLoader >> s;
-        scoreLoader >> highScore;
-        this->highScores[i].second = highScore;
-        this->highScores[i].first = new QString(s);
-    }
-    scanScore.close();
-    }
-    /*QFile inputFile(":/new/PacFiles/score.txt");
-    if (inputFile.open(QIODevice::ReadOnly))
-    {
-       int k = 0;
-       QTextStream in(&inputFile);
-       while (!in.atEnd() || k < 10)
-       {
-
-       }
-       inputFile.close();
-    }*/
-
-}
-
-
 
 Game::Game(QWidget *parent)
 {
@@ -100,6 +67,28 @@ Game::Game(QWidget *parent)
 
 void Game::displayMainManu()
 {
+
+    QFile inputFile(":/new/PacFiles/score.txt");
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       int i = 0;
+       QTextStream in(&inputFile);
+       QString s;
+       int sk;
+       while (!in.atEnd() && i < 10)
+       {
+           in >> s;
+           in >> sk;
+           highScores[i] = std::pair<QString*,int>(new QString(s),sk);
+              i++;
+       }
+       std::sort(std::begin(highScores),std::end(highScores),myfunction);
+       inputFile.close();
+    }
+
+
+
+
     //QPixmap m(":/Images/pacmanManu.jpg");
     //QImage l(":/Images/pacmanManu.jpg");
     //scene->addPixmap(m);
@@ -189,6 +178,29 @@ void Game::gameOver(QString message)
     }
     */
     gameStop();
+    int sk = this->game1->score->getScore();
+    if(sk > highScores[9].second)
+    {
+        highScores[9] = std::pair<QString*,int>(new QString("Player"), sk);
+        sort(std::begin(highScores),std::end(highScores),myfunction);
+
+        // ovaj deo ne radi :(
+        QFile outputFile(":/new/PacFiles/score.txt");
+        outputFile.open(QIODevice::WriteOnly);
+        if (outputFile.isOpen())
+        {
+            QTextStream outStream(&outputFile);
+            for(auto x : highScores)
+            {
+                outStream << QString(QString(*x.first) + " " + QString::number(x.second) + "\n");
+            }
+        }
+        else
+        {
+            qDebug() << outputFile.errorString() << "\n";
+        }
+        outputFile.close();
+    }
 
     qDebug() << "usli smo u funkciju gameOver()";
   //  scene->clear();
@@ -268,7 +280,6 @@ void Game::gameOver(QString message)
 
 }
 
-bool myfunction (std::pair<QString*,int> i,std::pair<QString*,int> j) { return (i.second>j.second); }
 
 void Game::score(){
     scene->clear();
@@ -276,73 +287,35 @@ void Game::score(){
     //this->setFixedSize(screen1width,screen1height);
     scene->setSceneRect(0, 0, screen1width, screen1height);
     QGraphicsTextItem *text =  new QGraphicsTextItem(QString("S C O R E"));
+    text->setDefaultTextColor(Qt::magenta);
     int txPos = this->width()/2- text->boundingRect().width()/2;
     int tyPos = 150;
     text->setPos(txPos,tyPos);
     scene->addItem(text);
 
+    QString tekst;
+    int i = 0;
+    for(auto x : highScores){
 
-    QFile inputFile(":/new/PacFiles/score.txt");
-    if (inputFile.open(QIODevice::ReadOnly))
-    {
-       int i = 0;
-       QTextStream in(&inputFile);
-       QString s;
-       int sk;
-       while (!in.atEnd() && i < 10)
-       {
-           in >> s;
-           in >> sk;
-           //in.readLine();
-           highScores[i] = std::pair<QString*,int>(new QString(s),sk);
-           //qDebug() << sk;
-           QString tekst(s + " " + QString::fromStdString(std::to_string(sk)));
+        tyPos = 200+i*20;
 
-              text =  new QGraphicsTextItem(QString(tekst));
-              txPos = this->width()/2- text->boundingRect().width()/2;
-              tyPos = 200+i*20;
-              text->setPos(txPos,tyPos);
-              scene->addItem(text);
-              i++;
-       }
-       std::sort(std::begin(highScores),std::end(highScores),myfunction);
-       for(auto x : highScores)
-       {
-           qDebug() << QString(*x.first) << " " << x.second << "\n";
-       }
+        tekst = QString(*x.first);
+        text =  new QGraphicsTextItem(tekst);
+        text->setDefaultTextColor(Qt::magenta);
+        txPos = this->width()/2- text->boundingRect().width();
 
-       inputFile.close();
-       /*
-       QFile outputFile{":/new/PacFiles/score.txt"};
-       outputFile.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Text);
-       QTextStream out(&outputFile);
-       for(auto x : highScores)
-           out << *x.first + " " + QString::number(x.second) + "\n";
-       outputFile.close();
-       */
+        text->setPos(txPos,tyPos);
+        scene->addItem(text);
+
+        tekst = QString(" " + QString::number(x.second));
+        text =  new QGraphicsTextItem(tekst);
+        text->setDefaultTextColor(Qt::magenta);
+        txPos = this->width()/2;
+
+        text->setPos(txPos,tyPos);
+        scene->addItem(text);
+        i++;
     }
-
-/*
-    QFile inputFile(":/new/PacFiles/score.txt");
-    if (inputFile.open(QIODevice::ReadOnly))
-    {
-       int i = 0;
-       QTextStream in(&inputFile);
-       while (!in.atEnd())
-       {
-          QString tekst = in.readLine();
-
-              text =  new QGraphicsTextItem(QString(tekst));
-              txPos = this->width()/2- text->boundingRect().width()/2;
-              tyPos = 200+i*20;
-              text->setPos(txPos,tyPos);
-              scene->addItem(text);
-              i++;
-       }
-       inputFile.close();
-    }
-*/
-
 
 
 

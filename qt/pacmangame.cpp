@@ -216,10 +216,7 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
         scene.addItem(x);
     }
 
-    //Global prom{};
     for(auto x: this->dots){
-        //global::allDots.insert(scene.addEllipse(x.second->getDot()));
-        //prom.addDot(scene.addEllipse(x.second->getDot()));
         scene.addEllipse(x.second->getDot());
     }
 

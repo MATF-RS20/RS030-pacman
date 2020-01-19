@@ -231,11 +231,12 @@ void Pacman::move()
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                game->game1->health->decrease();
                 if (game->game1->health->getHealth() == 0){
                     game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
-                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
                 }
                 else {
@@ -306,7 +307,7 @@ void Pacman::move()
                         game->game1->flag = 1;
                         QString message = "You lost :(";
                         game->gameOver(message);
-                        std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                        std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                         //QCoreApplication::quit();
                     }
 
@@ -380,7 +381,7 @@ void Pacman::move()
                     game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
-                    std::cout << "VISE SRECE DRUGIT PT!!!\n";
+                    std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
                 }
 

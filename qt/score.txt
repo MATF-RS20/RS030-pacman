@@ -1,9 +1,10 @@
 marko 100
 janko 10
 mirko 14
-stanko 2143
-saf 341
-sdf 134
-casdf 34
-adsf 3421
-asdf 4312
+stanko 214
+bert 341
+sogun 134
+cista 34
+masimo 342
+Noris 1312
+migula 19
