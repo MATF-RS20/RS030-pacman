@@ -182,10 +182,17 @@ void Game::gameOver(QString message)
     }
     */
     gameStop();
+
     int sk = this->game1->score->getScore();
     if(sk > highScores[9].second)
     {
-        highScores[9] = std::pair<QString*,int>(new QString("Player"), sk);
+        //=========AJ DA VIDIMO I TAJ HIGHSCORE DA SE UNOSI=======//
+        QString player = "Player";
+        QGraphicsScene *highScene = new QGraphicsScene();
+
+
+
+        highScores[9] = std::pair<QString*,int>(new QString(player), sk);
         sort(std::begin(highScores),std::end(highScores),myfunction);
 
         // ovaj deo ne radi :(
@@ -204,7 +211,9 @@ void Game::gameOver(QString message)
             qDebug() << outputFile.errorString() << "\n";
         }
         outputFile.close();
+
     }
+    //else{         <- UKLJUCITI KAD SE ODRADI HIGHSCORE
 
     qDebug() << "usli smo u funkciju gameOver()";
   //  scene->clear();
@@ -280,10 +289,9 @@ void Game::gameOver(QString message)
     this->scene->addItem(quitButton);
 
 
-
+//}//           <- OD ELSE-A za HIGHSCORE
 
 }
-
 
 void Game::score(){
     scene->clear();

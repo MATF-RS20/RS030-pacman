@@ -32,7 +32,6 @@ private:
 //obrisala current_score, nalazi se u pacman klasi
     //Wall *walls[200];             // <- ne treba odavno, imamo walls_and_borders listu
     std::list<Wall*> walls_and_borders{};
-    std::list<QGraphicsRectItem*> otherWorld{};
     std::map<std::pair<int,int>,Dot*> dots{};
 
     // dodao da bi mozda napravili konstruktor za PacmanGame kome se prosledjuje
