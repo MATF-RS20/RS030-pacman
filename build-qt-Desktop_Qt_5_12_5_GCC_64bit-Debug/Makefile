@@ -694,6 +694,7 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/pacmanManu.jpg \
 		../qt/plavi-dole.jpg \
 		../qt/plavi-gore.png \
+		../qt/vrata.png \
 		../qt/bg.jpg \
 		../qt/plavi-levo.png \
 		../qt/plavi-dole.png \

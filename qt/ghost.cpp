@@ -192,7 +192,7 @@ void Ghost::move1()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
+            if(x->boundingRect().size().rwidth() == 13 || x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
                 n--;
             }
             //else if(x->boundingRect().size().rwidth() == this->boundingRect().rwidth())
@@ -242,7 +242,7 @@ void Ghost::move1()
             colliding_items = collidingItems();
             int n = colliding_items.size();
             for(auto x: colliding_items){
-                if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
+                if(x->boundingRect().size().rwidth() == 13 || x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
                     n--;
                 }
 
@@ -303,7 +303,7 @@ void Ghost::move1()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
+            if(x->boundingRect().size().rwidth() == 13 || x->boundingRect().size().rwidth() == 5 || x->boundingRect().size().rwidth() == 11 || x->boundingRect().size().rwidth() == 20 || x->boundingRect().size().rwidth() == 31){
                 n--;
             }
 

@@ -2,7 +2,10 @@
 
 Wall::Wall(int x, int y, int width, int height){
     //setRect(x, y, width, height);
-    if(width == 20)
+    if(width == 13){
+        setPixmap(QPixmap(":/Puck/vrata.png"));
+    }
+    else if(width == 20)
         setPixmap(QPixmap(":/Puck/pattern1.jpg"));  // 35 is spacing from PacmanGame
     else
         setPixmap(QPixmap(":/Puck/pattern.jpg"));  // 35 is spacing from PacmanGame

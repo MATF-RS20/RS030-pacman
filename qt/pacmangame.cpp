@@ -115,6 +115,11 @@ PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
             this->walls_and_borders.push_back(w1);
             x+=spacing;
             //i++; // counts walls
+        }else if(c == '+'){
+            w1 = new Wall(x,y,13,spacing);
+            this->walls_and_borders.push_back(w1);
+            x+=spacing;
+            //i++; // counts walls
         }
         else if(c == noviRed){
             width--;

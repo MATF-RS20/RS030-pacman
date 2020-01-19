@@ -50,6 +50,7 @@
         <file>pacman-otvoren.png</file>
         <file>pacman-polu.png</file>
         <file>duh-jedi.png</file>
+        <file>vrata.png</file>
     </qresource>
     <qresource prefix="/images">
         <file>congratulations.jpg</file>
