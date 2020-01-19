@@ -72,15 +72,17 @@ Pacman::Pacman(int x1, int y1, int dotsInMap)
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(25);
+    connect(timerLastChance, SIGNAL(timeout()), this, SLOT(last_chance()));
+
     QTimer *timer1 = new QTimer(this);
 
     connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));// i korektivni_faktor
 
     timer1->start(150);
 
-
-
     connect(timer_jedi, SIGNAL(timeout()), this, SLOT(jedi()));// i korektivni_faktor
+
+
 }
 
 
@@ -150,8 +152,18 @@ void Pacman::animation(){
 void Pacman::jedi(){
     if(!game->game1->pojedi){
         timer_jedi->stop();
+        return;
     }
+    lc = 0;
+    timerLastChance->start(150);
     game->game1->pojedi = false;
+}
+void Pacman::last_chance(){
+    if(lc == 11){
+        timerLastChance->stop();
+
+    }
+    lc++;
 }
 void Pacman::move()
 {
@@ -255,7 +267,7 @@ void Pacman::move()
                 n--;
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
-            }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+            }else if(((lc > 0 && lc < 11) || game->game1->pojedi) && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                 //game->game1->sendGhostsToStartPos();
                 x->boundingRect().size().rwidth() -= 2;
                 for(auto a: game->game1->ghosts){
@@ -340,7 +352,7 @@ void Pacman::move()
                     game->game1->score->setScore(100*korektivni_faktor);
                     //=========================
                     this->current_score +=100*korektivni_faktor;
-                }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+                }else if(((lc > 0 && lc < 11) || game->game1->pojedi) && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                     //game->game1->sendGhostsToStartPos();
                     x->boundingRect().size().rwidth() -= 2;
                     for(auto a: game->game1->ghosts){
@@ -436,7 +448,7 @@ void Pacman::move()
                 n--;
                 //=======================
                 this->current_score += 100*korektivni_faktor;
-            }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
+            }else if(((lc > 0 && lc < 11) || game->game1->pojedi) && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                 //game->game1->sendGhostsToStartPos();
                 x->boundingRect().size().rwidth() -= 2;
                 for(auto a: game->game1->ghosts){

@@ -126,7 +126,7 @@ void Ghost::move1()
         return;
     }
 
-    if(!game->game1->pojedi){
+    if(!game->game1->pojedi && game->game1->getPacman()->lc%2 != 1){
         if (ghost_id == 1){
                 if (this->currentDirection == 1){
                     setPixmap(QPixmap(":/Puck/crveni-levo.png"));
@@ -200,7 +200,7 @@ void Ghost::move1()
         }
         if (n != 0)
         {
-                if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                if(((game->game1->getPacman()->lc > 0 &&  game->game1->getPacman()->lc < 11) || game->game1->pojedi) && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     this->sendToInitial();
                     game->game1->score->setScore(200);
                 }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
@@ -249,7 +249,7 @@ void Ghost::move1()
             }
             if (n != 0)
             {
-                if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+                if(((game->game1->getPacman()->lc > 0 &&  game->game1->getPacman()->lc < 11) || game->game1->pojedi) && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     this->sendToInitial();
                     game->game1->score->setScore(200);
                 }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
@@ -310,7 +310,7 @@ void Ghost::move1()
         }
         if (n != 0)
         {
-            if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
+            if(((game->game1->getPacman()->lc > 0 &&  game->game1->getPacman()->lc < 11) || game->game1->pojedi) && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 this->sendToInitial();
                 game->game1->score->setScore(200);
             }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){

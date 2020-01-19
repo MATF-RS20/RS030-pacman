@@ -29,12 +29,15 @@ public:
 
     int eatenDots=0;
     int dotsToEat=156;
+    int lc = 0;
 
     void keyPressEvent(QKeyEvent *event);
     void setCurrentDirection(int x);
     void setNextDirection(int x);
     void setDirs0();
     QTimer *timer_jedi = new QTimer(this);
+    QTimer *timerLastChance = new QTimer(this);
+
 
 // move se nalazi u slots da bi mogao tajmer da ga zove
 // da, ovde sam odustao od engleskog
@@ -45,6 +48,7 @@ public slots:
     void move();
     void animation();
     void jedi();
+    void last_chance();
 private:
 
     // We need current_direction for continual movement, and also for solving colision
