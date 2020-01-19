@@ -202,6 +202,7 @@ void Ghost::move1()
         {
                 if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     this->sendToInitial();
+                    game->game1->score->setScore(200);
                 }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     game->game1->score->setScore(-50);
                     game->game1->health->decrease();
@@ -250,6 +251,7 @@ void Ghost::move1()
             {
                 if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     this->sendToInitial();
+                    game->game1->score->setScore(200);
                 }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                     //  game1->health->decrease();
                       game->game1->health->decrease();
@@ -310,6 +312,7 @@ void Ghost::move1()
         {
             if(game->game1->pojedi && colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 this->sendToInitial();
+                game->game1->score->setScore(200);
             }else if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
                 game->game1->health->decrease();

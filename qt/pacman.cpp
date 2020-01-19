@@ -219,7 +219,7 @@ void Pacman::move()
         QList<QGraphicsItem *> colliding_items = collidingItems();
         int n = colliding_items.size();
         for(auto x: colliding_items){
-            if(x->boundingRect().size().rwidth() == 5*korektivni_faktor){
+            if(x->boundingRect().size().rwidth() == 5){
                 scene()->removeItem(x);
                 //global::allDots.erase(x);
                 delete x;
@@ -227,6 +227,7 @@ void Pacman::move()
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
                 game->game1->score->setScore(5*korektivni_faktor);
+                n--;
                 //=======================
                 this->current_score +=5;
 
@@ -239,6 +240,7 @@ void Pacman::move()
                 game->game1->score->setScore(20*korektivni_faktor);
                 game->game1->pojedi = true;
                 timer_jedi->start(7000);
+                n--;
                 //=======================
                 this->current_score +=20*korektivni_faktor;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
@@ -250,6 +252,7 @@ void Pacman::move()
                 //global::allDots.erase(x);
                 delete x;
                 scene()->update();
+                n--;
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
@@ -260,6 +263,8 @@ void Pacman::move()
                         a->sendToInitial();
                 }
                 x->boundingRect().size().rwidth() += 2;
+                n--;
+                game->game1->score->setScore(200*korektivni_faktor);
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
                 game->game1->health->decrease();
                 if (game->game1->health->getHealth() == 0){
@@ -269,11 +274,13 @@ void Pacman::move()
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
+                    return;
                 }
                 else {
                     //game->game1->health->decrease();
                     game->game1->sendGhostsToStartPos();
                     setPos(game->game1->pacPosX,game->game1->pacPosY);
+                    return;
                 }
 
             }
@@ -341,10 +348,10 @@ void Pacman::move()
                             a->sendToInitial();
                     }
                     x->boundingRect().size().rwidth() += 2;
+                    n--;
+                    game->game1->score->setScore(200*korektivni_faktor);
                 }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
-                    //game1->health->decrease();
                     game->game1->health->decrease();
-                    //setPos(game->game1->pacPosX,game->game1->pacPosY);
                     if (game->game1->health->getHealth() == 0){
                         this->setDirs0();
                         game->game1->flag = 1;
@@ -352,12 +359,15 @@ void Pacman::move()
                         game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                         //QCoreApplication::quit();
+                        return;
                     }
                     else {
                         //game->game1->health->decrease();
                         game->game1->sendGhostsToStartPos();
                         setPos(game->game1->pacPosX,game->game1->pacPosY);
+                        return;
                     }
+
 
                 }
 
@@ -403,6 +413,7 @@ void Pacman::move()
                 delete x;
                 scene()->update();
                 game->game1->score->setScore(5*korektivni_faktor);
+                n--;
                 //======================
                 this->current_score +=5*korektivni_faktor;
             }else if(x->boundingRect().size().rwidth() == 11){
@@ -413,6 +424,7 @@ void Pacman::move()
                 timer_jedi->start(7000);
                 scene()->update();
                 game->game1->score->setScore(20*korektivni_faktor);
+                n--;
                 //=======================
                 this->current_score += 20*korektivni_faktor;
             }else if(x->boundingRect().size().rwidth() == 20){
@@ -421,6 +433,7 @@ void Pacman::move()
                 delete x;
                 scene()->update();
                 game->game1->score->setScore(100*korektivni_faktor);
+                n--;
                 //=======================
                 this->current_score += 100*korektivni_faktor;
             }else if(game->game1->pojedi && x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
@@ -431,10 +444,10 @@ void Pacman::move()
                         a->sendToInitial();
                 }
                 x->boundingRect().size().rwidth() += 2;
-            }else if(x->boundingRect().size().rwidth() == this->boundingRect().size().rwidth()){
-                //game1->health->decrease();
+                n--;
+                game->game1->score->setScore(200*korektivni_faktor);
+            }else if(x->boundingRect().size().rwidth()-1 == this->boundingRect().size().rwidth()){
                 game->game1->health->decrease();
-                //setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
                     this->setDirs0();
                     game->game1->flag = 1;
@@ -442,12 +455,15 @@ void Pacman::move()
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
+                    return;
                 }
                 else {
                     //game->game1->health->decrease();
                     game->game1->sendGhostsToStartPos();
                     setPos(game->game1->pacPosX,game->game1->pacPosY);
+                    return;
                 }
+
 
             }
 
