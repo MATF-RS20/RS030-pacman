@@ -176,6 +176,15 @@ PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
 */
 }
 
+
+void PacmanGame::sendGhostsToStartPos()
+{
+    for(auto x : ghosts)
+    {
+        x->sendToInitial();
+    }
+}
+
 PacmanGame::~PacmanGame()
 {
 

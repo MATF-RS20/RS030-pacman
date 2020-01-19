@@ -27,6 +27,7 @@ public:
     Ghost(int x1, int y1, int id);
     int getX();
     int getY();
+    void sendToInitial();
 public slots:
     void move1();
     void chooseRandom();
@@ -35,7 +36,9 @@ private:
     int currentDirection = 0;
     int nextDirection = 0;
     int x1;
+    int initialX;
     int y1;
+    int initialY;
     Ghost_Id ghost_id;       // in every game there are 4 ghosts so id can be only 1,2,3,4
     QTimer *timer;
     QTimer *timerM;

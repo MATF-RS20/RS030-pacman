@@ -18,6 +18,8 @@ extern Game *game;
 Ghost::Ghost(int x1, int y1, int id)
     :x1(x1), y1(y1), ghost_id(static_cast<Ghost_Id>(id))
 {
+    initialX = x1;
+    initialY = y1;
     qDebug() << "Napravljen ghost";
     setPixmap(QPixmap(":/Puck/crveni.jpg"));
     setTransformOriginPoint(15,15);  // same size as pacman
@@ -85,6 +87,13 @@ Ghost::Ghost(int x1, int y1, int id)
 
     }
 
+}
+
+void Ghost::sendToInitial()
+{
+    x1 = initialX;
+    y1 = initialY;
+    this->setPos(x1,y1);
 }
 
 void Ghost::chooseRandom() {
@@ -160,16 +169,21 @@ void Ghost::move1()
         if (n != 0)
         {
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
-                //game1->health->decrease();
                 game->game1->score->setScore(-50);
                 game->game1->health->decrease();
-                game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 if (game->game1->health->getHealth() == 0){
                     game->game1->flag = 1;
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
+                }
+                else{
+                    //game1->health->decrease();
+                    //=======SEND THEM HOME============
+                    game->game1->sendGhostsToStartPos();
+
+                    game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 }
             }
 
@@ -201,16 +215,21 @@ void Ghost::move1()
             if (n != 0)
             {
                 if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
-                  //  game1->health->decrease();
-                    game->game1->health->decrease();
-                    game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
-                    game->game1->score->setScore(-50);
+                    //  game1->health->decrease();
+                      game->game1->health->decrease();
+                      game->game1->score->setScore(-50);
                     if (game->game1->health->getHealth() == 0){
                         game->game1->flag = 1;
                         QString message = "You lost :(";
                         game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                         //QCoreApplication::quit();
+                    }
+                    else{
+                          //=======SEND THEM HOME============
+                          game->game1->sendGhostsToStartPos();
+
+                          game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                     }
                 }
                 // ako ima kolizije unazad
@@ -256,7 +275,6 @@ void Ghost::move1()
             if(colliding_items[0]->boundingRect().size().rwidth() + 1 == this->boundingRect().size().rwidth()){
                 //game1->health->decrease();
                 game->game1->health->decrease();
-                game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 game->game1->score->setScore(-50);
                 if (game->game1->health->getHealth() == 0){
                     game->game1->flag = 1;
@@ -264,6 +282,12 @@ void Ghost::move1()
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
+                }
+                else {
+                    //=======SEND THEM HOME============
+                    game->game1->sendGhostsToStartPos();
+
+                    game->game1->getPacman()->setPos(game->game1->pacPosX,game->game1->pacPosY);
                 }
             }
             // ako ima kolizije unazad

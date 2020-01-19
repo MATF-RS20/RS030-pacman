@@ -74,6 +74,7 @@ public:
     void setMapSelector(int x);
     int getX() const;
     int getY() const;
+    void sendGhostsToStartPos();
 };
 
 #endif // PACMANGAME_H

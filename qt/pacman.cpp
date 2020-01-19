@@ -160,6 +160,16 @@ void Pacman::move()
     if(this->eatenDots == this->dotsToEat && level_map == 4){
         QString message = "Congratulations";
         //QApplication::quit();
+
+        //=========STOP THE PUCK HEW GONE NUTS BRUH=================
+        // tj, svi se ukoce sem njega u bilo kom scenariju, nz kako da ga zaustavum
+        //=========HIS POWER LEVEL IS OFF THE CHARTS BOIII==========
+        game->game1->getPacman()->setDirs0();
+        game->game1->flag = 1;
+        /*
+        game->game1->getPacman()->setCurrentDirection(0);
+        game->game1->getPacman()->setPos(game->game1->getPacman()->getX(),game->game1->getPacman()->getY());
+        */
         game->gameOver(message);
         std::cout << "CESTITAM!!!\n";
         this->eatenDots = 0;
@@ -169,7 +179,7 @@ void Pacman::move()
         //game->gameStop();
 
        //game->game1->mapSelector += 1;
-        //game->game1->flag = 1;
+        game->game1->flag = 1;
        level_map =(level_map + 1)%5;
         std::cout << "level je "<< level_map <<"\n";
        //sledeci nivo
@@ -231,7 +241,7 @@ void Pacman::move()
                 this->eatenDots++;
                 //std::cout<< this->eatenDots << " : " << this->dotsToEat<<std::endl;
             }else if(x->boundingRect().size().rwidth() - 1 == this->boundingRect().size().rwidth()){
-                game->game1->health->decrease();
+                //game->game1->health->decrease();
                 if (game->game1->health->getHealth() == 0){
                     game->game1->flag = 1;
                     QString message = "You lost :(";
@@ -241,6 +251,7 @@ void Pacman::move()
                 }
                 else {
                     game->game1->health->decrease();
+                    game->game1->sendGhostsToStartPos();
                     setPos(game->game1->pacPosX,game->game1->pacPosY);
                 }
 
@@ -309,6 +320,11 @@ void Pacman::move()
                         game->gameOver(message);
                         std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                         //QCoreApplication::quit();
+                    }
+                    else {
+                        game->game1->health->decrease();
+                        game->game1->sendGhostsToStartPos();
+                        setPos(game->game1->pacPosX,game->game1->pacPosY);
                     }
 
                 }
@@ -384,6 +400,11 @@ void Pacman::move()
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
                     //QCoreApplication::quit();
                 }
+                else {
+                    game->game1->health->decrease();
+                    game->game1->sendGhostsToStartPos();
+                    setPos(game->game1->pacPosX,game->game1->pacPosY);
+                }
 
             }
 
@@ -418,4 +439,15 @@ void Pacman::move()
 void Pacman::setCurrentDirection(int x)
 {
     this->currentDirection = x%5;
+}
+
+void Pacman::setNextDirection(int x)
+{
+    this->nextDirection = x%5;
+}
+
+void Pacman::setDirs0()
+{
+    this->setNextDirection(0);
+    this->setCurrentDirection(0);
 }

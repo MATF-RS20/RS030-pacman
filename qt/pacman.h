@@ -32,6 +32,8 @@ public:
 
     void keyPressEvent(QKeyEvent *event);
     void setCurrentDirection(int x);
+    void setNextDirection(int x);
+    void setDirs0();
 
 // move se nalazi u slots da bi mogao tajmer da ga zove
 // da, ovde sam odustao od engleskog
