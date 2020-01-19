@@ -133,11 +133,11 @@ void Pacman::keyPressEvent(QKeyEvent *event)
 int i3 = 0;
 void Pacman::animation(){
     if(i3 == 0)
-        setPixmap(QPixmap(":/Puck/pacman1.jpg"));
+        setPixmap(QPixmap(":/Puck/pacman-otvoren.png"));
     if(i3 == 1)
-        setPixmap(QPixmap(":/Puck/pacman2.jpg"));
+        setPixmap(QPixmap(":/Puck/pacman-polu.png"));
     if(i3 == 2)
-        setPixmap(QPixmap(":/Puck/pacman3.jpg"));
+        setPixmap(QPixmap(":/Puck/pacman-zatvoren.png"));
 
     scene()->update();
     i3 = (i3 + 1)%3;

@@ -21,7 +21,7 @@ Ghost::Ghost(int x1, int y1, int id)
     initialX = x1;
     initialY = y1;
     qDebug() << "Napravljen ghost";
-    setPixmap(QPixmap(":/Puck/crveni.jpg"));
+    setPixmap(QPixmap(":/Puck/crveni-gore.png"));
     setTransformOriginPoint(15,15);  // same size as pacman
     setPos(this->x1,this->y1);
     //this->scene()->addItem(this);
@@ -42,7 +42,7 @@ Ghost::Ghost(int x1, int y1, int id)
 
     timer = new QTimer(this);
     if (ghost_id == 1){     //random
-        setPixmap(QPixmap(":/Puck/crveni.jpg"));
+        setPixmap(QPixmap(":/Puck/crveni-gore.png"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);
@@ -52,7 +52,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timerM->start(25);
 
     }else if (ghost_id == 2){   //chaser - manhattan algorithm    ovako reba da bude samo algoritam da provalim
-        setPixmap(QPixmap(":/Puck/zeleni.jpg"));
+        setPixmap(QPixmap(":/Puck/zeleni-gore.png"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         //qDebug() << nextDirection;
@@ -64,7 +64,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timerM->start(25);
 
     }else if (ghost_id == 3){
-        setPixmap(QPixmap(":/Puck/plavi.jpg"));
+        setPixmap(QPixmap(":/Puck/plavi-gore.png"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);
@@ -75,7 +75,7 @@ Ghost::Ghost(int x1, int y1, int id)
         timerM->start(25);
 
     }else if (ghost_id == 4){
-        setPixmap(QPixmap(":/Puck/zuti.jpg"));
+        setPixmap(QPixmap(":/Puck/zuti-gore.png"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
         timer->start(4800);
@@ -127,15 +127,45 @@ void Ghost::move1()
     }
 
 
+    if (ghost_id == 1){
+            if (this->currentDirection == 1){
+                setPixmap(QPixmap(":/Puck/crveni-levo.png"));
+            }else if (this->currentDirection == 2)
+                setPixmap(QPixmap(":/Puck/crveni-desno.png"));
+            else if (this->currentDirection == 3)
+                setPixmap(QPixmap(":/Puck/crveni-gore.png"));
+            else if (this->currentDirection == 4)
+                setPixmap(QPixmap(":/Puck/crveni-dole.png"));
+    }
+    if (ghost_id == 2){
+            if (this->currentDirection == 1){
+                setPixmap(QPixmap(":/Puck/zeleni-levo.png"));
+            }else if (this->currentDirection == 2)
+                setPixmap(QPixmap(":/Puck/zeleni-desno.png"));
+            else if (this->currentDirection == 3)
+                setPixmap(QPixmap(":/Puck/zeleni-gore.png"));
+            else if (this->currentDirection == 4)
+                setPixmap(QPixmap(":/Puck/zeleni-dole.png"));
+    }
     if (ghost_id == 3){
             if (this->currentDirection == 1){
-                setPixmap(QPixmap(":/Puck/plavi-l.jpg"));
+                setPixmap(QPixmap(":/Puck/plavi-levo.png"));
             }else if (this->currentDirection == 2)
-                setPixmap(QPixmap(":/Puck/plavi-d.jpg"));
+                setPixmap(QPixmap(":/Puck/plavi-desno.png"));
             else if (this->currentDirection == 3)
-                setPixmap(QPixmap(":/Puck/plavi-g.jpg"));
+                setPixmap(QPixmap(":/Puck/plavi-gore.png"));
             else if (this->currentDirection == 4)
-                setPixmap(QPixmap(":/Puck/plavi-dole.jpg"));
+                setPixmap(QPixmap(":/Puck/plavi-dole.png"));
+    }
+    if (ghost_id == 4){
+            if (this->currentDirection == 1){
+                setPixmap(QPixmap(":/Puck/zuti-levo.png"));
+            }else if (this->currentDirection == 2)
+                setPixmap(QPixmap(":/Puck/zuti-desno.png"));
+            else if (this->currentDirection == 3)
+                setPixmap(QPixmap(":/Puck/zuti-gore.png"));
+            else if (this->currentDirection == 4)
+                setPixmap(QPixmap(":/Puck/zuti-dole.png"));
     }
 
 

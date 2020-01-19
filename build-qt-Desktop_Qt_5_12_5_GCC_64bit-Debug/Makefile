@@ -692,21 +692,40 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/congratulations.jpg \
 		../qt/loser.jpeg \
 		../qt/pacmanManu.jpg \
-		../qt/crveni.jpg \
-		../qt/pacman3.jpg \
-		../qt/pacman2.jpg \
-		../qt/bg.jpg \
-		../qt/zeleni.jpg \
-		../qt/zuti.jpg \
-		../qt/pacman1.jpg \
-		../qt/pattern1.jpg \
-		../qt/plavi-d.jpg \
 		../qt/plavi-dole.jpg \
-		../qt/plavi-l.jpg \
-		../qt/puckk.gif \
-		../qt/pattern.jpg \
+		../qt/plavi-gore.png \
+		../qt/bg.jpg \
+		../qt/plavi-levo.png \
+		../qt/plavi-dole.png \
+		../qt/pacman1.jpg \
+		../qt/crveni-dole.png \
+		../qt/pacman2.jpg \
+		../qt/pacman3.jpg \
+		../qt/zeleni-gore.png \
+		../qt/crveni.jpg \
+		../qt/zeleni-levo.png \
+		../qt/zuti.jpg \
 		../qt/plavi.jpg \
+		../qt/zeleni-dole.png \
+		../qt/crveni-desno.png \
+		../qt/pattern.jpg \
+		../qt/zeleni-desno.png \
+		../qt/zeleni.jpg \
+		../qt/plavi-desno.png \
+		../qt/plavi-d.jpg \
 		../qt/plavi-g.jpg \
+		../qt/zuti-gore.png \
+		../qt/pattern1.jpg \
+		../qt/zuti-levo.png \
+		../qt/plavi-l.jpg \
+		../qt/zuti-dole.png \
+		../qt/pacman-polu.png \
+		../qt/pacman-zatvoren.png \
+		../qt/puckk.gif \
+		../qt/pacman-otvoren.png \
+		../qt/crveni-gore.png \
+		../qt/crveni-levo.png \
+		../qt/zuti-desno.png \
 		../qt/mapa2.txt \
 		../qt/mapa1.txt \
 		../qt/mapa0.txt \
@@ -1612,7 +1631,9 @@ main.o: ../qt/main.cpp ../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplicati
 		../qt/game.h \
 		../qt/button.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsSceneMouseEvent \
-		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicssceneevent.h
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicssceneevent.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QFile \
+		../../../../Qt/5.12.5/gcc_64/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../qt/main.cpp
 
 pacman.o: ../qt/pacman.cpp ../qt/pacman.h \
@@ -2606,7 +2627,9 @@ game.o: ../qt/game.cpp ../qt/game.h \
 		../qt/health.h \
 		../qt/button.h \
 		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsSceneMouseEvent \
-		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicssceneevent.h
+		../../../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicssceneevent.h \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/QPixmap \
+		../../../../Qt/5.12.5/gcc_64/include/QtGui/QImage
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o game.o ../qt/game.cpp
 
 qrc_PacResources.o: qrc_PacResources.cpp 
