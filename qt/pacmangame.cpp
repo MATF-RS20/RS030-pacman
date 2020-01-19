@@ -6,6 +6,7 @@
 #include <QApplication>
 
 #include <QGraphicsItem>
+#include <QGraphicsRectItem>
 #include <fstream>
 #include <QFile>
 #include <fstream>
@@ -85,6 +86,7 @@ PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
 
 
     Wall *w1;
+    QGraphicsRectItem *w2;
     Dot *tuf{};
 
     inMap >> c;                         // kupi novi red posle ucitanog smera
@@ -134,6 +136,17 @@ PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
             x+=spacing;
         }
         else if(c == emptySpace){
+            x+=spacing;
+        }
+        else if(c == 'I'){
+            x+=spacing;
+            w2 = new QGraphicsRectItem(x,y,1,spacing);
+            this->otherWorld.push_back(w2);
+        }
+        else if(c == 'L'){
+            w2 = new QGraphicsRectItem(x,y,1,spacing);
+            //w2->setBrush(Qt::white);
+            this->otherWorld.push_back(w2);
             x+=spacing;
         }
     }
@@ -220,6 +233,9 @@ void PacmanGame::populateScene(QGraphicsScene &scene){
    // getWall();
     //QGraphicsItemGroup *group = new QGraphicsItemGroup{};
 
+    for(auto x : this->otherWorld){
+        scene.addItem(x);
+    }
 
     for(auto x : this->walls_and_borders){
         scene.addItem(x);
