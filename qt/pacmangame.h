@@ -55,8 +55,11 @@ private:
     int y;
     int width = 0;
 public:
-    PacmanGame(int selectMap);
+    PacmanGame(int selectMap, int hearts = 3, int scr = 0);
     Score *score;
+    std::vector<std::pair<QString*,int>> highScores{10};
+    void readScores();
+
     Health *health;
     int pacPosX;
     int pacPosY;

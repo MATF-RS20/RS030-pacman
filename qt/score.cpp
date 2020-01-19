@@ -1,10 +1,10 @@
 #include "score.h"
 
 
-Score::Score(QGraphicsItem *parent)
+Score::Score(QGraphicsItem *parent, int scr)
     :QGraphicsTextItem(parent)
 {
-    score = 0 ;
+    score = scr;
 
     setPlainText(QString("Score: ") + QString::number(score));
 }

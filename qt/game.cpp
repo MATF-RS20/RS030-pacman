@@ -18,12 +18,14 @@
 #include <vector>
 #include <algorithm>
 #include <QImage>
+
+#include <cstdlib>
 //#include "globalVariables.h"
 
 extern int level_map;
 //using namespace global;
 
-int screen1width = 600;
+int screen1width = 800;
 int screen1height = 800;
 
 
@@ -35,6 +37,40 @@ int Game::getMapY() const{
     return this->game1->getY();
 }
 
+void Game::readScores(){
+    QString scoreFile = ":/new/PacFiles/score.txt";
+    QFile scanScore{scoreFile};
+    if(scanScore.open(QFile::ReadOnly | QFile::Text)){
+    QTextStream scoreLoader{&scanScore};
+
+    //char name[5];
+    int highScore;
+    QString s;
+    int i = 0;
+    while( i<10 || !scoreLoader.atEnd() ){
+        scoreLoader >> s;
+        scoreLoader >> highScore;
+        this->highScores[i].second = highScore;
+        this->highScores[i].first = new QString(s);
+    }
+    scanScore.close();
+    }
+    /*QFile inputFile(":/new/PacFiles/score.txt");
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       int k = 0;
+       QTextStream in(&inputFile);
+       while (!in.atEnd() || k < 10)
+       {
+
+       }
+       inputFile.close();
+    }*/
+
+}
+
+
+
 Game::Game(QWidget *parent)
 {
     //QSize size = qApp->screens()[0]->size();
@@ -44,6 +80,8 @@ Game::Game(QWidget *parent)
         PacmanGame g(1);
         this->setFixedSize(g.getX()+200,g.getY()+50);
     */
+    //readScores();
+
     this->setFixedSize(screen1width,screen1height); //(size.width(), size.height())
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -69,6 +107,8 @@ void Game::displayMainManu()
     //scene->setBackgroundBrush(QBrush);
     //this->setScene(scene);
 
+    //this->setFixedSize(screen1width,screen1height);
+    scene->setSceneRect(0, 0, screen1width, screen1height);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::black);
@@ -133,11 +173,21 @@ int indeks(int rezultat, std::list<std::pair<std::string, int> > & l){
 }
 */
 
-void Game::gameOver(QString message)
+void Game::gameStop()
 {
     for (size_t i=0, n = scene->items().size(); i<n; i++){
         scene->items()[i]->setEnabled(false);
     }
+}
+
+void Game::gameOver(QString message)
+{
+    /*
+    for (size_t i=0, n = scene->items().size(); i<n; i++){
+        scene->items()[i]->setEnabled(false);
+    }
+    */
+    gameStop();
 
     qDebug() << "usli smo u funkciju gameOver()";
   //  scene->clear();
@@ -184,21 +234,21 @@ void Game::gameOver(QString message)
     font.setPixelSize(60);
     text1->setFont(font);
     //text1->setDefaultTextColor(Qt::white);
-    int txPos1 = this->width()/2- text1->boundingRect().width()/2;
-    int tyPos1 = 100;
+    int txPos1 = this->game1->getX()/2 - text1->boundingRect().width()/2;
+    int tyPos1 = this->game1->getY()/10;
     text1->setPos(txPos1,tyPos1);
     scene->addItem(text1);
 
     Button *scoreButton = new Button(QString("Score"));
-    int bxPos = this->width()/2- scoreButton->boundingRect().width()/2;
-    int byPos = 200;
+    int bxPos = this->game1->getX()/2 - scoreButton->boundingRect().width()/2;
+    int byPos = 2*this->game1->getY()/7+20;
     scoreButton->setPos(bxPos,byPos);
     QObject::connect(scoreButton, SIGNAL(clicked()),this, SLOT(score()) );
     this->scene->addItem(scoreButton);
 
     Button *mainButton = new Button(QString("Main Menu"));
-    bxPos = this->width()/2- mainButton->boundingRect().width()/2;
-    byPos = 350;
+    bxPos = this->game1->getX()/2 - mainButton->boundingRect().width()/2;
+    byPos = 3*this->game1->getY()/7+20;
     mainButton->setPos(bxPos,byPos);
     QObject::connect(mainButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
     this->scene->addItem(mainButton);
@@ -206,8 +256,8 @@ void Game::gameOver(QString message)
 
 
     Button *quitButton = new Button(QString("Quit"));
-    bxPos = this->width()/2- quitButton->boundingRect().width()/2;
-    byPos = 500;
+    bxPos = this->game1->getX()/2 - quitButton->boundingRect().width()/2;
+    byPos = 4*this->game1->getY()/7+20;
     quitButton->setPos(bxPos,byPos);
     QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
     this->scene->addItem(quitButton);
@@ -220,12 +270,40 @@ void Game::gameOver(QString message)
 void Game::score(){
     scene->clear();
 
+    //this->setFixedSize(screen1width,screen1height);
+    scene->setSceneRect(0, 0, screen1width, screen1height);
     QGraphicsTextItem *text =  new QGraphicsTextItem(QString("S C O R E"));
     int txPos = this->width()/2- text->boundingRect().width()/2;
     int tyPos = 150;
     text->setPos(txPos,tyPos);
     scene->addItem(text);
 
+
+    QFile inputFile(":/new/PacFiles/score.txt");
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       int i = 0;
+       QTextStream in(&inputFile);
+       QString s;
+       int sk;
+       while (!in.atEnd())
+       {
+           in >> s;
+           in >> sk;
+           //qDebug() << sk;
+           QString tekst(s + " " + QString::fromStdString(std::to_string(sk)));
+
+              text =  new QGraphicsTextItem(QString(tekst));
+              txPos = this->width()/2- text->boundingRect().width()/2;
+              tyPos = 200+i*20;
+              text->setPos(txPos,tyPos);
+              scene->addItem(text);
+              i++;
+       }
+       inputFile.close();
+    }
+
+/*
     QFile inputFile(":/new/PacFiles/score.txt");
     if (inputFile.open(QIODevice::ReadOnly))
     {
@@ -244,7 +322,7 @@ void Game::score(){
        }
        inputFile.close();
     }
-
+*/
 
 
 
@@ -284,7 +362,7 @@ void Game::again(){
 
 
     Button *resetButton = new Button(QString("NEXT LEVEL"));
-    int bxPos = this->width()/2- resetButton->boundingRect().width()/2;
+    int bxPos = this->game1->getX()/2- resetButton->boundingRect().width()/2;
     int byPos = 125;
     resetButton->setPos(bxPos,byPos);
     QObject::connect(resetButton, SIGNAL(clicked()),this, SLOT(start()) );
@@ -292,7 +370,7 @@ void Game::again(){
 
 
     Button *mainButton = new Button(QString("Main Menu"));
-    bxPos = this->width()/2- mainButton->boundingRect().width()/2;
+    bxPos = this->game1->getX()/2- mainButton->boundingRect().width()/2;
     byPos = 200;
     mainButton->setPos(bxPos,byPos);
     QObject::connect(mainButton, SIGNAL(clicked()),this, SLOT(resetGame()) );
@@ -300,7 +378,7 @@ void Game::again(){
 
 
     Button *quitButton = new Button(QString("Quit"));
-    bxPos = this->width()/2- quitButton->boundingRect().width()/2;
+    bxPos = this->game1->getX()/2- quitButton->boundingRect().width()/2;
     byPos = 275;
     quitButton->setPos(bxPos,byPos);
     QObject::connect(quitButton, SIGNAL(clicked()),this, SLOT(close()) );
@@ -325,15 +403,41 @@ void Game::start()
     for (size_t i=0, n = scene->items().size(); i<n; i++){
         scene->items()[i]->setEnabled(false);
     }
+
+    //Pacman *pucky;
+    int scr = 0;
+    int hearts = 3;
+    if(level_map > 1){
+        scr = this->game1->score->getScore();
+        hearts = this->game1->health->getHealth();
+    }
+/*    int i = 0;
+    while(true){
+    try {
+        //pucky = new Pacman(this->game1->getPacman()->getX(), this->game1->getPacman()->getY());
+        scr = this->game1->score->getScore();
+        hearts = this->game1->health->getHealth();
+        goingNextLevel = true;
+
+    } catch (...) {
+
+    }
+    }
+*/
     qDebug() << "uslo u funkciju start()";
 
     this->scene->clear();
 
     //int level_map =1;
-    game1 = new PacmanGame(level_map);
+    game1 = new PacmanGame(level_map,hearts,scr);
+
+
 //OVDE brE
-    this->setFixedSize(game1->getX(),game1->getY());
-    scene->setSceneRect(0, 0, game1->getX(), game1->getY());
+    /*this->setFixedSize(game1->getX(),game1->getY());
+    scene->setSceneRect(0,0,game1->getX(),game1->getY());*/
+
+    scene->setSceneRect(0,0,game1->getX(),game1->getY());
+    qDebug() << this->width()/2-game1->getX()/2 << ", " << this->height()/2-game1->getY()/2 << "\n";
 
     game1->getPacman()->setFlag(QGraphicsItem::ItemIsFocusable);
     game1->getPacman()->setFocus();

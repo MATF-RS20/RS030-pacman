@@ -1,9 +1,9 @@
 #include "health.h"
 
 
-Health::Health()
+Health::Health(int hearts)
 {
-    health = 3;
+    health = hearts;
 
     setPlainText(QString("Health: ") + QString::number(health));
 }
@@ -17,4 +17,10 @@ void Health::decrease()
 int Health::getHealth()
 {
     return health;
+}
+
+
+void Health::setHealth(int x)
+{
+    this->health = x;
 }

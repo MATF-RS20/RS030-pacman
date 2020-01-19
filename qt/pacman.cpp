@@ -7,11 +7,34 @@
 
 #include "game.h"
 
+#include <fstream>
+
 extern PacmanGame *game1;
 extern Game * game;
 extern int level_map;
 
+/*
+void Pacman::readScores(){
+    QString scoreFile = ":/new/PacFiles/score.txt";
+    QFile scanScore{scoreFile};
+    scanScore.open(QFile::ReadOnly | QFile::Text);
+    QTextStream scoreLoader{&scanScore};
 
+    char name[5];
+    int highScore;
+    QString s;
+    int i = 0;
+    while( i<10 || !scoreLoader.atEnd() ){
+        scoreLoader >> name;
+        scoreLoader >> highScore;
+        this->highScores[i].second = highScore;
+        for(int j = 0; j < 5; j++)
+            this->highScores[i].first[j] = name[j];
+    }
+    scanScore.close();
+
+}
+*/
 Pacman::Pacman(int x1, int y1, int dotsInMap)
     :x1(x1),y1(y1),dotsToEat(dotsInMap)
 {
@@ -133,7 +156,7 @@ void Pacman::move()
         setRotation(90);
 
 
-
+// OVDE--------------------------
     if(this->eatenDots == this->dotsToEat && level_map == 4){
         QString message = "Congratulations";
         //QApplication::quit();
@@ -142,8 +165,11 @@ void Pacman::move()
         this->eatenDots = 0;
         //QCoreApplication::quit();
     } else if (this->eatenDots == this->dotsToEat){
+        // ne radi nista jbg
+        //game->gameStop();
+
        //game->game1->mapSelector += 1;
-        game->game1->flag = 1;
+        //game->game1->flag = 1;
        level_map =(level_map + 1)%5;
         std::cout << "level je "<< level_map <<"\n";
        //sledeci nivo

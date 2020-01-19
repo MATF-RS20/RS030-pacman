@@ -6,8 +6,9 @@
 
 class Health: public QGraphicsTextItem{
 public:
-    Health();
+    Health(int hearts = 3);
     void decrease();
+    void setHealth(int x);
     int getHealth();
 private:
     int health;

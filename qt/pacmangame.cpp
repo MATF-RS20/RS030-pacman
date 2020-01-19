@@ -8,6 +8,7 @@
 #include <QGraphicsItem>
 #include <fstream>
 #include <QFile>
+#include <fstream>
 #include <stdio.h>
 #include <QTextStream>
 #include <QChar>
@@ -16,6 +17,7 @@
 #include <QString>
 #include "dot.h"
 #include <QStyleOption>
+//#include <pair>
 
 // u global (od globalVariables.h) sam smestio neke promenljive (spacing, nula, bigDot...)
 // cisto radi urednosti,
@@ -36,9 +38,12 @@ int PacmanGame::getY() const{
     return this->y;
 }
 
-PacmanGame::PacmanGame(int selectMap)
+PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
 {
     mapSelector = selectMap;
+    health = new Health(hearts);
+    score = new Score(0,scr);
+
 
 /*
     // ingame sounds
@@ -140,11 +145,35 @@ PacmanGame::PacmanGame(int selectMap)
     this->pacman = new Pacman(pacPosX,pacPosY,dotNumber);
     this->pacman->setCurrentDirection(direction);           // <- ako vas ovaj deo iritira zakomentarisite,
                                                             // stavio sam jer msm da treba da ima
-    this->score = new Score();
-    this->health = new Health();
+    //this->score = new Score();
+    //this->health = new Health();  //<- pise na pocetku fje
 
     mapa.close();
+/*
+    QString scoreFile = ":/new/PacFiles/score.txt";
+    QFile scanScore{scoreFile};
+    qDebug() << "idemo u fajl\n";
+    if(!scanScore.exists()){
+        qDebug() << "ne postoji";
+    }
+    else{
+        scanScore.open(QFile::ReadOnly);
+        qDebug() << "idemo u fajl\n";
+        QTextStream scoreLoader{&scanScore};
 
+        //char name[5];
+        int highScore;
+        QString s;
+        int i = 0;
+        while( i<10 || !scoreLoader.atEnd() ){
+            scoreLoader >> s;
+            scoreLoader >> highScore;
+            this->highScores[i].second = highScore;
+            this->highScores[i].first = new QString(s);
+        }
+        scanScore.close();
+    }
+*/
 }
 
 PacmanGame::~PacmanGame()
