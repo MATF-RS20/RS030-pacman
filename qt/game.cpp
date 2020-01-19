@@ -124,7 +124,7 @@ void Game::displayMainManu()
     //level_map = 0;
 
 
-    Button *playButton = new Button(QString("Play"));
+    Button *playButton = new Button(QString("Play"),200,50);
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;
     //int bxPos = screen1width/2- playButton->boundingRect().width()/2;
     int byPos = 275;
@@ -132,7 +132,7 @@ void Game::displayMainManu()
     QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start()) );
     this->scene->addItem(playButton);
 
-    Button *scoreButton = new Button(QString("Score"));
+    Button *scoreButton = new Button(QString("Score"), 200, 50);
     bxPos = this->width()/2- scoreButton->boundingRect().width()/2;
     //bxPos = screen1width/2- scoreButton->boundingRect().width()/2;
     byPos = 350;
@@ -141,7 +141,7 @@ void Game::displayMainManu()
     this->scene->addItem(scoreButton);
 
 
-    Button *quitButton = new Button(QString("Quit"));
+    Button *quitButton = new Button(QString("Quit"), 200, 50);
     bxPos = this->width()/2- quitButton->boundingRect().width()/2;
     //bxPos = screen1width/2- quitButton->boundingRect().width()/2;
     byPos = 425;
@@ -174,6 +174,64 @@ void Game::gameStop()
     }
 }
 
+void Game::tastatura(QGraphicsScene *highScene)
+{
+    std::vector<QString> abeceda ={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "DONE" };
+    int spacing =70;
+    int bx = 40;
+    int by = 200;
+    int i =0;
+    for (auto x: abeceda){
+        Button *dugme = new Button(x,50,50);
+        bx = bx +  spacing;
+        if(i == 7){
+            by = by + spacing;
+            i =0;
+            bx = 110;
+        }
+
+        dugme->setPos(bx,by);
+        if (x == "DONE"){
+            QObject::connect(dugme, SIGNAL(clicked()),this, SLOT(changeScene()) );
+        }else{
+            QObject::connect(dugme, SIGNAL(clicked()),this, SLOT(writeName()) );
+        }
+        highScene->addItem(dugme);
+        ++i;
+    }//end of for
+
+}
+
+
+void Game::writeName(){
+    playersName += " nesto";
+    QGraphicsTextItem *nameBar =  new QGraphicsTextItem(playersName);
+    QFont font;
+    font.setPixelSize(30);
+    nameBar->setFont(font);
+    //text1->setDefaultTextColor(Qt::white);
+    int xPos1 = this->game1->getX()/2 - nameBar->boundingRect().width()/2;
+    int yPos1 = this->game1->getY()/10 + 50;
+    nameBar->setPos(xPos1,yPos1);
+
+    this->highScene->addItem(nameBar);
+    this->highScene->update();
+
+    qDebug()<< playersName;
+}
+
+void Game::changeScene(){
+    qDebug() << "================";
+    qDebug() << playersName;
+    player = playersName;
+    playersName = "";
+
+    setScene(scene);
+    show();
+}
+
+
+
 void Game::gameOver(QString message)
 {
     /*
@@ -181,18 +239,41 @@ void Game::gameOver(QString message)
         scene->items()[i]->setEnabled(false);
     }
     */
+
     gameStop();
 
     int sk = this->game1->score->getScore();
     if(sk > highScores[9].second)
     {
         //=========AJ DA VIDIMO I TAJ HIGHSCORE DA SE UNOSI=======//
-        QString player = "Player";
-        QGraphicsScene *highScene = new QGraphicsScene();
+        this->hide();
+
+        highScene = new QGraphicsScene();
+        highScene->setSceneRect(0, 0, screen1width, screen1height);
+        //  Creating an item to place in the scene
+        setScene(highScene);
+        show();
 
 
+        QGraphicsTextItem *nameBar =  new QGraphicsTextItem("Type your name");
+        QFont font;
+        font.setPixelSize(60);
+        nameBar->setFont(font);
+        //text1->setDefaultTextColor(Qt::white);
+        int xPos1 = this->game1->getX()/2 - nameBar->boundingRect().width()/2;
+        int yPos1 = this->game1->getY()/10;
+        nameBar->setPos(xPos1,yPos1);
+        highScene->addItem(nameBar);
 
-        highScores[9] = std::pair<QString*,int>(new QString(player), sk);
+        tastatura(highScene);
+         qDebug()<< "******************";
+         qDebug()<< playersName;
+
+        // kada upisemo userName onda se vracamo na staru scenu
+        //setScene(scene);
+
+        //highScores[9] = std::pair<QString*,int>(new QString(player), sk);
+         highScores[9] = std::pair<QString*,int>(&player, sk);
         sort(std::begin(highScores),std::end(highScores),myfunction);
 
         // ovaj deo ne radi :(
@@ -265,14 +346,14 @@ void Game::gameOver(QString message)
     text1->setPos(txPos1,tyPos1);
     scene->addItem(text1);
 
-    Button *scoreButton = new Button(QString("Score"));
+    Button *scoreButton = new Button(QString("Score"), 200, 50);
     int bxPos = this->game1->getX()/2 - scoreButton->boundingRect().width()/2;
     int byPos = 2*this->game1->getY()/7+20;
     scoreButton->setPos(bxPos,byPos);
     QObject::connect(scoreButton, SIGNAL(clicked()),this, SLOT(score()) );
     this->scene->addItem(scoreButton);
 
-    Button *mainButton = new Button(QString("Main Menu"));
+    Button *mainButton = new Button(QString("Main Menu"), 200, 50);
     bxPos = this->game1->getX()/2 - mainButton->boundingRect().width()/2;
     byPos = 3*this->game1->getY()/7+20;
     mainButton->setPos(bxPos,byPos);
@@ -281,7 +362,7 @@ void Game::gameOver(QString message)
 
 
 
-    Button *quitButton = new Button(QString("Quit"));
+    Button *quitButton = new Button(QString("Quit"), 200, 50);
     bxPos = this->game1->getX()/2 - quitButton->boundingRect().width()/2;
     byPos = 4*this->game1->getY()/7+20;
     quitButton->setPos(bxPos,byPos);
@@ -333,7 +414,7 @@ void Game::score(){
 
 
 
-    Button *mainButton = new Button(QString("Main Menu"));
+    Button *mainButton = new Button(QString("Main Menu"), 200, 50);
     int bxPos = this->width()/2- mainButton->boundingRect().width()/2;
     int byPos = 450;
     mainButton->setPos(bxPos,byPos);
@@ -342,7 +423,7 @@ void Game::score(){
 
 
 
-    Button *quitButton = new Button(QString("Quit"));
+    Button *quitButton = new Button(QString("Quit"), 200, 50);
     bxPos = this->width()/2- quitButton->boundingRect().width()/2;
     byPos = 525;
     quitButton->setPos(bxPos,byPos);
@@ -365,7 +446,7 @@ void Game::again(){
 
 
 
-    Button *resetButton = new Button(QString("NEXT LEVEL"));
+    Button *resetButton = new Button(QString("NEXT LEVEL"), 200, 50);
     int bxPos = this->game1->getX()/2- resetButton->boundingRect().width()/2;
     int byPos = 125;
     resetButton->setPos(bxPos,byPos);
@@ -373,7 +454,7 @@ void Game::again(){
     this->scene->addItem(resetButton);
 
 
-    Button *mainButton = new Button(QString("Main Menu"));
+    Button *mainButton = new Button(QString("Main Menu"), 200, 50);
     bxPos = this->game1->getX()/2- mainButton->boundingRect().width()/2;
     byPos = 200;
     mainButton->setPos(bxPos,byPos);
@@ -381,7 +462,7 @@ void Game::again(){
     this->scene->addItem(mainButton);
 
 
-    Button *quitButton = new Button(QString("Quit"));
+    Button *quitButton = new Button(QString("Quit"), 200, 50);
     bxPos = this->game1->getX()/2- quitButton->boundingRect().width()/2;
     byPos = 275;
     quitButton->setPos(bxPos,byPos);

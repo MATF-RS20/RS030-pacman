@@ -2,10 +2,10 @@
 #include <QBrush>
 #include <QGraphicsTextItem>
 
-Button::Button(QString name, QGraphicsItem *parent)
+Button::Button(QString name,int width, int height,QGraphicsItem *parent)
     :QGraphicsRectItem(parent)
 {
-    setRect(0,0,200,50);
+    setRect(0,0,width,height);
 
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
