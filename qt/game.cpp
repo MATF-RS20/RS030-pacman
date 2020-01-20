@@ -176,7 +176,11 @@ void Game::gameStop()
 
 void Game::tastatura(QGraphicsScene *highScene)
 {
-    std::vector<QString> abeceda ={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "DONE" };
+    std::vector<QString> abeceda ={"A","B","C","D","E","F","G",
+                                   "H","I","J","K","L","M","N",
+                                   "O","P","Q","R","S","T","U",
+                                   "V","W","X","Y","Z", "DONE"
+                                  };
     int spacing =70;
     int bx = 40;
     int by = 200;
@@ -194,7 +198,9 @@ void Game::tastatura(QGraphicsScene *highScene)
         if (x == "DONE"){
             QObject::connect(dugme, SIGNAL(clicked()),this, SLOT(changeScene()) );
         }else{
-            QObject::connect(dugme, SIGNAL(clicked()),this, SLOT(writeName()) );
+            auto f = [x,this](){writeName(x);};
+            QObject::connect(dugme, SIGNAL(clicked()),this, SLOT(f()) );
+            //writeName(x);
         }
         highScene->addItem(dugme);
         ++i;
@@ -203,9 +209,11 @@ void Game::tastatura(QGraphicsScene *highScene)
 }
 
 
-void Game::writeName(){
-    playersName += " nesto";
-    QGraphicsTextItem *nameBar =  new QGraphicsTextItem(playersName);
+void Game::writeName(QString x){
+
+    playersName += x;
+    QString *name = new QString(playersName);
+    QGraphicsTextItem *nameBar =  new QGraphicsTextItem(*name);
     QFont font;
     font.setPixelSize(30);
     nameBar->setFont(font);
@@ -222,8 +230,9 @@ void Game::writeName(){
 
 void Game::changeScene(){
     qDebug() << "================";
-    qDebug() << playersName;
-    player = playersName;
+    QString *name = new QString(playersName);
+    qDebug() << *name;
+    player = *name;
     playersName = "";
 
     setScene(scene);
@@ -245,6 +254,7 @@ void Game::gameOver(QString message)
     int sk = this->game1->score->getScore();
     if(sk > highScores[9].second)
     {
+        /*
         //=========AJ DA VIDIMO I TAJ HIGHSCORE DA SE UNOSI=======//
         this->hide();
 
@@ -272,11 +282,14 @@ void Game::gameOver(QString message)
         // kada upisemo userName onda se vracamo na staru scenu
         //setScene(scene);
 
+         */
         //highScores[9] = std::pair<QString*,int>(new QString(player), sk);
-         highScores[9] = std::pair<QString*,int>(&player, sk);
+        QString *whichPlayer = new QString(&player + QString::number(howManyGames));
+        howManyGames++;
+        highScores[9] = std::pair<QString*,int>(whichPlayer, sk);
         sort(std::begin(highScores),std::end(highScores),myfunction);
 
-        // ovaj deo ne radi :(
+        // ---===---   ---===---   ---===---
         QFile outputFile(":/new/PacFiles/score.txt");
         outputFile.open(QIODevice::WriteOnly);
         if (outputFile.isOpen())
@@ -294,7 +307,7 @@ void Game::gameOver(QString message)
         outputFile.close();
 
     }
-    //else{         <- UKLJUCITI KAD SE ODRADI HIGHSCORE
+    //else{//         <- UKLJUCITI KAD SE ODRADI HIGHSCORE
 
     qDebug() << "usli smo u funkciju gameOver()";
   //  scene->clear();

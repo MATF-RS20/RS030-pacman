@@ -30,6 +30,7 @@ public:
     QGraphicsScene *highScene;
     //QString playersName = "";
    // QString player = "Player";
+    unsigned howManyGames = 1;
 
 
     Game(QWidget *parent = NULL);
@@ -42,12 +43,13 @@ public:
     std::vector<std::pair<QString*,int>> highScores{10};
     bool highScoresLoaded = false;
     void tastatura(QGraphicsScene *highScene);
+    void writeName(QString x);
 
 public slots:
+    //auto f();
     void start();
     void score();
     void resetGame();
-    void writeName();
     void changeScene();
 };
 

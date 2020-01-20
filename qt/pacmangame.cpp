@@ -116,9 +116,13 @@ PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
             x+=spacing;
             //i++; // counts walls
         }else if(c == '+'){
+            ++broj_duha;
+            this->ghost = new Ghost(x+2,y+2, broj_duha);
+            this->ghosts.push_back(ghost);
+            x+=spacing-13;
             w1 = new Wall(x,y,13,spacing);
             this->walls_and_borders.push_back(w1);
-            x+=spacing;
+            x+=13;
             //i++; // counts walls
         }
         else if(c == noviRed){

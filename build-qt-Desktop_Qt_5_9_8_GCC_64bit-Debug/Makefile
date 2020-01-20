@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../qt -I. -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/vasja/Qt/5.9.8/gcc_64/bin/qmake
 DEL_FILE      = rm -f
@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = qt1.0.0
-DISTDIR = /home/vasja/Desktop/Git/O/RS030-pacman/build-qt-Desktop_Qt_5_9_8_GCC_64bit-Debug/.tmp/qt1.0.0
+DISTDIR = /home/vasja/Desktop/Git/R/RS030-pacman/build-qt-Desktop_Qt_5_9_8_GCC_64bit-Debug/.tmp/qt1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/vasja/Qt/5.9.8/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/home/vasja/Qt/5.9.8/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -716,6 +716,7 @@ qrc_PacResources.cpp: ../qt/PacResources.qrc \
 		../qt/pacmanManu.jpg \
 		../qt/plavi-dole.jpg \
 		../qt/plavi-gore.png \
+		../qt/vrata.png \
 		../qt/bg.jpg \
 		../qt/plavi-levo.png \
 		../qt/plavi-dole.png \
@@ -766,7 +767,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp
-	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp
+	g++ -pipe -g -Wall -W -dM -E -o moc_predefs.h /home/vasja/Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_pacman.cpp moc_pacmangame.cpp moc_ghost.cpp moc_button.cpp moc_game.cpp
 compiler_moc_header_clean:
@@ -888,7 +889,7 @@ moc_pacman.cpp: ../qt/dot.h \
 		../qt/pacman.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/O/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacman.h -o moc_pacman.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/R/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacman.h -o moc_pacman.cpp
 
 moc_pacmangame.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qsize.h \
@@ -1017,7 +1018,7 @@ moc_pacmangame.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QSize \
 		../qt/pacmangame.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/O/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacmangame.h -o moc_pacmangame.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/R/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/pacmangame.h -o moc_pacmangame.cpp
 
 moc_ghost.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QObject \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtCore/qobject.h \
@@ -1131,7 +1132,7 @@ moc_ghost.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtCore/QObject \
 		../qt/ghost.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/O/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/ghost.h -o moc_ghost.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/R/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/ghost.h -o moc_ghost.cpp
 
 moc_button.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsitem.h \
@@ -1225,7 +1226,7 @@ moc_button.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsRectItem 
 		../qt/button.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/O/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/button.h -o moc_button.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/R/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/button.h -o moc_button.cpp
 
 moc_game.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
 		/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
@@ -1378,7 +1379,7 @@ moc_game.cpp: /home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
 		../qt/game.h \
 		moc_predefs.h \
 		/home/vasja/Qt/5.9.8/gcc_64/bin/moc
-	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/O/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/game.h -o moc_game.cpp
+	/home/vasja/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/vasja/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/vasja/Desktop/Git/R/RS030-pacman/qt -I/home/vasja/Qt/5.9.8/gcc_64/include -I/home/vasja/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/vasja/Qt/5.9.8/gcc_64/include/QtGui -I/home/vasja/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../qt/game.h -o moc_game.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
