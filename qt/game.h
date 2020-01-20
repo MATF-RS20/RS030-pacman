@@ -28,8 +28,6 @@ public:
     PacmanGame *game1;
     QGraphicsScene *scene;
     QGraphicsScene *highScene;
-    //QString playersName = "";
-   // QString player = "Player";
     unsigned howManyGames = 1;
 
 
@@ -50,7 +48,7 @@ public slots:
     void start();
     void score();
     void resetGame();
-    void changeScene();
+    //void changeScene();
 };
 
 #endif // GAME_H

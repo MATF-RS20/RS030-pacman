@@ -29,16 +29,9 @@ private:
     Pacman *pacman;
     Ghost *ghost;
 
-//obrisala current_score, nalazi se u pacman klasi
-    //Wall *walls[200];             // <- ne treba odavno, imamo walls_and_borders listu
     std::list<Wall*> walls_and_borders{};
     std::map<std::pair<int,int>,Dot*> dots{};
 
-    // dodao da bi mozda napravili konstruktor za PacmanGame kome se prosledjuje
-    // integer koji oznacava mapu
-
-    //std::set<QGraphicsItem*> allDots{};           // cuvamo kao skupove ovog tipa jer mozemo da dobijemo
-    //std::set<QGraphicsRectItem*> allGhosts{};     // pokazivace na objekte u trenutku kad ih ubacujemo na scenu
 /*
     QMediaPlayer * beginning;
     QMediaPlayer * chomp;
@@ -46,9 +39,6 @@ private:
     QMediaPlayer * eatghost;
     QMediaPlayer * death;
 */
-    //  tabela skorova !!!
-    //  bolje tipa vektor sa 10 mesta, da otmemo odmah 10 slotova
-    //  za skorove, da ne alociramo memoriju ako je slucajno nema
 
 
     int x;

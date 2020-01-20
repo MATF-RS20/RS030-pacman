@@ -13,28 +13,6 @@ extern PacmanGame *game1;
 extern Game * game;
 extern int level_map;
 
-/*
-void Pacman::readScores(){
-    QString scoreFile = ":/new/PacFiles/score.txt";
-    QFile scanScore{scoreFile};
-    scanScore.open(QFile::ReadOnly | QFile::Text);
-    QTextStream scoreLoader{&scanScore};
-
-    char name[5];
-    int highScore;
-    QString s;
-    int i = 0;
-    while( i<10 || !scoreLoader.atEnd() ){
-        scoreLoader >> name;
-        scoreLoader >> highScore;
-        this->highScores[i].second = highScore;
-        for(int j = 0; j < 5; j++)
-            this->highScores[i].first[j] = name[j];
-    }
-    scanScore.close();
-
-}
-*/
 Pacman::Pacman(int x1, int y1, int dotsInMap)
     :x1(x1),y1(y1),dotsToEat(dotsInMap)
 {
@@ -44,7 +22,6 @@ Pacman::Pacman(int x1, int y1, int dotsInMap)
     setPos(this->x1,this->y1);
     eatenDots = 0;
 
-    //this->setBrush(Qt::yellow);
 
     this->current_score = 0;
 
@@ -92,11 +69,6 @@ int Pacman::getY(){ return this->y(); }
 
 void Pacman::keyPressEvent(QKeyEvent *event)
 {
-    //treba u meni-ju korisnik da izabere da li ce da se krece na strelicu ili na jkli.. za sada ovako
-
-    // **Micovic je mislio na hjkl, slova koja se koriste za pomeranje pozicije u vim-u
-
-    //kolizija sa Ghost-om
 
     if (event->key() == Qt::Key_Left)
     {
@@ -187,19 +159,11 @@ void Pacman::move()
         //=========HIS POWER LEVEL IS OFF THE CHARTS BOIII==========
         this->setDirs0();
         game->game1->flag = 1;
-        /*
-        game->game1->getPacman()->setCurrentDirection(0);
-        game->game1->getPacman()->setPos(game->game1->getPacman()->getX(),game->game1->getPacman()->getY());
-        */
         game->gameOver(message);
         std::cout << "CESTITAM!!!\n";
         this->eatenDots = 0;
-        //QCoreApplication::quit();
-    } else if (this->eatenDots == this->dotsToEat){
-        // ne radi nista jbg
-        //game->gameStop();
 
-       //game->game1->mapSelector += 1;
+    } else if (this->eatenDots == this->dotsToEat){
         this->setDirs0();
         game->game1->flag = 1;
        level_map =(level_map + 1)%5;
@@ -374,7 +338,7 @@ void Pacman::move()
                         return;
                     }
                     else {
-                        //game->game1->health->decrease();
+
                         game->game1->sendGhostsToStartPos();
                         setPos(game->game1->pacPosX,game->game1->pacPosY);
                         return;
@@ -470,7 +434,7 @@ void Pacman::move()
                     return;
                 }
                 else {
-                    //game->game1->health->decrease();
+
                     game->game1->sendGhostsToStartPos();
                     setPos(game->game1->pacPosX,game->game1->pacPosY);
                     return;

@@ -41,14 +41,6 @@ int Game::getMapY() const{
 
 Game::Game(QWidget *parent)
 {
-    //QSize size = qApp->screens()[0]->size();
-
-    //this->setFixedSize(size.width(), size.height());
-    /*
-        PacmanGame g(1);
-        this->setFixedSize(g.getX()+200,g.getY()+50);
-    */
-    //readScores();
 
     this->setFixedSize(screen1width,screen1height); //(size.width(), size.height())
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -92,16 +84,6 @@ void Game::displayMainManu()
     }
 
 
-
-    //QPixmap m(":/Images/pacmanManu.jpg");
-    //QImage l(":/Images/pacmanManu.jpg");
-    //scene->addPixmap(m);
-    //this->setPixmap(QPixmap(":/Images/pacmanManu.jpg"));
-   // scene->setBackgroundBrush(m.scaled(100,100,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-    //scene->setBackgroundBrush(QBrush);
-    //this->setScene(scene);
-
-    //this->setFixedSize(screen1width,screen1height);
     scene->setSceneRect(0, 0, screen1width, screen1height);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
@@ -109,13 +91,11 @@ void Game::displayMainManu()
     //setBrush(brush);
     scene->setBackgroundBrush(brush);
 
-    //QPixmap m(":/Images/pacmanManu.jpg");
 
     QGraphicsTextItem *text =  new QGraphicsTextItem(QString("P A C M A N"));
     //text->setScale(100);
     text->setDefaultTextColor(Qt::white);
     int txPos = this->width()/2- text->boundingRect().width()/2;
-    //int txPos = screen1width/2- text->boundingRect().width()/2;
     int tyPos = 150;
     text->setPos(txPos,tyPos);
     scene->addItem(text);
@@ -126,7 +106,6 @@ void Game::displayMainManu()
 
     Button *playButton = new Button(QString("Play"),200,50);
     int bxPos = this->width()/2- playButton->boundingRect().width()/2;
-    //int bxPos = screen1width/2- playButton->boundingRect().width()/2;
     int byPos = 275;
     playButton->setPos(bxPos,byPos);
     QObject::connect(playButton, SIGNAL(clicked()),this, SLOT(start()) );
@@ -150,22 +129,7 @@ void Game::displayMainManu()
     this->scene->addItem(quitButton);
 
 }
-/*
-int indeks(int rezultat, std::list<std::pair<std::string, int> > & l){
 
-
-    std::list<std::pair<std::string, int> >::iterator it;
-    for (int i =0 ,it=l.begin(); it!=l.end(); it++, i++){
-        if (rezultat >= (*it)->second){
-            // vector vec sortiran opadajuce
-            return i;
-        }
-
-    }
-    return -1;
-
-}
-*/
 
 void Game::gameStop()
 {
@@ -174,6 +138,8 @@ void Game::gameStop()
     }
 }
 
+
+/*
 void Game::tastatura(QGraphicsScene *highScene)
 {
     std::vector<QString> abeceda ={"A","B","C","D","E","F","G",
@@ -238,16 +204,11 @@ void Game::changeScene(){
     setScene(scene);
     show();
 }
-
+*/
 
 
 void Game::gameOver(QString message)
 {
-    /*
-    for (size_t i=0, n = scene->items().size(); i<n; i++){
-        scene->items()[i]->setEnabled(false);
-    }
-    */
 
     gameStop();
 
@@ -276,14 +237,13 @@ void Game::gameOver(QString message)
         highScene->addItem(nameBar);
 
         tastatura(highScene);
-         qDebug()<< "******************";
-         qDebug()<< playersName;
+
 
         // kada upisemo userName onda se vracamo na staru scenu
         //setScene(scene);
 
          */
-        //highScores[9] = std::pair<QString*,int>(new QString(player), sk);
+        highScores[9] = std::pair<QString*,int>(new QString(player), sk);
         QString *whichPlayer = new QString(&player + QString::number(howManyGames));
         howManyGames++;
         highScores[9] = std::pair<QString*,int>(whichPlayer, sk);
@@ -314,40 +274,6 @@ void Game::gameOver(QString message)
     qDebug() << "ocistili smo ekran";
 
 
-/*
-
-
-    int i = indeks(this->game1->score->getScore(), listOfScores);
-    if( i >= 0){
-        // nas score idde u listu
-        // da omogucimo korisniku da unese svoje ime
-
-        std::pair<std::string, int> tmp("bla", this->game1->score->getScore());
-
-        //std::vector<std::pair<std::string, int> > tmp;
-        //std::copy(listOfScores.begin(), listOfScores.end(), tmp.begin());
-        listOfScores.insert(i,tmp);
-
-        // treba da azuriramo nas text fajl
-        QFile inputFile(":/new/PacFiles/score.txt");
-        if (inputFile.open(QIODevice::ReadWrite)){
-                       std::list<std::pair<std::string, int> >::iterator it;
-                       for (int i=1, it=listOfScores.begin(); it!=listOfScores.end(); it++, i++){
-                        QString player = QString(QString(i)+ ". " + QString(*it->first)+ " " + QString(*it->second));
-                                QTextStream stream(&inputFile);
-                                stream << player << endl;
-                       }
-         }
-    }// end of if(i>=0)
-
-*/
-/*
-    QBrush brush;
-    brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::black);
-    //setBrush(brush);
-    scene->setBackgroundBrush(brush);
-*/
 
     QGraphicsTextItem *text1 =  new QGraphicsTextItem(message);
     QFont font;
@@ -386,6 +312,9 @@ void Game::gameOver(QString message)
 //}//           <- OD ELSE-A za HIGHSCORE
 
 }
+
+
+
 
 void Game::score(){
     scene->clear();
@@ -502,37 +431,20 @@ void Game::start()
         scene->items()[i]->setEnabled(false);
     }
 
-    //Pacman *pucky;
+
     int scr = 0;
     int hearts = 3;
     if(level_map > 1){
         scr = this->game1->score->getScore();
         hearts = this->game1->health->getHealth();
     }
-/*    int i = 0;
-    while(true){
-    try {
-        //pucky = new Pacman(this->game1->getPacman()->getX(), this->game1->getPacman()->getY());
-        scr = this->game1->score->getScore();
-        hearts = this->game1->health->getHealth();
-        goingNextLevel = true;
 
-    } catch (...) {
-
-    }
-    }
-*/
-    qDebug() << "uslo u funkciju start()";
 
     this->scene->clear();
 
-    //int level_map =1;
+
     game1 = new PacmanGame(level_map,hearts,scr);
 
-
-//OVDE brE
-    /*this->setFixedSize(game1->getX(),game1->getY());
-    scene->setSceneRect(0,0,game1->getX(),game1->getY());*/
 
     scene->setSceneRect(0,0,game1->getX(),game1->getY());
     qDebug() << this->width()/2-game1->getX()/2 << ", " << this->height()/2-game1->getY()/2 << "\n";
@@ -546,7 +458,7 @@ void Game::start()
 
     this->scene->addItem(game1);
     qDebug() << "level je "<< level_map <<"\n";
-    //scene->addItem(game1->getPacman());
+
 
 }
 
@@ -559,5 +471,5 @@ void Game::resetGame()
     level_map =1;
     scene->clear();
     this->displayMainManu();
-    //start();
+
 }

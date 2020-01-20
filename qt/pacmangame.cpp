@@ -155,35 +155,9 @@ PacmanGame::PacmanGame(int selectMap, int hearts, int scr)
     this->pacman = new Pacman(pacPosX,pacPosY,dotNumber);
     this->pacman->setCurrentDirection(direction);           // <- ako vas ovaj deo iritira zakomentarisite,
                                                             // stavio sam jer msm da treba da ima
-    //this->score = new Score();
-    //this->health = new Health();  //<- pise na pocetku fje
+
 
     mapa.close();
-/*
-    QString scoreFile = ":/new/PacFiles/score.txt";
-    QFile scanScore{scoreFile};
-    qDebug() << "idemo u fajl\n";
-    if(!scanScore.exists()){
-        qDebug() << "ne postoji";
-    }
-    else{
-        scanScore.open(QFile::ReadOnly);
-        qDebug() << "idemo u fajl\n";
-        QTextStream scoreLoader{&scanScore};
-
-        //char name[5];
-        int highScore;
-        QString s;
-        int i = 0;
-        while( i<10 || !scoreLoader.atEnd() ){
-            scoreLoader >> s;
-            scoreLoader >> highScore;
-            this->highScores[i].second = highScore;
-            this->highScores[i].first = new QString(s);
-        }
-        scanScore.close();
-    }
-*/
 }
 
 
@@ -217,9 +191,6 @@ int PacmanGame::getHeight(){
 }
 
 
-//Wall* PacmanGame::getWall(){
-
-//}
 
 bool add_to_scene(QGraphicsScene &scene, Wall* zid){
     scene.addItem(zid);
@@ -227,9 +198,6 @@ bool add_to_scene(QGraphicsScene &scene, Wall* zid){
 }
 
 void PacmanGame::populateScene(QGraphicsScene &scene){
-   // getWall();
-    //QGraphicsItemGroup *group = new QGraphicsItemGroup{};
-
 
     for(auto x : this->walls_and_borders){
         scene.addItem(x);

@@ -20,28 +20,15 @@ Ghost::Ghost(int x1, int y1, int id)
 {
     initialX = x1;
     initialY = y1;
-    qDebug() << "Napravljen ghost";
+    //qDebug() << "Napravljen ghost";
     setPixmap(QPixmap(":/Puck/crveni-gore.png"));
     setTransformOriginPoint(15,15);  // same size as pacman
     setPos(this->x1,this->y1);
-    //this->scene()->addItem(this);
-
-
-
-
-
-    // Stavio sam sve tajmere na move1() samo da vidim kako bi izgledalo
-    // posto je to jedini random
-
-
-
-
-
 
 
 
     timer = new QTimer(this);
-    if (ghost_id == 1){     //random
+    if (ghost_id == 1){
         setPixmap(QPixmap(":/Puck/crveni-gore.png"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
@@ -51,11 +38,10 @@ Ghost::Ghost(int x1, int y1, int id)
         QObject::connect(timerM,SIGNAL(timeout()), this, SLOT(move1()));
         timerM->start(25);
 
-    }else if (ghost_id == 2){   //chaser - manhattan algorithm    ovako reba da bude samo algoritam da provalim
+    }else if (ghost_id == 2){
         setPixmap(QPixmap(":/Puck/zeleni-gore.png"));
         QObject::connect(timer,SIGNAL(timeout()), this, SLOT(chooseRandom()));
 
-        //qDebug() << nextDirection;
         timer->start(4800);
 
 
@@ -108,10 +94,7 @@ void Ghost::chooseRandom() {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0,4);
     this->nextDirection = dis(gen);
-/*
-    qDebug() << "id " << this->ghost_id << "\n";
-    qDebug() << "next " << this->nextDirection << "\n";
-    qDebug() << "current" << this->currentDirection << "\n\n";*/
+
 }
 
 
@@ -211,10 +194,10 @@ void Ghost::move1()
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
-                    //QCoreApplication::quit();
+
                 }
                 else{
-                    //game1->health->decrease();
+
                     //=======SEND THEM HOME============
                     game->game1->sendGhostsToStartPos();
 
@@ -322,7 +305,7 @@ void Ghost::move1()
                     QString message = "You lost :(";
                     game->gameOver(message);
                     std::cout << "VISE SRECE DRUGIT PUT!!!\n";
-                    //QCoreApplication::quit();
+
                 }
                 else {
                     //=======SEND THEM HOME============
