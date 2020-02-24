@@ -19,6 +19,9 @@ razlicit broj poena,i kako vreme prolazi svaka bobica gubi vrednost, a pored tog
 ima dodatani efekat. Kada se ona poejede svi duhovi poplave i tada pekmen moze njih da jede u narednom
 periodu od 7(8.5)* sekundi.Cilj igrice je da skupis sto vise poena,i da pojedes sve bobice. Kada u
 lavirintu nema vise bobica prelazi se na sledeci nivo(lavirint).
+
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Game Demonstration)
   
   
 Tabela vrednosti:
