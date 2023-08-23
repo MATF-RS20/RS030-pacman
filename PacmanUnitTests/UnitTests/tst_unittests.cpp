@@ -5,6 +5,7 @@
 #include "../../RS030-pacman/qt/extern_variables.h"
 #include "../../RS030-pacman/qt/health.h"
 #include "../../RS030-pacman/qt/ghost.h"
+#include "../../RS030-pacman/qt/pacmangame.h"
 
 class unitTests : public QObject
 {
@@ -33,6 +34,10 @@ private slots:
     void testGetX();
     void testGetY();
     void testSendToInitial();
+    void testChooseRandomTimerStops();
+    void testChooseRandomCheckRange();
+    void testChooseRandomCheckDistribution();
+
 };
 
 unitTests::unitTests()
@@ -276,6 +281,122 @@ void unitTests::testSendToInitial()
     QCOMPARE(ghost->getX(), firstX);
     QCOMPARE(ghost->getY(), firstY);
 
+}
+
+void unitTests::testChooseRandomTimerStops()
+{
+    int x = 5;
+    int y = 10;
+    int id = 1;
+
+    int map = 1;
+    int health = 3;
+    int src = 0;
+
+    int flagState = 1;
+
+    Ghost* ghost = new Ghost(x, y, id);
+    PacmanGame* pacgame = new PacmanGame(map, health, src);
+    pacgame->flag = flagState;
+    game->game1 = pacgame;
+
+    // Check if the timer is active
+    QVERIFY(ghost->getTimer()->isActive() == true);
+
+    ghost->chooseRandom();
+
+    // Check if the timer is stopped
+    QVERIFY(ghost->getTimer()->isActive() == false);
+
+    if (ghost != nullptr)
+        delete(ghost);
+    if (pacgame != nullptr)
+        delete(pacgame);
+}
+
+void unitTests::testChooseRandomCheckRange()
+{
+    int x = 5;
+    int y = 10;
+    int id = 1;
+
+    int map = 1;
+    int health = 3;
+    int src = 0;
+
+    int flagState = 0;
+
+    int numDirections = 5;
+
+    Ghost* ghost = new Ghost(x, y, id);
+    PacmanGame* pacgame = new PacmanGame(map, health, src);
+    pacgame->flag = flagState;
+    game->game1 = pacgame;
+
+    const int numIterations = 10000;
+    bool isValidRange = true;
+
+    for (int i = 0; i < numIterations; i++)
+    {
+        ghost->chooseRandom();
+        int generatedValue = ghost->getNextDirection();
+
+        // Check if the generated value is outside the expected range
+        if (generatedValue < 0 || generatedValue > numDirections)
+        {
+            isValidRange = false;
+            break;
+        }
+    }
+
+    QVERIFY(isValidRange);
+
+    if (ghost != nullptr)
+        delete(ghost);
+    if (pacgame != nullptr)
+        delete(pacgame);
+}
+
+void unitTests::testChooseRandomCheckDistribution()
+{
+    int x = 5;
+    int y = 10;
+    int id = 1;
+
+    int map = 1;
+    int health = 3;
+    int src = 0;
+
+    int flagState = 0;
+
+    int numDirections = 5;
+
+    Ghost* ghost = new Ghost(x, y, id);
+    PacmanGame* pacgame = new PacmanGame(map, health, src);
+    pacgame->flag = flagState;
+    game->game1 = pacgame;
+
+    // Map for counting all generated numbers
+    std::unordered_map<int, int> countMap;
+
+    const int numIterations = 100000;
+    for (int i = 0; i < numIterations; i++) {
+        ghost->chooseRandom();
+        countMap[ghost->getNextDirection()]++;
+    }
+
+    // Checking distribution
+    const double expectedProbability = 1.0 / numDirections;
+    const double tolerance = 0.05;
+    for (int num = 0; num < numDirections; num++) {
+        const double actualProbability = static_cast<double>(countMap[num]) / numIterations;
+        QVERIFY(qAbs(actualProbability - expectedProbability) < tolerance);
+    }
+
+    if (ghost != nullptr)
+        delete(ghost);
+    if (pacgame != nullptr)
+        delete(pacgame);
 }
 
 QTEST_APPLESS_MAIN(unitTests)

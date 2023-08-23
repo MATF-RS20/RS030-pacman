@@ -1,6 +1,9 @@
 QT += testlib
 QT -= gui
 
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += qt console warn_on depend_includepath testcase
