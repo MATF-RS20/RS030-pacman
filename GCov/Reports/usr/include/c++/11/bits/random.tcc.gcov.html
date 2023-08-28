@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-23 12:45:28</td>
+            <td class="headerValue">2023-08-28 20:53:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -474,7 +474,7 @@
 <a name="403"><span class="lineNum">     403 </span>                :<span class="lineCov">   24970000 :           _UIntType __y = ((_M_x[__k] &amp; __upper_mask)</span></a>
 <a name="404"><span class="lineNum">     404 </span>                :<span class="lineCov">   24970000 :                            | (_M_x[__k + 1] &amp; __lower_mask));</span></a>
 <a name="405"><span class="lineNum">     405 </span>                :<span class="lineCov">   49940000 :           _M_x[__k] = (_M_x[__k + __m] ^ (__y &gt;&gt; 1)</span></a>
-<a name="406"><span class="lineNum">     406 </span>        [<span class="branchCov" title="Branch 0 was taken 12483205 times"> + </span><span class="branchCov" title="Branch 1 was taken 12486795 times"> + </span>]:<span class="lineCov">   24970000 :                        ^ ((__y &amp; 0x01) ? __a : 0));</span></a>
+<a name="406"><span class="lineNum">     406 </span>        [<span class="branchCov" title="Branch 0 was taken 12483836 times"> + </span><span class="branchCov" title="Branch 1 was taken 12486164 times"> + </span>]:<span class="lineCov">   24970000 :                        ^ ((__y &amp; 0x01) ? __a : 0));</span></a>
 <a name="407"><span class="lineNum">     407 </span>                :            :         }</a>
 <a name="408"><span class="lineNum">     408 </span>                :            : </a>
 <a name="409"><span class="lineNum">     409 </span>        [<span class="branchCov" title="Branch 0 was taken 43560000 times"> + </span><span class="branchCov" title="Branch 1 was taken 110000 times"> + </span>]:<span class="lineCov">   43670000 :       for (size_t __k = (__n - __m); __k &lt; (__n - 1); ++__k)</span></a>
@@ -482,13 +482,13 @@
 <a name="411"><span class="lineNum">     411 </span>                :<span class="lineCov">   43560000 :           _UIntType __y = ((_M_x[__k] &amp; __upper_mask)</span></a>
 <a name="412"><span class="lineNum">     412 </span>                :<span class="lineCov">   43560000 :                            | (_M_x[__k + 1] &amp; __lower_mask));</span></a>
 <a name="413"><span class="lineNum">     413 </span>                :<span class="lineCov">   87120000 :           _M_x[__k] = (_M_x[__k + (__m - __n)] ^ (__y &gt;&gt; 1)</span></a>
-<a name="414"><span class="lineNum">     414 </span>        [<span class="branchCov" title="Branch 0 was taken 21774025 times"> + </span><span class="branchCov" title="Branch 1 was taken 21785975 times"> + </span>]:<span class="lineCov">   43560000 :                        ^ ((__y &amp; 0x01) ? __a : 0));</span></a>
+<a name="414"><span class="lineNum">     414 </span>        [<span class="branchCov" title="Branch 0 was taken 21780578 times"> + </span><span class="branchCov" title="Branch 1 was taken 21779422 times"> + </span>]:<span class="lineCov">   43560000 :                        ^ ((__y &amp; 0x01) ? __a : 0));</span></a>
 <a name="415"><span class="lineNum">     415 </span>                :            :         }</a>
 <a name="416"><span class="lineNum">     416 </span>                :            : </a>
 <a name="417"><span class="lineNum">     417 </span>                :<span class="lineCov">     110000 :       _UIntType __y = ((_M_x[__n - 1] &amp; __upper_mask)</span></a>
 <a name="418"><span class="lineNum">     418 </span>                :<span class="lineCov">     110000 :                        | (_M_x[0] &amp; __lower_mask));</span></a>
 <a name="419"><span class="lineNum">     419 </span>                :<span class="lineCov">     220000 :       _M_x[__n - 1] = (_M_x[__m - 1] ^ (__y &gt;&gt; 1)</span></a>
-<a name="420"><span class="lineNum">     420 </span>        [<span class="branchCov" title="Branch 0 was taken 54832 times"> + </span><span class="branchCov" title="Branch 1 was taken 55168 times"> + </span>]:<span class="lineCov">     110000 :                        ^ ((__y &amp; 0x01) ? __a : 0));</span></a>
+<a name="420"><span class="lineNum">     420 </span>        [<span class="branchCov" title="Branch 0 was taken 55003 times"> + </span><span class="branchCov" title="Branch 1 was taken 54997 times"> + </span>]:<span class="lineCov">     110000 :                        ^ ((__y &amp; 0x01) ? __a : 0));</span></a>
 <a name="421"><span class="lineNum">     421 </span>                :<span class="lineCov">     110000 :       _M_p = 0;</span></a>
 <a name="422"><span class="lineNum">     422 </span>                :<span class="lineCov">     110000 :     }</span></a>
 <a name="423"><span class="lineNum">     423 </span>                :            : </a>
@@ -2026,7 +2026,7 @@
 <a name="1955"><span class="lineNum">    1955 </span>                :            :       bool __saved_avail;</a>
 <a name="1956"><span class="lineNum">    1956 </span>                :            :       if (__is &gt;&gt; __mean &gt;&gt; __stddev &gt;&gt; __saved_avail)</a>
 <a name="1957"><span class="lineNum">    1957 </span>                :            :         {</a>
-<a name="1958"><span class="lineNum">    1958 </span>                :            :           if (__saved_avail &amp;&amp; (__is &gt;&gt; __x._M_saved))</a>
+<a name="1958"><span class="lineNum">    1958 </span>                :            :           if (!__saved_avail || (__is &gt;&gt; __x._M_saved))</a>
 <a name="1959"><span class="lineNum">    1959 </span>                :            :             {</a>
 <a name="1960"><span class="lineNum">    1960 </span>                :            :               __x._M_saved_available = __saved_avail;</a>
 <a name="1961"><span class="lineNum">    1961 </span>                :            :               __x.param(param_type(__mean, __stddev));</a>

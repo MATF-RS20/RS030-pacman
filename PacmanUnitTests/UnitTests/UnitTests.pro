@@ -1,6 +1,7 @@
 QT += testlib
 QT -= gui
 
+# For GCov
 QMAKE_CXXFLAGS += --coverage
 QMAKE_LFLAGS += --coverage
 

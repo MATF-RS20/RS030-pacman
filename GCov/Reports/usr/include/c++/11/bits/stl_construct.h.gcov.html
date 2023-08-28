@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-23 12:45:28</td>
+            <td class="headerValue">2023-08-28 20:53:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -187,7 +187,7 @@
 <a name="116"><span class="lineNum">     116 </span>                :            :           return;</a>
 <a name="117"><span class="lineNum">     117 </span>                :            :         }</a>
 <a name="118"><span class="lineNum">     118 </span>                :            : #endif</a>
-<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">         40 :       ::new(static_cast&lt;void*&gt;(__p)) _Tp(std::forward&lt;_Args&gt;(__args)...);</span></a>
+<a name="119"><span class="lineNum">     119 </span>                :<span class="lineCov">         40 :       ::new((void*)__p) _Tp(std::forward&lt;_Args&gt;(__args)...);</span></a>
 <a name="120"><span class="lineNum">     120 </span>                :<span class="lineCov">         40 :     }</span></a>
 <a name="121"><span class="lineNum">     121 </span>                :            : #else</a>
 <a name="122"><span class="lineNum">     122 </span>                :            :   template&lt;typename _T1, typename _T2&gt;</a>
@@ -203,7 +203,7 @@
 <a name="132"><span class="lineNum">     132 </span>                :            :   template&lt;typename _T1&gt;</a>
 <a name="133"><span class="lineNum">     133 </span>                :            :     inline void</a>
 <a name="134"><span class="lineNum">     134 </span>                :            :     _Construct_novalue(_T1* __p)</a>
-<a name="135"><span class="lineNum">     135 </span>                :            :     { ::new(static_cast&lt;void*&gt;(__p)) _T1; }</a>
+<a name="135"><span class="lineNum">     135 </span>                :            :     { ::new((void*)__p) _T1; }</a>
 <a name="136"><span class="lineNum">     136 </span>                :            : </a>
 <a name="137"><span class="lineNum">     137 </span>                :            :   template&lt;typename _ForwardIterator&gt;</a>
 <a name="138"><span class="lineNum">     138 </span>                :            :     _GLIBCXX20_CONSTEXPR void</a>
