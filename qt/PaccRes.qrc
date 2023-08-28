@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/new/Pref">
-        <file>izlaz.txt</file>
-    </qresource>
-    <qresource prefix="/">
-        <file>../../../Downloads/Doo-Bop/Miles Davis - Doo-Bop - 01. Mystery.mp3</file>
-    </qresource>
-</RCC>

@@ -1,0 +1,3 @@
+[submodule "RS030-pacman"]
+	path = RS030-pacman
+	url = https://github.com/MATF-RS20/RS030-pacman
