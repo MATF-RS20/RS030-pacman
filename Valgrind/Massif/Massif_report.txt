@@ -1,0 +1,7 @@
+==9494== Massif, a heap profiler
+==9494== Copyright (C) 2003-2017, and GNU GPL'd, by Nicholas Nethercote
+==9494== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9494== Command: ../../RS030-pacman/build-qt-Desktop_Qt_5_12_12_GCC_64bit-Debug/qt
+==9494== Parent PID: 9493
+==9494== 
+==9494== 
