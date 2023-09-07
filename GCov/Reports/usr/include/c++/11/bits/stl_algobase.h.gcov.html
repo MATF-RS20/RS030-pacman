@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -298,14 +298,14 @@
 <a name="227"><span class="lineNum">     227 </span>                :            :   template&lt;typename _Tp&gt;</a>
 <a name="228"><span class="lineNum">     228 </span>                :            :     _GLIBCXX14_CONSTEXPR</a>
 <a name="229"><span class="lineNum">     229 </span>                :            :     inline const _Tp&amp;</a>
-<a name="230"><span class="lineNum">     230 </span>                :<span class="lineCov">          4 :     min(const _Tp&amp; __a, const _Tp&amp; __b)</span></a>
+<a name="230"><span class="lineNum">     230 </span>                :<span class="lineCov">         16 :     min(const _Tp&amp; __a, const _Tp&amp; __b)</span></a>
 <a name="231"><span class="lineNum">     231 </span>                :            :     {</a>
 <a name="232"><span class="lineNum">     232 </span>                :            :       // concept requirements</a>
 <a name="233"><span class="lineNum">     233 </span>                :            :       __glibcxx_function_requires(_LessThanComparableConcept&lt;_Tp&gt;)</a>
 <a name="234"><span class="lineNum">     234 </span>                :            :       //return __b &lt; __a ? __b : __a;</a>
-<a name="235"><span class="lineNum">     235 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 4 times"> + </span>]:<span class="lineCov">          4 :       if (__b &lt; __a)</span></a>
+<a name="235"><span class="lineNum">     235 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 16 times"> + </span>]:<span class="lineCov">         16 :       if (__b &lt; __a)</span></a>
 <a name="236"><span class="lineNum">     236 </span>                :<span class="lineNoCov">          0 :         return __b;</span></a>
-<a name="237"><span class="lineNum">     237 </span>                :<span class="lineCov">          4 :       return __a;</span></a>
+<a name="237"><span class="lineNum">     237 </span>                :<span class="lineCov">         16 :       return __a;</span></a>
 <a name="238"><span class="lineNum">     238 </span>                :            :     }</a>
 <a name="239"><span class="lineNum">     239 </span>                :            : </a>
 <a name="240"><span class="lineNum">     240 </span>                :            :   /**</a>

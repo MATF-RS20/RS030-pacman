@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -171,7 +171,7 @@
 <a name="100"><span class="lineNum">     100 </span>                :            : </a>
 <a name="101"><span class="lineNum">     101 </span>                :            :     // Everything below is either implemented in ../arch/qatomic_XXX.h or (as fallback) in qgenericatomic.h</a>
 <a name="102"><span class="lineNum">     102 </span>                :            : </a>
-<a name="103"><span class="lineNum">     103 </span>                :<span class="lineCov">        126 :     T load() const Q_DECL_NOTHROW { return Ops::load(_q_value); }</span></a>
+<a name="103"><span class="lineNum">     103 </span>                :<span class="lineCov">        504 :     T load() const Q_DECL_NOTHROW { return Ops::load(_q_value); }</span></a>
 <a name="104"><span class="lineNum">     104 </span>                :            :     void store(T newValue) Q_DECL_NOTHROW { Ops::store(_q_value, newValue); }</a>
 <a name="105"><span class="lineNum">     105 </span>                :            : </a>
 <a name="106"><span class="lineNum">     106 </span>                :            :     T loadAcquire() const Q_DECL_NOTHROW { return Ops::loadAcquire(_q_value); }</a>
@@ -182,8 +182,8 @@
 <a name="111"><span class="lineNum">     111 </span>                :            :     static Q_DECL_CONSTEXPR bool isReferenceCountingNative() Q_DECL_NOTHROW { return Ops::isReferenceCountingNative(); }</a>
 <a name="112"><span class="lineNum">     112 </span>                :            :     static Q_DECL_CONSTEXPR bool isReferenceCountingWaitFree() Q_DECL_NOTHROW { return Ops::isReferenceCountingWaitFree(); }</a>
 <a name="113"><span class="lineNum">     113 </span>                :            : </a>
-<a name="114"><span class="lineNum">     114 </span>                :<span class="lineCov">         21 :     bool ref() Q_DECL_NOTHROW { return Ops::ref(_q_value); }</span></a>
-<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">        105 :     bool deref() Q_DECL_NOTHROW { return Ops::deref(_q_value); }</span></a>
+<a name="114"><span class="lineNum">     114 </span>                :<span class="lineCov">         84 :     bool ref() Q_DECL_NOTHROW { return Ops::ref(_q_value); }</span></a>
+<a name="115"><span class="lineNum">     115 </span>                :<span class="lineCov">        420 :     bool deref() Q_DECL_NOTHROW { return Ops::deref(_q_value); }</span></a>
 <a name="116"><span class="lineNum">     116 </span>                :            : </a>
 <a name="117"><span class="lineNum">     117 </span>                :            :     static Q_DECL_CONSTEXPR bool isTestAndSetNative() Q_DECL_NOTHROW { return Ops::isTestAndSetNative(); }</a>
 <a name="118"><span class="lineNum">     118 </span>                :            :     static Q_DECL_CONSTEXPR bool isTestAndSetWaitFree() Q_DECL_NOTHROW { return Ops::isTestAndSetWaitFree(); }</a>

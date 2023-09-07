@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -424,11 +424,11 @@
 <a name="353"><span class="lineNum">     353 </span>                :            : #if QT_VERSION &lt; QT_VERSION_CHECK(6, 0, 0)</a>
 <a name="354"><span class="lineNum">     354 </span>                :            :     // kept after adding implementation of &lt;T1, T2&gt; out of paranoia:</a>
 <a name="355"><span class="lineNum">     355 </span>                :            :     template &lt;typename T&gt;</a>
-<a name="356"><span class="lineNum">     356 </span>                :<span class="lineCov">         18 :     inline bool qCompare(T const &amp;t1, T const &amp;t2, const char *actual, const char *expected,</span></a>
+<a name="356"><span class="lineNum">     356 </span>                :<span class="lineCov">         72 :     inline bool qCompare(T const &amp;t1, T const &amp;t2, const char *actual, const char *expected,</span></a>
 <a name="357"><span class="lineNum">     357 </span>                :            :                         const char *file, int line)</a>
 <a name="358"><span class="lineNum">     358 </span>                :            :     {</a>
-<a name="359"><span class="lineNum">     359 </span>                :<span class="lineCov">         18 :         return compare_helper(t1 == t2, &quot;Compared values are not the same&quot;,</span></a>
-<a name="360"><span class="lineNum">     360 </span>                :<span class="lineCov">         18 :                               toString(t1), toString(t2), actual, expected, file, line);</span></a>
+<a name="359"><span class="lineNum">     359 </span>                :<span class="lineCov">         72 :         return compare_helper(t1 == t2, &quot;Compared values are not the same&quot;,</span></a>
+<a name="360"><span class="lineNum">     360 </span>                :<span class="lineCov">         72 :                               toString(t1), toString(t2), actual, expected, file, line);</span></a>
 <a name="361"><span class="lineNum">     361 </span>                :            :     }</a>
 <a name="362"><span class="lineNum">     362 </span>                :            : #endif</a>
 <a name="363"><span class="lineNum">     363 </span>                :            : </a>

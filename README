@@ -1,2 +1,21 @@
 Autor: Jovan Markovic 1092/2022
 
+Projekat za analizu: Pacman 
+Adresa projekta: https://github.com/MATF-RS20/RS030-pacman 
+Alati za verifikaciu softvera će biti primenjeni commit sa hešom 		22218d726c58f913ca10168f73bbd15aa47ceb98 
+
+Ovaj projekat predstavlja video-igru po uzoru na poznatu igru Pacman. Igra je jedna osoba i kretnjom po ekranu sakuplja tačkice koje predstavljaju poene. Kada sakupi sve tačkice, igrač prelazi na naredni nivo. 
+Projekat je implementiran uz pomoć C++ i Qt okruženja.
+
+Alati korišćeni u analizi: 
+1. Qt Unit Tests i GCov
+2. Memcheck
+3. Callgrind
+4. Massif
+
+Zaključak o projektu:
+
+Veliki propust u projektu predstavlja činjenica da se nigde ne oslobađa alocirana memorija. 
+Drugi veliki problem je najpozivanija funkcija move1() koja je previše glomazna i treba se refaktorisati radi optimalnijeg rada programa. U toj funkciji takođe se konstantno prave objekti za iscrtavanje slika, mada je poželjnije da se oni naprave negde izvan funkcije i pozivaju, jer ih ima mali i ograničen broj.
+Što se tiče testiranih klasa, one su prošle testove, s tim što su neke metode možda trebale da imaju svoje unutrašnje sisteme provere prosleđenih vrednosti. 
+

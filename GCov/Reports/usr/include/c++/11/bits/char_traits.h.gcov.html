@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -358,7 +358,7 @@
 <a name="287"><span class="lineNum">     287 </span>                :            : #ifdef _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED</a>
 <a name="288"><span class="lineNum">     288 </span>                :            :       (void) __s;</a>
 <a name="289"><span class="lineNum">     289 </span>                :            :       // In constexpr contexts all strings should be constant.</a>
-<a name="290"><span class="lineNum">     290 </span>                :<span class="lineCov">     110003 :       return __builtin_is_constant_evaluated();</span></a>
+<a name="290"><span class="lineNum">     290 </span>                :<span class="lineCov">     440012 :       return __builtin_is_constant_evaluated();</span></a>
 <a name="291"><span class="lineNum">     291 </span>                :            : #else</a>
 <a name="292"><span class="lineNum">     292 </span>                :            :       while (__builtin_constant_p(*__s) &amp;&amp; *__s)</a>
 <a name="293"><span class="lineNum">     293 </span>                :            :         __s++;</a>
@@ -461,13 +461,13 @@
 <a name="390"><span class="lineNum">     390 </span>                :            :       }</a>
 <a name="391"><span class="lineNum">     391 </span>                :            : </a>
 <a name="392"><span class="lineNum">     392 </span>                :            :       static _GLIBCXX17_CONSTEXPR size_t</a>
-<a name="393"><span class="lineNum">     393 </span>                :<span class="lineCov">     110003 :       length(const char_type* __s)</span></a>
+<a name="393"><span class="lineNum">     393 </span>                :<span class="lineCov">     440012 :       length(const char_type* __s)</span></a>
 <a name="394"><span class="lineNum">     394 </span>                :            :       {</a>
 <a name="395"><span class="lineNum">     395 </span>                :            : #if __cplusplus &gt;= 201703L</a>
-<a name="396"><span class="lineNum">     396 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 110003 times"> + </span>]:<span class="lineCov">     110003 :         if (__constant_string_p(__s))</span></a>
+<a name="396"><span class="lineNum">     396 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 440012 times"> + </span>]:<span class="lineCov">     440012 :         if (__constant_string_p(__s))</span></a>
 <a name="397"><span class="lineNum">     397 </span>                :<span class="lineNoCov">          0 :           return __gnu_cxx::char_traits&lt;char_type&gt;::length(__s);</span></a>
 <a name="398"><span class="lineNum">     398 </span>                :            : #endif</a>
-<a name="399"><span class="lineNum">     399 </span>                :<span class="lineCov">     110003 :         return __builtin_strlen(__s);</span></a>
+<a name="399"><span class="lineNum">     399 </span>                :<span class="lineCov">     440012 :         return __builtin_strlen(__s);</span></a>
 <a name="400"><span class="lineNum">     400 </span>                :            :       }</a>
 <a name="401"><span class="lineNum">     401 </span>                :            : </a>
 <a name="402"><span class="lineNum">     402 </span>                :            :       static _GLIBCXX17_CONSTEXPR const char_type*</a>

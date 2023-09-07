@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -341,9 +341,9 @@
 <a name="270"><span class="lineNum">     270 </span>                :            : </a>
 <a name="271"><span class="lineNum">     271 </span>                :            :     // Positioning in scene coordinates</a>
 <a name="272"><span class="lineNum">     272 </span>                :            :     QPointF pos() const;</a>
-<a name="273"><span class="lineNum">     273 </span>                :<span class="lineCov">          7 :     inline qreal x() const { return pos().x(); }</span></a>
+<a name="273"><span class="lineNum">     273 </span>                :<span class="lineCov">         28 :     inline qreal x() const { return pos().x(); }</span></a>
 <a name="274"><span class="lineNum">     274 </span>                :            :     void setX(qreal x);</a>
-<a name="275"><span class="lineNum">     275 </span>                :<span class="lineCov">          7 :     inline qreal y() const { return pos().y(); }</span></a>
+<a name="275"><span class="lineNum">     275 </span>                :<span class="lineCov">         28 :     inline qreal y() const { return pos().y(); }</span></a>
 <a name="276"><span class="lineNum">     276 </span>                :            :     void setY(qreal y);</a>
 <a name="277"><span class="lineNum">     277 </span>                :            :     QPointF scenePos() const;</a>
 <a name="278"><span class="lineNum">     278 </span>                :            :     void setPos(const QPointF &amp;pos);</a>
@@ -381,8 +381,8 @@
 <a name="310"><span class="lineNum">     310 </span>                :            : </a>
 <a name="311"><span class="lineNum">     311 </span>                :            :     QPointF transformOriginPoint() const;</a>
 <a name="312"><span class="lineNum">     312 </span>                :            :     void setTransformOriginPoint(const QPointF &amp;origin);</a>
-<a name="313"><span class="lineNum">     313 </span>                :<span class="lineCov">         22 :     inline void setTransformOriginPoint(qreal ax, qreal ay)</span></a>
-<a name="314"><span class="lineNum">     314 </span>        [<span class="branchCov" title="Branch 0 was taken 22 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         22 :     { setTransformOriginPoint(QPointF(ax,ay)); }</span></a>
+<a name="313"><span class="lineNum">     313 </span>                :<span class="lineCov">         88 :     inline void setTransformOriginPoint(qreal ax, qreal ay)</span></a>
+<a name="314"><span class="lineNum">     314 </span>        [<span class="branchCov" title="Branch 0 was taken 88 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         88 :     { setTransformOriginPoint(QPointF(ax,ay)); }</span></a>
 <a name="315"><span class="lineNum">     315 </span>                :            : </a>
 <a name="316"><span class="lineNum">     316 </span>                :            :     virtual void advance(int phase);</a>
 <a name="317"><span class="lineNum">     317 </span>                :            : </a>
@@ -560,8 +560,8 @@
 <a name="489"><span class="lineNum">     489 </span>                :            : Q_DECLARE_OPERATORS_FOR_FLAGS(QGraphicsItem::GraphicsItemFlags)</a>
 <a name="490"><span class="lineNum">     490 </span>                :            : Q_DECLARE_INTERFACE(QGraphicsItem, &quot;org.qt-project.Qt.QGraphicsItem&quot;)</a>
 <a name="491"><span class="lineNum">     491 </span>                :            : </a>
-<a name="492"><span class="lineNum">     492 </span>                :<span class="lineCov">         23 : inline void QGraphicsItem::setPos(qreal ax, qreal ay)</span></a>
-<a name="493"><span class="lineNum">     493 </span>        [<span class="branchCov" title="Branch 0 was taken 23 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         23 : { setPos(QPointF(ax, ay)); }</span></a>
+<a name="492"><span class="lineNum">     492 </span>                :<span class="lineCov">         92 : inline void QGraphicsItem::setPos(qreal ax, qreal ay)</span></a>
+<a name="493"><span class="lineNum">     493 </span>        [<span class="branchCov" title="Branch 0 was taken 92 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         92 : { setPos(QPointF(ax, ay)); }</span></a>
 <a name="494"><span class="lineNum">     494 </span>                :            : inline void QGraphicsItem::ensureVisible(qreal ax, qreal ay, qreal w, qreal h, int xmargin, int ymargin)</a>
 <a name="495"><span class="lineNum">     495 </span>                :            : { ensureVisible(QRectF(ax, ay, w, h), xmargin, ymargin); }</a>
 <a name="496"><span class="lineNum">     496 </span>                :            : inline void QGraphicsItem::update(qreal ax, qreal ay, qreal width, qreal height)</a>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">4</td>
@@ -601,14 +601,14 @@
 <a name="530"><span class="lineNum">     530 </span>                :            :       // 3076. basic_string CTAD ambiguity</a>
 <a name="531"><span class="lineNum">     531 </span>                :            :       template&lt;typename = _RequireAllocator&lt;_Alloc&gt;&gt;</a>
 <a name="532"><span class="lineNum">     532 </span>                :            : #endif</a>
-<a name="533"><span class="lineNum">     533 </span>                :<span class="lineCov">     110003 :       basic_string(const _CharT* __s, const _Alloc&amp; __a = _Alloc())</span></a>
-<a name="534"><span class="lineNum">     534 </span>                :<span class="lineCov">     110003 :       : _M_dataplus(_M_local_data(), __a)</span></a>
+<a name="533"><span class="lineNum">     533 </span>                :<span class="lineCov">     440012 :       basic_string(const _CharT* __s, const _Alloc&amp; __a = _Alloc())</span></a>
+<a name="534"><span class="lineNum">     534 </span>                :<span class="lineCov">     440012 :       : _M_dataplus(_M_local_data(), __a)</span></a>
 <a name="535"><span class="lineNum">     535 </span>                :            :       {</a>
-<a name="536"><span class="lineNum">     536 </span>  [<span class="branchCov" title="Branch 0 was taken 110003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 110003 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     110003 :         const _CharT* __end = __s ? __s + traits_type::length(__s)</span></a>
+<a name="536"><span class="lineNum">     536 </span>  [<span class="branchCov" title="Branch 0 was taken 440012 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 440012 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     440012 :         const _CharT* __end = __s ? __s + traits_type::length(__s)</span></a>
 <a name="537"><span class="lineNum">     537 </span>                :            :           // We just need a non-null pointer here to get an exception:</a>
 <a name="538"><span class="lineNum">     538 </span>                :            :           : reinterpret_cast&lt;const _CharT*&gt;(__alignof__(_CharT));</a>
-<a name="539"><span class="lineNum">     539 </span>        [<span class="branchCov" title="Branch 0 was taken 110003 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     110003 :         _M_construct(__s, __end, random_access_iterator_tag());</span></a>
-<a name="540"><span class="lineNum">     540 </span>                :<span class="lineCov">     110003 :       }</span></a>
+<a name="539"><span class="lineNum">     539 </span>        [<span class="branchCov" title="Branch 0 was taken 440012 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">     440012 :         _M_construct(__s, __end, random_access_iterator_tag());</span></a>
+<a name="540"><span class="lineNum">     540 </span>                :<span class="lineCov">     440012 :       }</span></a>
 <a name="541"><span class="lineNum">     541 </span>                :            : </a>
 <a name="542"><span class="lineNum">     542 </span>                :            :       /**</a>
 <a name="543"><span class="lineNum">     543 </span>                :            :        *  @brief  Construct string as multiple characters.</a>
@@ -621,9 +621,9 @@
 <a name="550"><span class="lineNum">     550 </span>                :            :       // 3076. basic_string CTAD ambiguity</a>
 <a name="551"><span class="lineNum">     551 </span>                :            :       template&lt;typename = _RequireAllocator&lt;_Alloc&gt;&gt;</a>
 <a name="552"><span class="lineNum">     552 </span>                :            : #endif</a>
-<a name="553"><span class="lineNum">     553 </span>                :<span class="lineCov">          3 :       basic_string(size_type __n, _CharT __c, const _Alloc&amp; __a = _Alloc())</span></a>
-<a name="554"><span class="lineNum">     554 </span>                :<span class="lineCov">          3 :       : _M_dataplus(_M_local_data(), __a)</span></a>
-<a name="555"><span class="lineNum">     555 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :       { _M_construct(__n, __c); }</span></a>
+<a name="553"><span class="lineNum">     553 </span>                :<span class="lineCov">         12 :       basic_string(size_type __n, _CharT __c, const _Alloc&amp; __a = _Alloc())</span></a>
+<a name="554"><span class="lineNum">     554 </span>                :<span class="lineCov">         12 :       : _M_dataplus(_M_local_data(), __a)</span></a>
+<a name="555"><span class="lineNum">     555 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :       { _M_construct(__n, __c); }</span></a>
 <a name="556"><span class="lineNum">     556 </span>                :            : </a>
 <a name="557"><span class="lineNum">     557 </span>                :            : #if __cplusplus &gt;= 201103L</a>
 <a name="558"><span class="lineNum">     558 </span>                :            :       /**</a>
@@ -6274,9 +6274,9 @@
 <a name="6203"><span class="lineNum">    6203 </span>                :            : </a>
 <a name="6204"><span class="lineNum">    6204 </span>                :            :   template&lt;typename _CharT, typename _Traits, typename _Alloc&gt;</a>
 <a name="6205"><span class="lineNum">    6205 </span>                :            :     inline basic_string&lt;_CharT, _Traits, _Alloc&gt;</a>
-<a name="6206"><span class="lineNum">    6206 </span>                :<span class="lineCov">          3 :     operator+(basic_string&lt;_CharT, _Traits, _Alloc&gt;&amp;&amp; __lhs,</span></a>
+<a name="6206"><span class="lineNum">    6206 </span>                :<span class="lineCov">         12 :     operator+(basic_string&lt;_CharT, _Traits, _Alloc&gt;&amp;&amp; __lhs,</span></a>
 <a name="6207"><span class="lineNum">    6207 </span>                :            :               const _CharT* __rhs)</a>
-<a name="6208"><span class="lineNum">    6208 </span>                :<span class="lineCov">          3 :     { return std::move(__lhs.append(__rhs)); }</span></a>
+<a name="6208"><span class="lineNum">    6208 </span>                :<span class="lineCov">         12 :     { return std::move(__lhs.append(__rhs)); }</span></a>
 <a name="6209"><span class="lineNum">    6209 </span>                :            : </a>
 <a name="6210"><span class="lineNum">    6210 </span>                :            :   template&lt;typename _CharT, typename _Traits, typename _Alloc&gt;</a>
 <a name="6211"><span class="lineNum">    6211 </span>                :            :     inline basic_string&lt;_CharT, _Traits, _Alloc&gt;</a>
@@ -6728,14 +6728,14 @@
 <a name="6657"><span class="lineNum">    6657 </span>                :            :   // DR 1261. Insufficent overloads for to_string / to_wstring</a>
 <a name="6658"><span class="lineNum">    6658 </span>                :            : </a>
 <a name="6659"><span class="lineNum">    6659 </span>                :            :   inline string</a>
-<a name="6660"><span class="lineNum">    6660 </span>                :<span class="lineCov">          3 :   to_string(int __val)</span></a>
+<a name="6660"><span class="lineNum">    6660 </span>                :<span class="lineCov">         12 :   to_string(int __val)</span></a>
 <a name="6661"><span class="lineNum">    6661 </span>                :            :   {</a>
-<a name="6662"><span class="lineNum">    6662 </span>                :<span class="lineCov">          3 :     const bool __neg = __val &lt; 0;</span></a>
-<a name="6663"><span class="lineNum">    6663 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 3 times"> + </span>]:<span class="lineCov">          3 :     const unsigned __uval = __neg ? (unsigned)~__val + 1u : __val;</span></a>
-<a name="6664"><span class="lineNum">    6664 </span>                :<span class="lineCov">          3 :     const auto __len = __detail::__to_chars_len(__uval);</span></a>
-<a name="6665"><span class="lineNum">    6665 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :     string __str(__neg + __len, '-');</span></a>
-<a name="6666"><span class="lineNum">    6666 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :     __detail::__to_chars_10_impl(&amp;__str[__neg], __len, __uval);</span></a>
-<a name="6667"><span class="lineNum">    6667 </span>                :<span class="lineCov">          3 :     return __str;</span></a>
+<a name="6662"><span class="lineNum">    6662 </span>                :<span class="lineCov">         12 :     const bool __neg = __val &lt; 0;</span></a>
+<a name="6663"><span class="lineNum">    6663 </span>        [<span class="branchNoCov" title="Branch 0 was not taken"> - </span><span class="branchCov" title="Branch 1 was taken 12 times"> + </span>]:<span class="lineCov">         12 :     const unsigned __uval = __neg ? (unsigned)~__val + 1u : __val;</span></a>
+<a name="6664"><span class="lineNum">    6664 </span>                :<span class="lineCov">         12 :     const auto __len = __detail::__to_chars_len(__uval);</span></a>
+<a name="6665"><span class="lineNum">    6665 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     string __str(__neg + __len, '-');</span></a>
+<a name="6666"><span class="lineNum">    6666 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     __detail::__to_chars_10_impl(&amp;__str[__neg], __len, __uval);</span></a>
+<a name="6667"><span class="lineNum">    6667 </span>                :<span class="lineCov">         12 :     return __str;</span></a>
 <a name="6668"><span class="lineNum">    6668 </span>                :<span class="lineNoCov">          0 :   }</span></a>
 <a name="6669"><span class="lineNum">    6669 </span>                :            : </a>
 <a name="6670"><span class="lineNum">    6670 </span>                :            :   inline string</a>

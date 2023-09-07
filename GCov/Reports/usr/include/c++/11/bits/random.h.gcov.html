@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -204,26 +204,26 @@
 <a name="133"><span class="lineNum">     133 </span>                :            :       struct _Mod&lt;_Tp, __m, __a, __c, true, __s&gt;</a>
 <a name="134"><span class="lineNum">     134 </span>                :            :       {</a>
 <a name="135"><span class="lineNum">     135 </span>                :            :         static _Tp</a>
-<a name="136"><span class="lineNum">     136 </span>                :<span class="lineCov">  137170000 :         __calc(_Tp __x)</span></a>
+<a name="136"><span class="lineNum">     136 </span>                :<span class="lineCov">  548680000 :         __calc(_Tp __x)</span></a>
 <a name="137"><span class="lineNum">     137 </span>                :            :         {</a>
-<a name="138"><span class="lineNum">     138 </span>                :<span class="lineCov">  137170000 :           _Tp __res = __a * __x + __c;</span></a>
+<a name="138"><span class="lineNum">     138 </span>                :<span class="lineCov">  548680000 :           _Tp __res = __a * __x + __c;</span></a>
 <a name="139"><span class="lineNum">     139 </span>                :            :           if (__m)</a>
-<a name="140"><span class="lineNum">     140 </span>                :<span class="lineCov">  137170000 :             __res %= __m;</span></a>
-<a name="141"><span class="lineNum">     141 </span>                :<span class="lineCov">  137170000 :           return __res;</span></a>
+<a name="140"><span class="lineNum">     140 </span>                :<span class="lineCov">  548680000 :             __res %= __m;</span></a>
+<a name="141"><span class="lineNum">     141 </span>                :<span class="lineCov">  548680000 :           return __res;</span></a>
 <a name="142"><span class="lineNum">     142 </span>                :            :         }</a>
 <a name="143"><span class="lineNum">     143 </span>                :            :       };</a>
 <a name="144"><span class="lineNum">     144 </span>                :            : </a>
 <a name="145"><span class="lineNum">     145 </span>                :            :     template&lt;typename _Tp, _Tp __m, _Tp __a = 1, _Tp __c = 0&gt;</a>
 <a name="146"><span class="lineNum">     146 </span>                :            :       inline _Tp</a>
-<a name="147"><span class="lineNum">     147 </span>                :<span class="lineCov">  137170000 :       __mod(_Tp __x)</span></a>
+<a name="147"><span class="lineNum">     147 </span>                :<span class="lineCov">  548680000 :       __mod(_Tp __x)</span></a>
 <a name="148"><span class="lineNum">     148 </span>                :            :       {</a>
 <a name="149"><span class="lineNum">     149 </span>                :            :         if _GLIBCXX17_CONSTEXPR (__a == 0)</a>
 <a name="150"><span class="lineNum">     150 </span>                :            :           return __c;</a>
 <a name="151"><span class="lineNum">     151 </span>                :            :         else</a>
 <a name="152"><span class="lineNum">     152 </span>                :            :           {</a>
 <a name="153"><span class="lineNum">     153 </span>                :            :             // _Mod must not be instantiated with a == 0</a>
-<a name="154"><span class="lineNum">     154 </span>                :<span class="lineCov">  137170000 :             constexpr _Tp __a1 = __a ? __a : 1;</span></a>
-<a name="155"><span class="lineNum">     155 </span>                :<span class="lineCov">  137170000 :             return _Mod&lt;_Tp, __m, __a1, __c&gt;::__calc(__x);</span></a>
+<a name="154"><span class="lineNum">     154 </span>                :<span class="lineCov">  548680000 :             constexpr _Tp __a1 = __a ? __a : 1;</span></a>
+<a name="155"><span class="lineNum">     155 </span>                :<span class="lineCov">  548680000 :             return _Mod&lt;_Tp, __m, __a1, __c&gt;::__calc(__x);</span></a>
 <a name="156"><span class="lineNum">     156 </span>                :            :           }</a>
 <a name="157"><span class="lineNum">     157 </span>                :            :       }</a>
 <a name="158"><span class="lineNum">     158 </span>                :            : </a>
@@ -598,8 +598,8 @@
 <a name="527"><span class="lineNum">     527 </span>                :            :       mersenne_twister_engine() : mersenne_twister_engine(default_seed) { }</a>
 <a name="528"><span class="lineNum">     528 </span>                :            : </a>
 <a name="529"><span class="lineNum">     529 </span>                :            :       explicit</a>
-<a name="530"><span class="lineNum">     530 </span>                :<span class="lineCov">     110000 :       mersenne_twister_engine(result_type __sd)</span></a>
-<a name="531"><span class="lineNum">     531 </span>                :<span class="lineCov">     110000 :       { seed(__sd); }</span></a>
+<a name="530"><span class="lineNum">     530 </span>                :<span class="lineCov">     440000 :       mersenne_twister_engine(result_type __sd)</span></a>
+<a name="531"><span class="lineNum">     531 </span>                :<span class="lineCov">     440000 :       { seed(__sd); }</span></a>
 <a name="532"><span class="lineNum">     532 </span>                :            : </a>
 <a name="533"><span class="lineNum">     533 </span>                :            :       /**</a>
 <a name="534"><span class="lineNum">     534 </span>                :            :        * @brief Constructs a %mersenne_twister_engine random number generator</a>
@@ -1686,14 +1686,14 @@
 <a name="1615"><span class="lineNum">    1615 </span>                :            : </a>
 <a name="1616"><span class="lineNum">    1616 </span>                :            :     // constructors, destructors and member functions</a>
 <a name="1617"><span class="lineNum">    1617 </span>                :            : </a>
-<a name="1618"><span class="lineNum">    1618 </span>  [<span class="branchCov" title="Branch 0 was taken 110000 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 110000 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     110000 :     random_device() { _M_init(&quot;default&quot;); }</span></a>
+<a name="1618"><span class="lineNum">    1618 </span>  [<span class="branchCov" title="Branch 0 was taken 440000 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 440000 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">     440000 :     random_device() { _M_init(&quot;default&quot;); }</span></a>
 <a name="1619"><span class="lineNum">    1619 </span>                :            : </a>
 <a name="1620"><span class="lineNum">    1620 </span>                :            :     explicit</a>
 <a name="1621"><span class="lineNum">    1621 </span>                :            :     random_device(const std::string&amp; __token) { _M_init(__token); }</a>
 <a name="1622"><span class="lineNum">    1622 </span>                :            : </a>
 <a name="1623"><span class="lineNum">    1623 </span>                :            : #if defined _GLIBCXX_USE_DEV_RANDOM</a>
-<a name="1624"><span class="lineNum">    1624 </span>                :<span class="lineCov">     110000 :     ~random_device()</span></a>
-<a name="1625"><span class="lineNum">    1625 </span>                :<span class="lineCov">     110000 :     { _M_fini(); }</span></a>
+<a name="1624"><span class="lineNum">    1624 </span>                :<span class="lineCov">     440000 :     ~random_device()</span></a>
+<a name="1625"><span class="lineNum">    1625 </span>                :<span class="lineCov">     440000 :     { _M_fini(); }</span></a>
 <a name="1626"><span class="lineNum">    1626 </span>                :            : #endif</a>
 <a name="1627"><span class="lineNum">    1627 </span>                :            : </a>
 <a name="1628"><span class="lineNum">    1628 </span>                :            :     static constexpr result_type</a>
@@ -1715,8 +1715,8 @@
 <a name="1644"><span class="lineNum">    1644 </span>                :            :     }</a>
 <a name="1645"><span class="lineNum">    1645 </span>                :            : </a>
 <a name="1646"><span class="lineNum">    1646 </span>                :            :     result_type</a>
-<a name="1647"><span class="lineNum">    1647 </span>                :<span class="lineCov">     110000 :     operator()()</span></a>
-<a name="1648"><span class="lineNum">    1648 </span>                :<span class="lineCov">     110000 :     { return this-&gt;_M_getval(); }</span></a>
+<a name="1647"><span class="lineNum">    1647 </span>                :<span class="lineCov">     440000 :     operator()()</span></a>
+<a name="1648"><span class="lineNum">    1648 </span>                :<span class="lineCov">     440000 :     { return this-&gt;_M_getval(); }</span></a>
 <a name="1649"><span class="lineNum">    1649 </span>                :            : </a>
 <a name="1650"><span class="lineNum">    1650 </span>                :            :     // No copy functions.</a>
 <a name="1651"><span class="lineNum">    1651 </span>                :            :     random_device(const random_device&amp;) = delete;</a>

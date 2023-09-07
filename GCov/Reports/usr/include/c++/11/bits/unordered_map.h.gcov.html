@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -209,7 +209,7 @@
 <a name="138"><span class="lineNum">     138 </span>                :            :       //construct/destroy/copy</a>
 <a name="139"><span class="lineNum">     139 </span>                :            : </a>
 <a name="140"><span class="lineNum">     140 </span>                :            :       /// Default constructor.</a>
-<a name="141"><span class="lineNum">     141 </span>                :<span class="lineCov">          1 :       unordered_map() = default;</span></a>
+<a name="141"><span class="lineNum">     141 </span>                :<span class="lineCov">          4 :       unordered_map() = default;</span></a>
 <a name="142"><span class="lineNum">     142 </span>                :            : </a>
 <a name="143"><span class="lineNum">     143 </span>                :            :       /**</a>
 <a name="144"><span class="lineNum">     144 </span>                :            :        *  @brief  Default constructor creates no elements.</a>
@@ -1047,12 +1047,12 @@
 <a name="976"><span class="lineNum">     976 </span>                :            :        *  Lookup requires constant time.</a>
 <a name="977"><span class="lineNum">     977 </span>                :            :        */</a>
 <a name="978"><span class="lineNum">     978 </span>                :            :       mapped_type&amp;</a>
-<a name="979"><span class="lineNum">     979 </span>                :<span class="lineCov">          5 :       operator[](const key_type&amp; __k)</span></a>
-<a name="980"><span class="lineNum">     980 </span>                :<span class="lineCov">          5 :       { return _M_h[__k]; }</span></a>
+<a name="979"><span class="lineNum">     979 </span>                :<span class="lineCov">         20 :       operator[](const key_type&amp; __k)</span></a>
+<a name="980"><span class="lineNum">     980 </span>                :<span class="lineCov">         20 :       { return _M_h[__k]; }</span></a>
 <a name="981"><span class="lineNum">     981 </span>                :            : </a>
 <a name="982"><span class="lineNum">     982 </span>                :            :       mapped_type&amp;</a>
-<a name="983"><span class="lineNum">     983 </span>                :<span class="lineCov">     100000 :       operator[](key_type&amp;&amp; __k)</span></a>
-<a name="984"><span class="lineNum">     984 </span>                :<span class="lineCov">     100000 :       { return _M_h[std::move(__k)]; }</span></a>
+<a name="983"><span class="lineNum">     983 </span>                :<span class="lineCov">     400000 :       operator[](key_type&amp;&amp; __k)</span></a>
+<a name="984"><span class="lineNum">     984 </span>                :<span class="lineCov">     400000 :       { return _M_h[std::move(__k)]; }</span></a>
 <a name="985"><span class="lineNum">     985 </span>                :            :       ///@}</a>
 <a name="986"><span class="lineNum">     986 </span>                :            : </a>
 <a name="987"><span class="lineNum">     987 </span>                :            :       ///@{</a>

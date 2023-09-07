@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -172,9 +172,9 @@
 <a name="101"><span class="lineNum">     101 </span>                :            :   }</a>
 <a name="102"><span class="lineNum">     102 </span>                :            : </a>
 <a name="103"><span class="lineNum">     103 </span>                :            :   constexpr memory_order</a>
-<a name="104"><span class="lineNum">     104 </span>                :<span class="lineCov">        126 :   operator&amp;(memory_order __m, __memory_order_modifier __mod)</span></a>
+<a name="104"><span class="lineNum">     104 </span>                :<span class="lineCov">        504 :   operator&amp;(memory_order __m, __memory_order_modifier __mod)</span></a>
 <a name="105"><span class="lineNum">     105 </span>                :            :   {</a>
-<a name="106"><span class="lineNum">     106 </span>                :<span class="lineCov">        126 :     return memory_order(int(__m) &amp; int(__mod));</span></a>
+<a name="106"><span class="lineNum">     106 </span>                :<span class="lineCov">        504 :     return memory_order(int(__m) &amp; int(__mod));</span></a>
 <a name="107"><span class="lineNum">     107 </span>                :            :   }</a>
 <a name="108"><span class="lineNum">     108 </span>                :            : </a>
 <a name="109"><span class="lineNum">     109 </span>                :            :   // Drop release ordering as per [atomics.types.operations.req]/21</a>
@@ -452,16 +452,16 @@
 <a name="381"><span class="lineNum">     381 </span>                :            :       { return fetch_sub(1); }</a>
 <a name="382"><span class="lineNum">     382 </span>                :            : </a>
 <a name="383"><span class="lineNum">     383 </span>                :            :       __int_type</a>
-<a name="384"><span class="lineNum">     384 </span>                :<span class="lineCov">         21 :       operator++() noexcept</span></a>
-<a name="385"><span class="lineNum">     385 </span>                :<span class="lineCov">         21 :       { return __atomic_add_fetch(&amp;_M_i, 1, int(memory_order_seq_cst)); }</span></a>
+<a name="384"><span class="lineNum">     384 </span>                :<span class="lineCov">         84 :       operator++() noexcept</span></a>
+<a name="385"><span class="lineNum">     385 </span>                :<span class="lineCov">         84 :       { return __atomic_add_fetch(&amp;_M_i, 1, int(memory_order_seq_cst)); }</span></a>
 <a name="386"><span class="lineNum">     386 </span>                :            : </a>
 <a name="387"><span class="lineNum">     387 </span>                :            :       __int_type</a>
 <a name="388"><span class="lineNum">     388 </span>                :            :       operator++() volatile noexcept</a>
 <a name="389"><span class="lineNum">     389 </span>                :            :       { return __atomic_add_fetch(&amp;_M_i, 1, int(memory_order_seq_cst)); }</a>
 <a name="390"><span class="lineNum">     390 </span>                :            : </a>
 <a name="391"><span class="lineNum">     391 </span>                :            :       __int_type</a>
-<a name="392"><span class="lineNum">     392 </span>                :<span class="lineCov">        105 :       operator--() noexcept</span></a>
-<a name="393"><span class="lineNum">     393 </span>                :<span class="lineCov">        105 :       { return __atomic_sub_fetch(&amp;_M_i, 1, int(memory_order_seq_cst)); }</span></a>
+<a name="392"><span class="lineNum">     392 </span>                :<span class="lineCov">        420 :       operator--() noexcept</span></a>
+<a name="393"><span class="lineNum">     393 </span>                :<span class="lineCov">        420 :       { return __atomic_sub_fetch(&amp;_M_i, 1, int(memory_order_seq_cst)); }</span></a>
 <a name="394"><span class="lineNum">     394 </span>                :            : </a>
 <a name="395"><span class="lineNum">     395 </span>                :            :       __int_type</a>
 <a name="396"><span class="lineNum">     396 </span>                :            :       operator--() volatile noexcept</a>
@@ -552,11 +552,11 @@
 <a name="481"><span class="lineNum">     481 </span>                :            :       load(memory_order __m = memory_order_seq_cst) const noexcept</a>
 <a name="482"><span class="lineNum">     482 </span>                :            :       {</a>
 <a name="483"><span class="lineNum">     483 </span>                :            :         memory_order __b __attribute__ ((__unused__))</a>
-<a name="484"><span class="lineNum">     484 </span>                :<span class="lineCov">        126 :           = __m &amp; __memory_order_mask;</span></a>
+<a name="484"><span class="lineNum">     484 </span>                :<span class="lineCov">        504 :           = __m &amp; __memory_order_mask;</span></a>
 <a name="485"><span class="lineNum">     485 </span>                :            :         __glibcxx_assert(__b != memory_order_release);</a>
 <a name="486"><span class="lineNum">     486 </span>                :            :         __glibcxx_assert(__b != memory_order_acq_rel);</a>
 <a name="487"><span class="lineNum">     487 </span>                :            : </a>
-<a name="488"><span class="lineNum">     488 </span>                :<span class="lineCov">        126 :         return __atomic_load_n(&amp;_M_i, int(__m));</span></a>
+<a name="488"><span class="lineNum">     488 </span>                :<span class="lineCov">        504 :         return __atomic_load_n(&amp;_M_i, int(__m));</span></a>
 <a name="489"><span class="lineNum">     489 </span>                :            :       }</a>
 <a name="490"><span class="lineNum">     490 </span>                :            : </a>
 <a name="491"><span class="lineNum">     491 </span>                :            :       _GLIBCXX_ALWAYS_INLINE __int_type</a>

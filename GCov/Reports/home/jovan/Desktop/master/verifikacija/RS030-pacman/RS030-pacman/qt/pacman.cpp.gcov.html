@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -84,20 +84,20 @@
 <a name="13"><span class="lineNum">      13 </span>                :            : extern Game * game;</a>
 <a name="14"><span class="lineNum">      14 </span>                :            : extern int level_map;</a>
 <a name="15"><span class="lineNum">      15 </span>                :            : </a>
-<a name="16"><span class="lineNum">      16 </span>                :<span class="lineCov">          3 : Pacman::Pacman(int x1, int y1, int dotsInMap)</span></a>
-<a name="17"><span class="lineNum">      17 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">          3 :     :x1(x1),y1(y1),dotsToEat(dotsInMap)</span></a>
-<span class="lineNum">         </span><span class="branchCov" title="Branch 4 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 8 was taken 3 times"> + </span> 
+<a name="16"><span class="lineNum">      16 </span>                :<span class="lineCov">         12 : Pacman::Pacman(int x1, int y1, int dotsInMap)</span></a>
+<a name="17"><span class="lineNum">      17 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">         12 :     :x1(x1),y1(y1),dotsToEat(dotsInMap)</span></a>
+<span class="lineNum">         </span><span class="branchCov" title="Branch 4 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span><span class="branchCov" title="Branch 6 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 7 was not taken"> - </span><span class="branchCov" title="Branch 8 was taken 12 times"> + </span> 
 <span class="lineNum">         </span>            <span class="branchNoCov" title="Branch 9 was not taken"> - </span>]
 <a name="18"><span class="lineNum">      18 </span>                :            : {</a>
 <a name="19"><span class="lineNum">      19 </span>                :            :     //setRect(0, 0, 29, 29);</a>
-<a name="20"><span class="lineNum">      20 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">          3 :     setPixmap(QPixmap(&quot;:/Puck/pacman1.jpg&quot;));</span></a>
-<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
-<a name="21"><span class="lineNum">      21 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :     setTransformOriginPoint(15,15);</span></a>
-<a name="22"><span class="lineNum">      22 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :     setPos(this-&gt;x1,this-&gt;y1);</span></a>
-<a name="23"><span class="lineNum">      23 </span>                :<span class="lineCov">          3 :     eatenDots = 0;</span></a>
+<a name="20"><span class="lineNum">      20 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">         12 :     setPixmap(QPixmap(&quot;:/Puck/pacman1.jpg&quot;));</span></a>
+<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<a name="21"><span class="lineNum">      21 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     setTransformOriginPoint(15,15);</span></a>
+<a name="22"><span class="lineNum">      22 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     setPos(this-&gt;x1,this-&gt;y1);</span></a>
+<a name="23"><span class="lineNum">      23 </span>                :<span class="lineCov">         12 :     eatenDots = 0;</span></a>
 <a name="24"><span class="lineNum">      24 </span>                :            : </a>
 <a name="25"><span class="lineNum">      25 </span>                :            : </a>
-<a name="26"><span class="lineNum">      26 </span>                :<span class="lineCov">          3 :     this-&gt;current_score = 0;</span></a>
+<a name="26"><span class="lineNum">      26 </span>                :<span class="lineCov">         12 :     this-&gt;current_score = 0;</span></a>
 <a name="27"><span class="lineNum">      27 </span>                :            : </a>
 <a name="28"><span class="lineNum">      28 </span>                :            :     /*</a>
 <a name="29"><span class="lineNum">      29 </span>                :            :     // ingame sounds</a>
@@ -118,27 +118,27 @@
 <a name="44"><span class="lineNum">      44 </span>                :            :     //</a>
 <a name="45"><span class="lineNum">      45 </span>                :            :     */</a>
 <a name="46"><span class="lineNum">      46 </span>                :            : </a>
-<a name="47"><span class="lineNum">      47 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">          3 :     QTimer *timer = new QTimer(this);</span></a>
+<a name="47"><span class="lineNum">      47 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         12 :     QTimer *timer = new QTimer(this);</span></a>
 <a name="48"><span class="lineNum">      48 </span>                :            : </a>
-<a name="49"><span class="lineNum">      49 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">          3 :     connect(timer, SIGNAL(timeout()), this, SLOT(move()));</span></a>
-<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<a name="49"><span class="lineNum">      49 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">         12 :     connect(timer, SIGNAL(timeout()), this, SLOT(move()));</span></a>
+<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
 <a name="50"><span class="lineNum">      50 </span>                :            : </a>
-<a name="51"><span class="lineNum">      51 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :     timer-&gt;start(25);</span></a>
-<a name="52"><span class="lineNum">      52 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">          3 :     connect(timerLastChance, SIGNAL(timeout()), this, SLOT(last_chance()));</span></a>
-<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<a name="51"><span class="lineNum">      51 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     timer-&gt;start(25);</span></a>
+<a name="52"><span class="lineNum">      52 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">         12 :     connect(timerLastChance, SIGNAL(timeout()), this, SLOT(last_chance()));</span></a>
+<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
 <a name="53"><span class="lineNum">      53 </span>                :            : </a>
-<a name="54"><span class="lineNum">      54 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">          3 :     QTimer *timer1 = new QTimer(this);</span></a>
+<a name="54"><span class="lineNum">      54 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span>]:<span class="lineCov">         12 :     QTimer *timer1 = new QTimer(this);</span></a>
 <a name="55"><span class="lineNum">      55 </span>                :            : </a>
-<a name="56"><span class="lineNum">      56 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">          3 :     connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));// i korektivni_faktor</span></a>
-<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<a name="56"><span class="lineNum">      56 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">         12 :     connect(timer1, SIGNAL(timeout()), this, SLOT(animation()));// i korektivni_faktor</span></a>
+<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
 <a name="57"><span class="lineNum">      57 </span>                :            : </a>
-<a name="58"><span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">          3 :     timer1-&gt;start(150);</span></a>
+<a name="58"><span class="lineNum">      58 </span>        [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span>]:<span class="lineCov">         12 :     timer1-&gt;start(150);</span></a>
 <a name="59"><span class="lineNum">      59 </span>                :            : </a>
-<a name="60"><span class="lineNum">      60 </span>  [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">          3 :     connect(timer_jedi, SIGNAL(timeout()), this, SLOT(jedi()));// i korektivni_faktor</span></a>
-<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 3 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
+<a name="60"><span class="lineNum">      60 </span>  [<span class="branchCov" title="Branch 0 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 1 was not taken"> - </span><span class="branchCov" title="Branch 2 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 3 was not taken"> - </span> :<span class="lineCov">         12 :     connect(timer_jedi, SIGNAL(timeout()), this, SLOT(jedi()));// i korektivni_faktor</span></a>
+<span class="lineNum">         </span>         <span class="branchCov" title="Branch 4 was taken 12 times"> + </span><span class="branchNoCov" title="Branch 5 was not taken"> - </span>]
 <a name="61"><span class="lineNum">      61 </span>                :            : </a>
 <a name="62"><span class="lineNum">      62 </span>                :            : </a>
-<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">          3 : }</span></a>
+<a name="63"><span class="lineNum">      63 </span>                :<span class="lineCov">         12 : }</span></a>
 <a name="64"><span class="lineNum">      64 </span>                :            : </a>
 <a name="65"><span class="lineNum">      65 </span>                :            : </a>
 <a name="66"><span class="lineNum">      66 </span>                :<span class="lineNoCov">          0 : int Pacman::getX() {return this-&gt;x(); }</span></a>
@@ -594,10 +594,10 @@
 <a name="471"><span class="lineNum">     471 </span>                :            : }</a>
 <a name="472"><span class="lineNum">     472 </span>                :            : </a>
 <a name="473"><span class="lineNum">     473 </span>                :            : </a>
-<a name="474"><span class="lineNum">     474 </span>                :<span class="lineCov">          3 : void Pacman::setCurrentDirection(int x)</span></a>
+<a name="474"><span class="lineNum">     474 </span>                :<span class="lineCov">         12 : void Pacman::setCurrentDirection(int x)</span></a>
 <a name="475"><span class="lineNum">     475 </span>                :            : {</a>
-<a name="476"><span class="lineNum">     476 </span>                :<span class="lineCov">          3 :     this-&gt;currentDirection = x%5;</span></a>
-<a name="477"><span class="lineNum">     477 </span>                :<span class="lineCov">          3 : }</span></a>
+<a name="476"><span class="lineNum">     476 </span>                :<span class="lineCov">         12 :     this-&gt;currentDirection = x%5;</span></a>
+<a name="477"><span class="lineNum">     477 </span>                :<span class="lineCov">         12 : }</span></a>
 <a name="478"><span class="lineNum">     478 </span>                :            : </a>
 <a name="479"><span class="lineNum">     479 </span>                :<span class="lineNoCov">          0 : void Pacman::setNextDirection(int x)</span></a>
 <a name="480"><span class="lineNum">     480 </span>                :            : {</a>

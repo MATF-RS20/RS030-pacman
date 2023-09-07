@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2023-08-28 20:53:54</td>
+            <td class="headerValue">2023-08-29 09:33:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -649,7 +649,7 @@
 <a name="578"><span class="lineNum">     578 </span>                :            : */</a>
 <a name="579"><span class="lineNum">     579 </span>                :            : </a>
 <a name="580"><span class="lineNum">     580 </span>                :            : template &lt;typename T&gt;</a>
-<a name="581"><span class="lineNum">     581 </span>        [<span class="branchCov" title="Branch 0 was taken 3 times"> + </span><span class="branchCov" title="Branch 1 was taken 2 times"> + </span>]:<span class="lineCov">          5 : Q_DECL_CONSTEXPR inline T qAbs(const T &amp;t) { return t &gt;= 0 ? t : -t; }</span></a>
+<a name="581"><span class="lineNum">     581 </span>        [<span class="branchCov" title="Branch 0 was taken 10 times"> + </span><span class="branchCov" title="Branch 1 was taken 10 times"> + </span>]:<span class="lineCov">         20 : Q_DECL_CONSTEXPR inline T qAbs(const T &amp;t) { return t &gt;= 0 ? t : -t; }</span></a>
 <a name="582"><span class="lineNum">     582 </span>                :            : </a>
 <a name="583"><span class="lineNum">     583 </span>                :            : Q_DECL_CONSTEXPR inline int qRound(double d)</a>
 <a name="584"><span class="lineNum">     584 </span>                :            : { return d &gt;= 0.0 ? int(d + 0.5) : int(d - double(int(d-1)) + 0.5) + int(d-1); }</a>
